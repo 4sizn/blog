@@ -1,5 +1,5 @@
 ---
-title: "[Screen Saver Extension] v1.0.4 릴리즈"
+title: "[2026.02.03] [Screen Saver Extension] v1.0.4 릴리즈"
 description: "Screen Saver Extension의 새로운 버전 v1.0.4이 출시되었습니다."
 tags:
   - release

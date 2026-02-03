@@ -114,10 +114,11 @@ function generateMarkdown(release, repoInfo) {
 
   const version = tag_name.replace(/^v/, '');
   const date = new Date(published_at).toISOString().split('T')[0];
+  const datePrefix = date.replace(/-/g, '.');
   const sections = parseReleaseNotes(body);
 
   let content = `---
-title: "[${displayName}] ${tag_name} 릴리즈"
+title: "[${datePrefix}] [${displayName}] ${tag_name} 릴리즈"
 description: "${displayName}의 새로운 버전 ${tag_name}이 출시되었습니다."
 tags:
   - release
