@@ -2,6 +2,13 @@
   "repositories": [
     {
       "owner": "4sizn",
+      "repo": "blog",
+      "category": "blog",
+      "displayName": "4sizn Blog",
+      "description": "Quartz 기반 개인 블로그 - 자동 릴리즈 노트 시스템"
+    },
+    {
+      "owner": "4sizn",
       "repo": "screen-saver-extension",
       "category": "extension",
       "displayName": "Screen Saver Extension",
