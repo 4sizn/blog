@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(tree:*)",
+      "Bash(npx quartz build --serve)",
+      "Bash(node scripts/sync-releases.mjs:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx quartz build:*)",
+      "Bash(git push)",
+      "Bash(ls:*)",
+      "Bash(gh --version:*)",
+      "Bash(gh release create:*)"
     ]
   }
 }
