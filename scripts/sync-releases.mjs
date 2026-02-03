@@ -107,113 +107,85 @@ function parseReleaseNotes(body) {
   return sections;
 }
 
-// 마크다운 파일 생성
-function generateMarkdown(release, repoInfo) {
-  const { owner, repo, displayName, category } = repoInfo;
+// 섹션 생성 헬퍼
+function buildSection(title, emoji, items) {
+  if (items.length === 0) return '';
+  let section = `### ${emoji} ${title}\n\n`;
+  items.forEach(item => {
+    section += `- ${item}\n`;
+  });
+  return section + '\n';
+}
+
+// 마크다운 파일 생성 (템플릿 기반)
+async function generateMarkdown(release, repoInfo) {
+  const { owner, repo, displayName, category, description } = repoInfo;
   const { tag_name, name, body, published_at, html_url, author } = release;
 
   const version = tag_name.replace(/^v/, '');
   const date = new Date(published_at).toISOString().split('T')[0];
-  const datePrefix = date.replace(/-/g, '.');
+  const datePrefix = date; // Keep YYYY-MM-DD format for URL safety
   const sections = parseReleaseNotes(body);
 
-  let content = `---
-title: "[${datePrefix}] [${displayName}] ${tag_name} 릴리즈"
-description: "${displayName}의 새로운 버전 ${tag_name}이 출시되었습니다."
-tags:
-  - release
-  - ${category}
-  - ${repo}
-aliases:
-  - "${displayName} ${version}"
-  - "${displayName} 릴리즈"
-permalink: "/releases/${repo}-${version}"
-draft: false
-lang: "ko"
-enableToc: true
-cssclasses:
-  - release
-  - changelog
-created: "${date}"
-updated: "${date}"
----
+  // 템플릿 파일 읽기
+  const templatePath = join(ROOT_DIR, 'content', 'templates', 'new_releases.md');
+  let template = await readFile(templatePath, 'utf-8');
 
-## 🎉 [${displayName}] ${tag_name} 릴리즈
+  // 섹션 생성
+  const featuresSection = buildSection('새로운 기능', '✨', sections.features);
+  const improvementsSection = buildSection('개선사항', '🔧', sections.improvements);
+  const bugfixesSection = buildSection('버그 수정', '🐛', sections.bugfixes);
+  const breakingSection = buildSection('Breaking Changes', '⚠️', sections.breaking);
+  const othersSection = buildSection('기타 변경사항', '📝', sections.others);
 
-> 📅 릴리즈 날짜: ${date}
-
-`;
-
-  // 새로운 기능
-  if (sections.features.length > 0) {
-    content += `### ✨ 새로운 기능\n\n`;
-    sections.features.forEach(item => {
-      content += `- ${item}\n`;
-    });
-    content += '\n';
-  }
-
-  // 개선사항
-  if (sections.improvements.length > 0) {
-    content += `### 🔧 개선사항\n\n`;
-    sections.improvements.forEach(item => {
-      content += `- ${item}\n`;
-    });
-    content += '\n';
-  }
-
-  // 버그 수정
-  if (sections.bugfixes.length > 0) {
-    content += `### 🐛 버그 수정\n\n`;
-    sections.bugfixes.forEach(item => {
-      content += `- ${item}\n`;
-    });
-    content += '\n';
-  }
-
-  // Breaking Changes
-  if (sections.breaking.length > 0) {
-    content += `### ⚠️ Breaking Changes\n\n`;
-    sections.breaking.forEach(item => {
-      content += `- ${item}\n`;
-    });
-    content += '\n';
-  }
-
-  // 기타 변경사항
-  if (sections.others.length > 0) {
-    content += `### 📝 기타 변경사항\n\n`;
-    sections.others.forEach(item => {
-      content += `- ${item}\n`;
-    });
-    content += '\n';
-  }
-
-  // 원본 릴리즈 노트가 비어있거나 파싱된 항목이 없는 경우
+  // 원본 릴리즈 노트 (파싱된 항목이 없는 경우)
+  let rawBodySection = '';
   if (sections.features.length === 0 &&
       sections.improvements.length === 0 &&
       sections.bugfixes.length === 0 &&
       sections.breaking.length === 0 &&
       sections.others.length === 0) {
-    content += `### 📝 변경사항\n\n${body || '자세한 변경사항은 GitHub 릴리즈 페이지를 참조하세요.'}\n\n`;
+    rawBodySection = `### 📝 변경사항\n\n${body || '자세한 변경사항은 GitHub 릴리즈 페이지를 참조하세요.'}\n\n`;
   }
 
-  // 관련 링크
-  content += `### 🔗 관련 링크\n\n`;
-  content += `- [GitHub 릴리즈 페이지](${html_url})\n`;
-  content += `- [저장소](https://github.com/${owner}/${repo})\n`;
-  content += `- [이슈 트래커](https://github.com/${owner}/${repo}/issues)\n\n`;
-
-  // 기여자
+  // 작성자 섹션
+  let authorSection = '';
   if (author) {
-    content += `### 👥 릴리즈 작성자\n\n`;
-    content += `- [@${author.login}](${author.html_url})\n\n`;
+    authorSection = `### 👥 릴리즈 작성자\n\n- [@${author.login}](${author.html_url})\n\n`;
   }
 
-  content += `---\n\n`;
-  content += `> 이 릴리즈 노트는 자동으로 생성되었습니다.\n`;
+  // Placeholder 치환
+  const replacements = {
+    '{{DATE_PREFIX}}': datePrefix,
+    '{{DISPLAY_NAME}}': displayName,
+    '{{TAG_NAME}}': tag_name,
+    '{{VERSION}}': version,
+    '{{DESCRIPTION}}': description || `${displayName}의 새로운 버전`,
+    '{{CATEGORY}}': category,
+    '{{REPO}}': repo,
+    '{{PERMALINK}}': `/releases/${datePrefix}-${repo}-${version}`,
+    '{{DATE}}': date,
+    '{{FEATURES_SECTION}}': featuresSection,
+    '{{IMPROVEMENTS_SECTION}}': improvementsSection,
+    '{{BUGFIXES_SECTION}}': bugfixesSection,
+    '{{BREAKING_SECTION}}': breakingSection,
+    '{{OTHERS_SECTION}}': othersSection,
+    '{{RAW_BODY_SECTION}}': rawBodySection,
+    '{{RELEASE_URL}}': html_url,
+    '{{REPO_URL}}': `https://github.com/${owner}/${repo}`,
+    '{{ISSUES_URL}}': `https://github.com/${owner}/${repo}/issues`,
+    '{{AUTHOR_SECTION}}': authorSection,
+  };
 
-  return content;
+  // 템플릿 치환
+  Object.keys(replacements).forEach(placeholder => {
+    template = template.replace(new RegExp(placeholder, 'g'), replacements[placeholder]);
+  });
+
+  // 빈 섹션 제거 (연속된 빈 줄)
+  template = template.replace(/\n{3,}/g, '\n\n');
+
+  return template;
 }
 
 // 메인 함수
@@ -241,7 +213,9 @@ async function main() {
     }
 
     const version = release.tag_name.replace(/^v/, '');
-    const filename = `${repo}-${version}.md`;
+    const releaseDate = new Date(release.published_at).toISOString().split('T')[0];
+    const datePrefix = releaseDate; // Keep YYYY-MM-DD format for URL safety
+    const filename = `${datePrefix}-${repo}-${version}.md`;
     const filepath = join(ROOT_DIR, 'content', 'releases', filename);
 
     // 이미 존재하는지 확인
@@ -253,7 +227,7 @@ async function main() {
 
     // 마크다운 생성
     log(`✨ ${displayName} ${release.tag_name} - 새 릴리즈 발견!`, 'yellow');
-    const markdown = generateMarkdown(release, repoInfo);
+    const markdown = await generateMarkdown(release, repoInfo);
 
     // 파일 저장
     await writeFile(filepath, markdown, 'utf-8');
