@@ -1,0 +1,78 @@
+name: Sync GitHub Releases
+
+on:
+  # 매일 오전 9시(KST, UTC+9 = 00:00 UTC)에 실행
+  schedule:
+    - cron: '0 0 * * *'
+
+  # 수동 실행 가능
+  workflow_dispatch:
+
+  # PR이나 푸시 시에도 테스트 가능 (선택사항)
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  sync-releases:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Git push를 위한 권한
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 전체 히스토리 가져오기
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run release sync script
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/sync-releases.mjs
+
+      - name: Check for new releases
+        id: check
+        run: |
+          if git diff --quiet content/releases/; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "📝 새로운 릴리즈가 없습니다."
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "✨ 새로운 릴리즈를 발견했습니다!"
+          fi
+
+      - name: Commit and push changes
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add content/releases/
+          git commit -m "chore: sync new GitHub releases
+
+          Automatically synced from tracked repositories.
+
+          Co-Authored-By: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 🎉 릴리즈 동기화 완료" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check.outputs.has_changes }}" == "true" ]; then
+            echo "✅ 새로운 릴리즈가 추가되었습니다." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "변경된 파일:" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            git diff --name-only HEAD~1 content/releases/ 2>/dev/null || echo "새 파일 추가됨"
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "📝 새로운 릴리즈가 없습니다." >> $GITHUB_STEP_SUMMARY
+          fi

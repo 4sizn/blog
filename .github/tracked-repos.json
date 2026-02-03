@@ -1,0 +1,11 @@
+{
+  "repositories": [
+    {
+      "owner": "4sizn",
+      "repo": "screen-saver-extension",
+      "category": "extension",
+      "displayName": "Screen Saver Extension",
+      "description": "크롬 확장 프로그램 - 스크린 세이버"
+    }
+  ]
+}
