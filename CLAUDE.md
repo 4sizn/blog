@@ -223,17 +223,17 @@ node scripts/sync-releases.mjs
 
 **파일명 형식:**
 ```
-content/releases/{repo-name}-{version}.md
+content/releases/{YYYY-MM-DD}-{repo-name}-{version}.md
 ```
 
 **예시:**
 ```
-content/releases/screen-saver-extension-1.0.4.md
+content/releases/2026-02-03-screen-saver-extension-1.0.4.md
 ```
 
 **URL:**
 ```
-https://blog.4sizn.com/releases/screen-saver-extension-1.0.4
+https://4sizn.github.io/blog/releases/2026-02-03-screen-saver-extension-1.0.4
 ```
 
 ### 릴리즈 노트 작성 팁
@@ -315,7 +315,7 @@ chmod +x scripts/sync-releases.mjs
 │   ├── index.md                    # 메인 페이지
 │   ├── releases/                   # 릴리즈 노트 (자동 생성)
 │   │   ├── index.md
-│   │   └── screen-saver-extension-1.0.4.md
+│   │   └── 2026-02-03-screen-saver-extension-1.0.4.md
 │   └── templates/                  # 템플릿
 │       └── new_releases.md         # 릴리즈 노트 템플릿
 │
