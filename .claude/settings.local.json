@@ -13,7 +13,13 @@
       "Bash(git push)",
       "Bash(ls:*)",
       "Bash(gh --version:*)",
-      "Bash(gh release create:*)"
+      "Bash(gh release create:*)",
+      "Bash(xargs:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(gh run:*)",
+      "Bash(git push:*)",
+      "Bash(gh workflow:*)",
+      "Bash(git remote set-url:*)"
     ]
   }
 }
