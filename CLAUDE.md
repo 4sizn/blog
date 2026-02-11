@@ -250,6 +250,79 @@ GitHub Release를 만들 때 다음 형식을 사용하면 자동으로 섹션�
 - BREAKING CHANGE: 호환성 변경 (⚠️ Breaking Changes)
 ```
 
+### 블로그 자체 릴리즈 관리
+
+블로그 코드를 수정했을 때도 릴리즈를 생성하여 자동으로 블로그에 게시할 수 있습니다.
+
+#### 릴리즈 생성 방법
+
+**1. GitHub Actions에서 수동 실행:**
+
+```
+https://github.com/4sizn/blog/actions/workflows/release.yml
+→ "Run workflow" 클릭
+→ 릴리즈 타입 선택:
+   - patch: 버그 수정 (1.0.0 → 1.0.1)
+   - minor: 새 기능 (1.0.0 → 1.1.0)
+   - major: 호환성 변경 (1.0.0 → 2.0.0)
+→ (선택) 버전 직접 입력 (예: 1.2.3)
+→ "Run workflow" 확인
+```
+
+**2. 자동 릴리즈 노트 생성:**
+
+워크플로우가 자동으로:
+- 이전 릴리즈 이후의 커밋 분석
+- Conventional Commits 형식으로 분류
+- 섹션별로 정리된 릴리즈 노트 생성
+- GitHub Release 생성
+
+**3. 블로그 자동 게시:**
+
+릴리즈 생성 후:
+- 다음날 오전 9시에 자동으로 릴리즈 노트가 블로그에 게시됨
+- 또는 수동으로 릴리즈 동기화 워크플로우 실행
+
+#### 커밋 메시지 규칙
+
+릴리즈 노트가 자동으로 잘 생성되도록 Conventional Commits 형식 사용:
+
+```bash
+feat: 새로운 기능 추가
+fix: 버그 수정
+chore: 코드 정리, 설정 변경
+docs: 문서 업데이트
+refactor: 리팩토링
+perf: 성능 개선
+style: 코드 스타일 변경
+test: 테스트 추가/수정
+build: 빌드 시스템 변경
+ci: CI 설정 변경
+```
+
+**예시:**
+```bash
+git commit -m "feat: 다크 모드 지원 추가"
+git commit -m "fix: 모바일에서 메뉴 버튼 클릭 안 되는 버그 수정"
+git commit -m "chore: 의존성 업데이트"
+```
+
+#### 릴리즈 워크플로우
+
+```
+코드 수정 & 커밋
+  ↓
+GitHub Actions에서 릴리즈 생성 (수동)
+  ↓
+릴리즈 노트 자동 생성
+  ↓
+GitHub Release 발행
+  ↓
+다음날 오전 9시 자동 동기화
+  ↓
+블로그에 릴리즈 노트 게시
+```
+
 ---
 
 ## 주요 명령어
