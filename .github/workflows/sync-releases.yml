@@ -40,7 +40,7 @@ jobs:
       - name: Check for new releases
         id: check
         run: |
-          if git diff --quiet content/releases/; then
+          if [ -z "$(git status --porcelain content/releases/)" ]; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "📝 새로운 릴리즈가 없습니다."
           else
