@@ -8,6 +8,11 @@ on:
   # 수동 실행 가능
   workflow_dispatch:
 
+  # Push 이벤트에도 실행하지만 bot 커밋은 제외
+  push:
+    branches:
+      - main
+
   # PR이나 푸시 시에도 테스트 가능 (선택사항)
   # push:
   #   branches:
@@ -16,6 +21,8 @@ on:
 jobs:
   sync-releases:
     runs-on: ubuntu-latest
+    # bot이 만든 커밋에서는 실행하지 않음 (무한 루프 방지)
+    if: "!contains(github.event.head_commit.message, 'github-actions[bot]')"
 
     permissions:
       contents: write  # Git push를 위한 권한
@@ -54,7 +61,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add content/releases/
-          git commit -m "chore: sync new GitHub releases [skip ci]
+          git commit -m "chore: sync new GitHub releases
 
           Automatically synced from tracked repositories.
 
