@@ -5,6 +5,7 @@
 ## 📋 목차
 
 - [프로젝트 개요](#프로젝트-개요)
+- [버전 관리 정책](#버전-관리-정책)
 - [개발 환경 설정](#개발-환경-설정)
 - [개발 서버 실행](#개발-서버-실행)
 - [빌드 및 배포](#빌드-및-배포)
@@ -30,6 +31,85 @@
 - Node.js 22+
 - npm 10.9.2+
 - GitHub Actions
+
+---
+
+## 버전 관리 정책
+
+이 프로젝트는 **Blog 콘텐츠**와 **Quartz 엔진**의 버전을 명확히 분리하여 관리합니다.
+
+### 📌 버전 체계
+
+| 타겟 | 버전 | 용도 | 관리 방법 |
+|------|------|------|-----------|
+| **Blog 릴리즈** | `v1.x.x` | 블로그 프로젝트 버전 | Git Tag + GitHub Release |
+| **Quartz 엔진** | `4.5.2` | 정적 사이트 생성기 버전 | package.json |
+
+### 🎯 Blog 릴리즈 버전 (v1.x.x)
+
+**Semantic Versioning 사용:**
+
+```
+v1.0.0 - 초기 릴리즈 (GitHub Release Auto-Sync System)
+v1.1.0 - 새 기능 추가 (Minor)
+v1.0.1 - 버그 수정 (Patch)
+v2.0.0 - 중대한 변경 (Major)
+```
+
+**릴리즈 생성 방법:**
+
+```bash
+# 1. GitHub에서 새 Release 생성
+#    - Releases → "Draft a new release" 클릭
+#    - Tag: v1.1.0
+#    - Title: "4sizn Blog v1.1.0 - Feature Name"
+#    - Description: 변경사항 작성
+
+# 2. 자동 동기화
+#    - 매일 오전 9시 자동 실행
+#    - 또는 수동 트리거: https://github.com/4sizn/blog/actions/workflows/sync-releases.yml
+
+# 3. 블로그에 자동 게시
+#    - content/releases/YYYY-MM-DD-blog-1.1.0.md 생성
+#    - GitHub Pages 자동 배포
+```
+
+### 🔧 Quartz 엔진 업그레이드
+
+**Quartz 버전 업그레이드 시:**
+
+```bash
+# 1. 의존성 업데이트
+npm update
+
+# 2. package.json 버전 확인
+# "version": "4.5.2" → "4.6.0"
+
+# 3. 테스트 후 커밋
+git commit -m "chore: upgrade Quartz to v4.6.0"
+```
+
+**주의:** Quartz 업그레이드는 Blog 릴리즈 버전(v1.x.x)과 무관합니다.
+
+### 📝 버전 관리 예시
+
+```
+2026-02-11: v1.0.0 릴리즈 (Quartz 4.5.2)
+   ↓ 블로그 콘텐츠 업데이트
+2026-03-01: v1.1.0 릴리즈 (Quartz 4.5.2)
+   ↓ Quartz 엔진 업그레이드
+2026-04-01: package.json 4.5.2 → 4.6.0
+   ↓ 블로그 기능 추가
+2026-05-01: v1.2.0 릴리즈 (Quartz 4.6.0)
+```
+
+### ⚠️ 무한루프 방지
+
+릴리즈 동기화 시스템은 `[skip ci]` 플래그를 사용하여 무한루프를 방지합니다:
+
+- ✅ 릴리즈 동기화 커밋은 추가 workflow를 트리거하지 않음
+- ✅ 매일 오전 9시 또는 수동 실행만 릴리즈 확인
+- ✅ 같은 릴리즈에 대해 중복 실행 방지
 
 ---
 
@@ -492,4 +572,14 @@ MIT License
 
 ---
 
-**마지막 업데이트:** 2026-02-03
+**마지막 업데이트:** 2026-02-11
+
+---
+
+## 변경 이력
+
+### v1.0.0 (2026-02-11)
+- ✨ GitHub Release Auto-Sync System 구축
+- 📝 버전 관리 정책 수립 (Blog v1.x.x / Quartz 4.5.2)
+- 🔒 무한루프 방지 장치 추가 (`[skip ci]`)
+- 📚 CLAUDE.md 문서 완성
