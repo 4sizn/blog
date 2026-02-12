@@ -19,7 +19,12 @@
       "Bash(gh run:*)",
       "Bash(git push:*)",
       "Bash(gh workflow:*)",
-      "Bash(git remote set-url:*)"
+      "Bash(git remote set-url:*)",
+      "Bash(gh release list:*)",
+      "Bash(gh release view v1.0.0)",
+      "Bash(gh repo set-default:*)",
+      "WebFetch(domain:4sizn.github.io)",
+      "WebFetch(domain:jzhao.xyz)"
     ]
   }
 }
