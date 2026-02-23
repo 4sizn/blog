@@ -24,7 +24,16 @@
       "Bash(gh release view v1.0.0)",
       "Bash(gh repo set-default:*)",
       "WebFetch(domain:4sizn.github.io)",
-      "WebFetch(domain:jzhao.xyz)"
+      "WebFetch(domain:jzhao.xyz)",
+      "Bash(docker info:*)",
+      "WebSearch",
+      "Bash(env:*)",
+      "Bash(fish --version)",
+      "Bash(find:*)",
+      "Bash(gh repo view:*)",
+      "Bash(npm view:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx get-shit-done-cc --global)"
     ]
   }
 }
