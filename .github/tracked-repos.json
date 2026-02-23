@@ -13,6 +13,13 @@
       "category": "extension",
       "displayName": "Screen Saver Extension",
       "description": "크롬 확장 프로그램 - 스크린 세이버"
+    },
+    {
+      "owner": "4sizn",
+      "repo": "ai-config-monitor",
+      "category": "tool",
+      "displayName": "AI Config Monitor",
+      "description": "AI 설정 모니터링 도구"
     }
   ]
 }
