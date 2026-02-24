@@ -22,12 +22,15 @@ updated: "2026-02-24"
 
 > 📅 릴리즈 날짜: 2026-02-24
 
-### 📝 기타 변경사항
+### ✨ 새로운 기능
 
-- Add ai-monitor update command for self-update flow.
-- Support update check/apply modes: --check, --force, --json.
-- Resolve app version from package metadata and align CLI/version help output.
-- Document update usage in README.
+- `ai-monitor update` 명령 추가 (셀프 업데이트 플로우 지원)
+- 업데이트 점검/적용 모드 지원: `--check`, `--force`, `--json`
+
+### 🔧 개선사항
+
+- 패키지 메타데이터 기반 버전 해석으로 CLI/버전 도움말 출력 일관성 개선
+- README에 업데이트 사용법 문서화
 
 ### 🔗 관련 링크
 
