@@ -10,5 +10,8 @@ private/
 .replit
 replit.nix
 
+# omc
+.omc/
+
 # comunity plugin
 content/.*
