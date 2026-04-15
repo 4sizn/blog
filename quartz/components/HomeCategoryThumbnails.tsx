@@ -14,8 +14,8 @@ type Category = {
 type PageWithSlug = QuartzPluginData & { slug: string }
 
 const categoryFilters: Category[] = [
-  { slug: "dev", title: "DEV", limit: 6 },
   { slug: "log", title: "Log", limit: 6 },
+  { slug: "dev/Daily_Read", title: "DEV/Daily_Read", limit: 6 },
   { slug: "releases", title: "Releases", limit: 6 },
 ]
 
