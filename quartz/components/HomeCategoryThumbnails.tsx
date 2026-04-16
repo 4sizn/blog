@@ -1,7 +1,7 @@
 import { byDateAndAlphabetical } from "./PageList"
 import { Date as PostDate, getDate } from "./Date"
 import style from "./styles/homeCategoryThumbnails.scss"
-import { resolveRelative, type FullSlug } from "../util/path"
+import { resolveRelative, pathToRoot, joinSegments, type FullSlug } from "../util/path"
 import type { QuartzComponent, QuartzComponentConstructor } from "./types"
 import type { QuartzPluginData } from "../plugins/vfile"
 
@@ -19,7 +19,7 @@ const categoryFilters: Category[] = [
   { slug: "releases", title: "Releases", limit: 6 },
 ]
 
-const DEFAULT_THUMBNAIL_IMAGE = "/static/blog_thumbnail_default.jpeg"
+const DEFAULT_THUMBNAIL = "static/blog_thumbnail_default.jpeg"
 
 function normalizeImageUrl(value: unknown): string | undefined {
   if (typeof value !== "string") {
@@ -40,6 +40,7 @@ const HomeCategoryThumbnails: QuartzComponent = ({ allFiles, fileData, cfg }) =>
   }
 
   const currentSlug = fileData.slug as FullSlug
+  const baseDir = pathToRoot(currentSlug)
 
   const dateSortedByFolder = (pages: QuartzPluginData[]) =>
     pages.slice().sort(byDateAndAlphabetical(cfg))
@@ -94,7 +95,15 @@ const HomeCategoryThumbnails: QuartzComponent = ({ allFiles, fileData, cfg }) =>
               {group.pages.map((page) => {
                 const title = page.frontmatter?.title ?? "제목 없음"
                 const rawImage = normalizeImageUrl(page.frontmatter?.socialImage)
-                const image = rawImage ?? DEFAULT_THUMBNAIL_IMAGE
+                let image: string
+                if (rawImage && /^https?:\/\//.test(rawImage)) {
+                  image = rawImage
+                } else if (rawImage) {
+                  const cleanPath = rawImage.startsWith("/") ? rawImage.slice(1) : rawImage
+                  image = joinSegments(baseDir, cleanPath)
+                } else {
+                  image = joinSegments(baseDir, DEFAULT_THUMBNAIL)
+                }
                 const description =
                   (typeof page.frontmatter?.description === "string" &&
                     page.frontmatter.description) ||
