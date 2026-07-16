@@ -20,6 +20,13 @@
       "category": "tool",
       "displayName": "AI Config Monitor",
       "description": "AI 설정 모니터링 도구"
+    },
+    {
+      "owner": "4sizn",
+      "repo": "gardeneel-desktop",
+      "category": "app",
+      "displayName": "Garden Eel Cove",
+      "description": "바탕화면 하단 투명 스트립에 정원장어가 사는 데스크톱 앱"
     }
   ]
 }
