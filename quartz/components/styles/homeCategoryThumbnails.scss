@@ -37,7 +37,9 @@
 
 .home-category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  // 카테고리당 6개를 보여주므로 3열 2줄로 떨어지게 잡는다.
+  // 12rem이던 시절엔 5열이 되어 마지막 한 장이 혼자 남았다.
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
   gap: 1rem;
 }
 

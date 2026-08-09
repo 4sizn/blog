@@ -1,13 +1,6 @@
 ---
-title: Welcome to 4sizn/blog
+title: "4sizn"
+description: "개발자 신희석의 작업과 기록. 데스크톱 앱, iOS 게임, 크롬 확장을 만들고 배운 것을 씁니다."
+draft: false
+lang: ko
 ---
-
-안녕하세요. Developer _ 신희석입니다.
-
-#개발 #회고 #아이디어 #release   블로그 글을 작성합니다.
-
-## 📫 Contact
-- 🐙 GitHub: https://github.com/4sizn
-- 🔗 LinkedIn: https://www.linkedin.com/in/4sizn
-- ✉️ Email: 4sizn@naver.com
-- 💬 Discord: 4sizn#0000

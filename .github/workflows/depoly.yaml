@@ -26,6 +26,11 @@ jobs:
           node-version: 22
       - name: Install Dependencies
         run: npm ci
+      # 잔디 데이터를 배포 시점 기준으로 갱신한다. 실패해도 커밋된
+      # quartz/static/contributions.json 으로 빌드가 계속된다.
+      - name: Refresh contribution graph
+        run: node scripts/fetch-contributions.mjs
+        continue-on-error: true
       - name: Build Quartz
         run: npx quartz build
       - name: Upload artifact

@@ -24,6 +24,12 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import HomeCategoryThumbnails from "./HomeCategoryThumbnails"
+import SiteNav from "./SiteNav"
+import SiteFooter from "./SiteFooter"
+import Hero from "./Hero"
+import ProjectGrid from "./ProjectGrid"
+import RecentPosts from "./RecentPosts"
+import ContributionGraph from "./ContributionGraph"
 
 export {
   ArticleTitle,
@@ -47,6 +53,12 @@ export {
   MobileOnly,
   RecentNotes,
   HomeCategoryThumbnails,
+  SiteNav,
+  SiteFooter,
+  Hero,
+  ProjectGrid,
+  RecentPosts,
+  ContributionGraph,
   NotFound,
   Breadcrumbs,
   Comments,

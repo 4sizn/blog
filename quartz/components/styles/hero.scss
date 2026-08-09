@@ -1,0 +1,80 @@
+@use "../../styles/variables.scss" as *;
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 2rem;
+  // page-header가 이미 상단 여백을 갖고 있어 여기선 조금만 더 준다
+  padding: 1rem 0;
+
+  & .hero-headline {
+    font-family: var(--headerFont);
+    font-size: clamp(1.9rem, 4.2vw, 3rem);
+    line-height: 1.18;
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+    color: var(--dark);
+    // 한글 제목이 어중간하게 끊기지 않도록
+    word-break: keep-all;
+  }
+
+  & .hero-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray);
+    margin: 0 0 1.75rem;
+    max-width: 34rem;
+    word-break: keep-all;
+  }
+
+  & .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    & li {
+      margin: 0;
+    }
+
+    & a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--darkgray);
+      text-decoration: none;
+      background-color: transparent;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--secondary);
+      }
+    }
+  }
+
+  & .hero-art {
+    color: var(--secondary);
+    opacity: 0.85;
+    max-width: 22rem;
+    justify-self: end;
+  }
+
+  @media all and ($mobile) {
+    grid-template-columns: 1fr;
+    padding: 2rem 0 0.5rem;
+
+    & .hero-art {
+      display: none;
+    }
+  }
+
+  @media all and ($tablet) {
+    & .hero-art {
+      max-width: 16rem;
+    }
+  }
+}

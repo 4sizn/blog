@@ -1,0 +1,95 @@
+@use "../../styles/variables.scss" as *;
+
+.recent-posts {
+  margin: 3.5rem 0 0;
+
+  & .recent-posts-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    & h2 {
+      font-family: var(--headerFont);
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--dark);
+    }
+  }
+
+  & .recent-posts-more {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    background-color: transparent;
+    flex-shrink: 0;
+  }
+
+  & .recent-posts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--lightgray);
+
+    & li {
+      margin: 0;
+      border-bottom: 1px solid var(--lightgray);
+    }
+
+    & a {
+      display: grid;
+      grid-template-columns: 7rem minmax(0, 1fr);
+      align-items: baseline;
+      gap: 0.25rem 1rem;
+      padding: 0.9rem 0.5rem;
+      text-decoration: none;
+      background-color: transparent;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--highlight);
+
+        & .recent-posts-title {
+          color: var(--secondary);
+        }
+      }
+    }
+  }
+
+  & .recent-posts-meta {
+    font-size: 0.78rem;
+    color: var(--gray);
+    grid-row: span 2;
+  }
+
+  & .recent-posts-title {
+    font-family: var(--headerFont);
+    font-size: 0.98rem;
+    color: var(--dark);
+    word-break: keep-all;
+    transition: color 0.2s ease;
+  }
+
+  & .recent-posts-description {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--gray);
+    word-break: keep-all;
+    // 두 줄까지만
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media all and ($mobile) {
+    & .recent-posts-list a {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+
+    & .recent-posts-meta {
+      grid-row: auto;
+    }
+  }
+}

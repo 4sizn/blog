@@ -1,3 +1,90 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// ---------------------------------------------------------------------------
+// 폰트 스택
+//
+// util/theme.ts의 joinStyles가 이 파일 내용을 먼저 깔고 그 뒤에 :root를 붙이므로,
+// 같은 specificity로는 여기 정의가 덮인다. :root:root로 한 단계 올려서 이긴다.
+// 한글은 Space Grotesk / Inter에 글리프가 없어 Pretendard로 폴백된다.
+// ---------------------------------------------------------------------------
+$korean: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+  "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+:root:root {
+  --headerFont: "Space Grotesk", #{$korean};
+  --bodyFont: "Inter", #{$korean};
+  --codeFont: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+// ---------------------------------------------------------------------------
+// 고정 상단 네비 공간 확보
+//
+// SiteNav는 fixed라 문서 흐름에서 빠진다. 본문이 네비 아래로 숨지 않게 밀어준다.
+// ---------------------------------------------------------------------------
+$navHeight: 60px;
+
+#quartz-root.page {
+  padding-top: $navHeight;
+}
+
+// ---------------------------------------------------------------------------
+// 랜딩 페이지 (Home / Project / Blog)
+//
+// 사이드바 없이 가운데 한 칸으로 그린다. 슬러그 목록은 quartz.layout.ts의
+// landingSlugs와 짝이므로 한쪽만 고치면 레이아웃과 컴포넌트가 어긋난다.
+// 글 페이지는 건드리지 않는다 — explorer·graph·TOC 모두 그대로다.
+// ---------------------------------------------------------------------------
+$landingWidth: 1100px;
+
+body[data-slug="index"],
+body[data-slug="projects/index"],
+body[data-slug="blog"] {
+  // base.scss가 `.page > #quartz-body .center`(1,2,0)로 max-width·min-width를
+  // 100%로 못박고 있어서, 여기서도 같은 경로를 타야 이긴다. 짧게 쓰면 조용히 무시된다.
+  & .page > #quartz-body {
+    display: block;
+
+    & > .sidebar {
+      display: none;
+    }
+
+    & > .center {
+      max-width: $landingWidth;
+      min-width: 0;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    // 사이드바가 없으니 상단 여백($topSpacing 6rem)을 덜어내되, 네비에 붙지는 않게 둔다
+    & .page-header {
+      margin-top: 2.5rem;
+    }
+
+    // 랜딩은 본문과 아래 섹션 사이 구분선이 필요 없다
+    & .center > hr {
+      display: none;
+    }
+
+    & .page-footer {
+      margin-top: 0;
+    }
+
+    @media all and (max-width: 800px) {
+      & > .center {
+        padding: 0 1rem;
+      }
+    }
+  }
+}
+
+// 홈은 본문이 비어 있어 article 기본 여백만 남는다. 접어 둔다.
+body[data-slug="index"] .center > article {
+  min-height: 0;
+}
+
+// Project 페이지는 폴더 인덱스라 FolderContent가 파일 목록을 덧붙인다.
+// 카드 그리드로 대신 보여주므로 기본 목록은 감춘다.
+body[data-slug="projects/index"] .page-listing {
+  display: none;
+}
+

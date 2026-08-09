@@ -1,0 +1,145 @@
+@use "../../styles/variables.scss" as *;
+
+.project-grid-section {
+  margin: 3.5rem 0 0;
+
+  & .project-grid-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+
+    & h2 {
+      font-family: var(--headerFont);
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--dark);
+    }
+  }
+
+  & .project-grid-more {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    background-color: transparent;
+    flex-shrink: 0;
+  }
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  background-color: transparent;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--secondary);
+    background-color: var(--highlight);
+  }
+
+  & .project-card-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1.1rem;
+    text-decoration: none;
+    background-color: transparent;
+    flex: 1;
+  }
+
+  & .project-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  & .project-icon--initial {
+    display: grid;
+    place-items: center;
+    font-family: var(--headerFont);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--secondary);
+    background-color: var(--highlight);
+    border: 1px solid var(--lightgray);
+  }
+
+  & .project-card-body {
+    min-width: 0;
+
+    & h3 {
+      font-family: var(--headerFont);
+      font-size: 1rem;
+      margin: 0 0 0.3rem;
+      color: var(--dark);
+      word-break: keep-all;
+    }
+  }
+
+  & .project-card-description {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--gray);
+    margin: 0;
+    word-break: keep-all;
+  }
+
+  & .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0.65rem 0 0;
+    padding: 0;
+
+    & li {
+      margin: 0;
+      font-size: 0.7rem;
+      padding: 0.12rem 0.45rem;
+      border: 1px solid var(--lightgray);
+      border-radius: 4px;
+      color: var(--gray);
+    }
+  }
+
+  & .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    list-style: none;
+    margin: 0;
+    padding: 0 1.1rem 1rem calc(1.1rem + 44px + 0.9rem);
+
+    & li {
+      margin: 0;
+    }
+
+    & a {
+      font-size: 0.78rem;
+      color: var(--gray);
+      background-color: transparent;
+
+      &:hover {
+        color: var(--secondary);
+      }
+    }
+  }
+
+  @media all and ($mobile) {
+    & .project-links {
+      padding-left: 1.1rem;
+    }
+  }
+}
