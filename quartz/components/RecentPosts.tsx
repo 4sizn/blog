@@ -17,7 +17,7 @@ const defaults: Options = {
   limit: 5,
   title: "Recent Posts",
   showMore: true,
-  sections: ["log", "dev", "releases"],
+  sections: ["blog/log", "blog/dev", "blog/releases"],
 }
 
 export default ((opts?: Partial<Options>) => {

@@ -31,15 +31,16 @@ const explorerSortFn = (a: any, b: any) => {
 // 같은 목록을 data-slug로 참조하므로 한쪽만 고치면 어긋난다.
 // content/projects/index.md 의 슬러그는 "projects"가 아니라 "projects/index"다.
 const PROJECTS_SLUG = "projects/index"
-const landingSlugs = ["index", "about", PROJECTS_SLUG, "blog"]
+const BLOG_SLUG = "blog/index"
+// Blog는 explorer·graph를 그대로 쓰므로 랜딩 목록에 넣지 않는다.
+const landingSlugs = ["index", "about", PROJECTS_SLUG]
 const isLanding = (page: { fileData: { slug?: string } }) =>
   landingSlugs.includes(page.fileData.slug ?? "")
 
-// explorer는 블로그 글을 훑는 도구다. 랜딩 페이지(About·Blog·Projects)와
-// 태그 인덱스는 네비로 가는 곳이라 목록에서 빼둔다.
+// explorer는 블로그 글을 훑는 도구다. 글은 전부 blog/ 아래 있으므로 그건 남기고,
+// 네비로 가는 페이지(About·Projects)와 태그 인덱스만 목록에서 뺀다.
 // sortFn과 마찬가지로 직렬화되어 클라이언트에서 실행되므로 자기 완결형이어야 한다.
-const explorerFilterFn = (node: any) =>
-  !["tags", "about", "blog", "projects"].includes(node.slugSegment)
+const explorerFilterFn = (node: any) => !["tags", "about", "projects"].includes(node.slugSegment)
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -72,7 +73,7 @@ export const sharedPageComponents: SharedLayout = {
     }),
     Component.ConditionalRender({
       component: Component.HomeCategoryThumbnails(),
-      condition: (page) => page.fileData.slug === "blog",
+      condition: (page) => page.fileData.slug === BLOG_SLUG,
     }),
   ],
   footer: Component.SiteFooter({
@@ -183,5 +184,7 @@ export const defaultListPageLayout: PageLayout = {
     }),
     Component.Explorer({ sortFn: explorerSortFn, filterFn: explorerFilterFn }),
   ],
-  right: [],
+  // Blog 랜딩(blog/index)도 폴더 페이지라 이 레이아웃을 탄다.
+  // 글 페이지와 같은 느낌이 나게 그래프를 띄운다.
+  right: [Component.Graph()],
 }

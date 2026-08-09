@@ -14,4 +14,4 @@ lang: ko
 차단 목록을 직접 관리할 수 있습니다.
 
 - 최신 릴리즈: v1.0.6 (2026-02-04)
-- [릴리즈 노트](../releases/2026-02-04-screen-saver-extension-1.0.6)
+- [릴리즈 노트](../blog/releases/2026-02-04-screen-saver-extension-1.0.6)

@@ -12,7 +12,8 @@ type NavItem = {
   isActive: (slug: string) => boolean
 }
 
-const BLOG_SECTIONS = ["blog", "log", "dev", "releases", "tags"]
+// 글은 전부 blog/ 아래에 있고, 태그 인덱스도 Blog 소속으로 본다
+const BLOG_SECTIONS = ["blog", "tags"]
 
 const navItems: NavItem[] = [
   {

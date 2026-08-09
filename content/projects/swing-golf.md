@@ -19,4 +19,4 @@ lang: ko
 Godot 엔진으로 만들었고 한국어와 영어를 지원합니다.
 
 - App Store 첫 공개: 2026-08-03
-- [릴리즈 노트](../releases/2026-08-05-swing-golf-1.2)
+- [릴리즈 노트](../blog/releases/2026-08-05-swing-golf-1.2)

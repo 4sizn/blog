@@ -20,4 +20,4 @@ Blender의 Mantaflow 유체 시뮬레이션으로 만든 촛불의 룩을 Godot 
 폰을 좌우로 기울이면 불꽃이 세계의 수직을 향해 부드럽게 출렁입니다.
 
 - App Store 첫 공개: 2026-08-03
-- [릴리즈 노트](../releases/2026-08-05-lonely-candle-1.2)
+- [릴리즈 노트](../blog/releases/2026-08-05-lonely-candle-1.2)

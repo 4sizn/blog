@@ -45,8 +45,7 @@ $landingWidth: 1100px;
 
 body[data-slug="index"],
 body[data-slug="about"],
-body[data-slug="projects/index"],
-body[data-slug="blog"] {
+body[data-slug="projects/index"] {
   // base.scss가 `.page > #quartz-body .center`(1,2,0)로 max-width·min-width를
   // 100%로 못박고 있어서, 여기서도 같은 경로를 타야 이긴다. 짧게 쓰면 조용히 무시된다.
   & .page > #quartz-body {
@@ -229,8 +228,9 @@ body[data-slug="about"] .center > article {
   }
 }
 
-// Project 페이지는 폴더 인덱스라 FolderContent가 파일 목록을 덧붙인다.
-// 카드 그리드로 대신 보여주므로 기본 목록은 감춘다.
-body[data-slug="projects/index"] .page-listing {
+// Project·Blog는 폴더 인덱스라 FolderContent가 파일 목록을 덧붙인다.
+// 각각 카드 그리드와 카테고리 썸네일로 대신 보여주므로 기본 목록은 감춘다.
+body[data-slug="projects/index"] .page-listing,
+body[data-slug="blog/index"] .page-listing {
   display: none;
 }

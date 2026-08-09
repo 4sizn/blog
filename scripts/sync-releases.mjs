@@ -163,7 +163,7 @@ async function generateMarkdown(release, repoInfo) {
     '{{DESCRIPTION}}': description || `${displayName}의 새로운 버전`,
     '{{CATEGORY}}': category,
     '{{REPO}}': repo,
-    '{{PERMALINK}}': `/releases/${datePrefix}-${repo}-${version}`,
+    '{{PERMALINK}}': `/blog/releases/${datePrefix}-${repo}-${version}`,
     '{{DATE}}': date,
     '{{FEATURES_SECTION}}': featuresSection,
     '{{IMPROVEMENTS_SECTION}}': improvementsSection,
@@ -216,7 +216,7 @@ async function main() {
     const releaseDate = new Date(release.published_at).toISOString().split('T')[0];
     const datePrefix = releaseDate; // Keep YYYY-MM-DD format for URL safety
     const filename = `${datePrefix}-${repo}-${version}.md`;
-    const filepath = join(ROOT_DIR, 'content', 'releases', filename);
+    const filepath = join(ROOT_DIR, 'content', 'blog', 'releases', filename);
 
     // 이미 존재하는지 확인
     const exists = await fileExists(filepath);
