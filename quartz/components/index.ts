@@ -27,6 +27,7 @@ import HomeCategoryThumbnails from "./HomeCategoryThumbnails"
 import SiteNav from "./SiteNav"
 import SiteFooter from "./SiteFooter"
 import Hero from "./Hero"
+import AboutHero from "./AboutHero"
 import ProjectGrid from "./ProjectGrid"
 import RecentPosts from "./RecentPosts"
 import ContributionGraph from "./ContributionGraph"
@@ -56,6 +57,7 @@ export {
   SiteNav,
   SiteFooter,
   Hero,
+  AboutHero,
   ProjectGrid,
   RecentPosts,
   ContributionGraph,

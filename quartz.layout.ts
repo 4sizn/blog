@@ -31,9 +31,15 @@ const explorerSortFn = (a: any, b: any) => {
 // 같은 목록을 data-slug로 참조하므로 한쪽만 고치면 어긋난다.
 // content/projects/index.md 의 슬러그는 "projects"가 아니라 "projects/index"다.
 const PROJECTS_SLUG = "projects/index"
-const landingSlugs = ["index", PROJECTS_SLUG, "blog"]
+const landingSlugs = ["index", "about", PROJECTS_SLUG, "blog"]
 const isLanding = (page: { fileData: { slug?: string } }) =>
   landingSlugs.includes(page.fileData.slug ?? "")
+
+// explorer는 블로그 글을 훑는 도구다. 랜딩 페이지(About·Blog·Projects)와
+// 태그 인덱스는 네비로 가는 곳이라 목록에서 빼둔다.
+// sortFn과 마찬가지로 직렬화되어 클라이언트에서 실행되므로 자기 완결형이어야 한다.
+const explorerFilterFn = (node: any) =>
+  !["tags", "about", "blog", "projects"].includes(node.slugSegment)
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -84,10 +90,10 @@ export const defaultContentPageLayout: PageLayout = {
       component: Component.Breadcrumbs(),
       condition: (page) => !isLanding(page),
     }),
-    // 홈은 Hero가 제목 역할을 하므로 기본 제목 줄을 숨긴다
+    // 홈과 About은 각자의 히어로가 제목 역할을 하므로 기본 제목 줄을 숨긴다
     Component.ConditionalRender({
       component: Component.ArticleTitle(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => !["index", "about"].includes(page.fileData.slug ?? ""),
     }),
     Component.ConditionalRender({
       component: Component.ContentMeta(),
@@ -110,6 +116,22 @@ export const defaultContentPageLayout: PageLayout = {
       }),
       condition: (page) => page.fileData.slug === "index",
     }),
+    Component.ConditionalRender({
+      component: Component.AboutHero({
+        headline: "신희석입니다. 웹에서 사람과 사람을 잇는 것을 만듭니다.",
+        paragraphs: [
+          "웹 개발자입니다. React 기반 UI 개발과 실시간 메시지 프로토콜을 이용한 클라이언트 기능 개발을 주로 해왔습니다.",
+          "IT 트렌드와 신기술에 관심이 많고, 다가올 미래를 자주 상상하는 편입니다. 다만 기발한 아이디어는 누구나 떠올릴 수 있고, 완성하지 않으면 머릿속에만 떠다니는 무형의 이미지로 남는다고 생각합니다.",
+          "그래서 구현하면서 마주치는 문제를 인식하고 해결하며 제 것으로 만들어 왔습니다. 좋은 동료들과 이야기를 나눠가며 좋은 서비스를 만들고 싶습니다.",
+        ],
+        initial: "4",
+        resumeUrl: "https://app.notion.com/p/Resume-e199c36eaf564f718dbb5aa90794daf1",
+        email: "4sizn@naver.com",
+        callout:
+          "함께 만들어보고 싶은 것이 있거나, 그냥 기술 이야기를 나누고 싶으시다면 편하게 연락 주세요.",
+      }),
+      condition: (page) => page.fileData.slug === "about",
+    }),
   ],
   left: [
     Component.PageTitle(),
@@ -124,7 +146,7 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer({ sortFn: explorerSortFn }),
+    Component.Explorer({ sortFn: explorerSortFn, filterFn: explorerFilterFn }),
   ],
   right: [
     Component.Graph(),
@@ -159,7 +181,7 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer({ sortFn: explorerSortFn }),
+    Component.Explorer({ sortFn: explorerSortFn, filterFn: explorerFilterFn }),
   ],
   right: [],
 }

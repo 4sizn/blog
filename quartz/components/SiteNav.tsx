@@ -21,6 +21,11 @@ const navItems: NavItem[] = [
     isActive: (slug) => slug === "index",
   },
   {
+    label: "About",
+    target: "about" as FullSlug,
+    isActive: (slug) => slug === "about",
+  },
+  {
     label: "Project",
     target: "projects" as FullSlug,
     isActive: (slug) => slug === "projects" || slug.startsWith("projects/"),

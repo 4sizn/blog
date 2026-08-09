@@ -7,8 +7,15 @@
 // 같은 specificity로는 여기 정의가 덮인다. :root:root로 한 단계 올려서 이긴다.
 // 한글은 Space Grotesk / Inter에 글리프가 없어 Pretendard로 폴백된다.
 // ---------------------------------------------------------------------------
-$korean: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
-  "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+$korean:
+  "Pretendard Variable",
+  Pretendard,
+  -apple-system,
+  BlinkMacSystemFont,
+  system-ui,
+  "Apple SD Gothic Neo",
+  "Malgun Gothic",
+  sans-serif;
 
 :root:root {
   --headerFont: "Space Grotesk", #{$korean};
@@ -28,7 +35,7 @@ $navHeight: 60px;
 }
 
 // ---------------------------------------------------------------------------
-// 랜딩 페이지 (Home / Project / Blog)
+// 랜딩 페이지 (Home / About / Project / Blog)
 //
 // 사이드바 없이 가운데 한 칸으로 그린다. 슬러그 목록은 quartz.layout.ts의
 // landingSlugs와 짝이므로 한쪽만 고치면 레이아웃과 컴포넌트가 어긋난다.
@@ -37,6 +44,7 @@ $navHeight: 60px;
 $landingWidth: 1100px;
 
 body[data-slug="index"],
+body[data-slug="about"],
 body[data-slug="projects/index"],
 body[data-slug="blog"] {
   // base.scss가 `.page > #quartz-body .center`(1,2,0)로 max-width·min-width를
@@ -77,9 +85,148 @@ body[data-slug="blog"] {
   }
 }
 
+// ---------------------------------------------------------------------------
+// 타이포그래피
+//
+// base.scss는 line-height를 rem 고정값(1.6rem)으로 잡는데, 한글은 글자가 네모나서
+// 같은 값이라도 라틴 문자보다 빽빽해 보인다. 배수로 바꿔 숨통을 틔운다.
+// 헤딩은 헤더 폰트를 확실히 물리고 자간을 조여 덩어리로 보이게 한다.
+//
+// 반드시 직계 자식(`>`)으로 좁힌다. 카드 컴포넌트도 내부에 <article>을 쓰기 때문에
+// 후손 선택자로 두면 문서용 헤딩 여백이 카드 안까지 새어 들어간다.
+// ---------------------------------------------------------------------------
+.center > article {
+  & p,
+  & li {
+    line-height: 1.85;
+    // 한글은 어절 단위로 끊어야 읽기 편하다
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  & p {
+    margin: 0 0 1.15rem;
+  }
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-family: var(--headerFont);
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    word-break: keep-all;
+    color: var(--dark);
+  }
+
+  & h1 {
+    font-size: 1.9rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.1rem;
+  }
+
+  & h2 {
+    font-size: 1.45rem;
+    margin-top: 2.6rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--lightgray);
+  }
+
+  & h3 {
+    font-size: 1.15rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  & h4 {
+    font-size: 1rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+    color: var(--darkgray);
+  }
+
+  & ul,
+  & ol {
+    padding-left: 1.15rem;
+
+    & li {
+      margin: 0.35rem 0;
+    }
+  }
+
+  & a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  & blockquote {
+    border-left: 3px solid var(--secondary);
+    margin: 1.5rem 0;
+    padding: 0.15rem 0 0.15rem 1.1rem;
+    color: var(--gray);
+  }
+
+  & table {
+    font-size: 0.92rem;
+  }
+
+  & th {
+    font-family: var(--headerFont);
+    font-weight: 600;
+    color: var(--dark);
+  }
+}
+
 // 홈은 본문이 비어 있어 article 기본 여백만 남는다. 접어 둔다.
 body[data-slug="index"] .center > article {
   min-height: 0;
+}
+
+// ---------------------------------------------------------------------------
+// About 본문
+//
+// 경력이 회사 > 프로젝트 > 항목 3단으로 겹쳐서, 계층이 눈에 보이게 들여쓴다.
+// ---------------------------------------------------------------------------
+body[data-slug="about"] .center > article {
+  & h3 {
+    margin-top: 2.4rem;
+    font-size: 1.2rem;
+  }
+
+  // 회사 재직 기간
+  & h3 + p {
+    margin: 0.15rem 0 0;
+    font-size: 0.85rem;
+    color: var(--gray);
+
+    & strong {
+      font-weight: 500;
+      color: var(--gray);
+    }
+  }
+
+  // 프로젝트 이름 + 기간
+  & h4 {
+    margin-top: 1.5rem;
+    padding-left: 0.85rem;
+    border-left: 2px solid var(--lightgray);
+    font-size: 0.95rem;
+    color: var(--dark);
+  }
+
+  & h4 + ul {
+    padding-left: 1.9rem;
+
+    & li {
+      font-size: 0.9rem;
+      // --gray는 다크 모드에서 #52525b라 배경(#18181b)과 대비가 3:1이 안 된다.
+      // 실제로 읽는 내용이므로 본문 색을 쓴다.
+      color: var(--darkgray);
+    }
+  }
 }
 
 // Project 페이지는 폴더 인덱스라 FolderContent가 파일 목록을 덧붙인다.
@@ -87,4 +234,3 @@ body[data-slug="index"] .center > article {
 body[data-slug="projects/index"] .page-listing {
   display: none;
 }
-
