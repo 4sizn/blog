@@ -1,3 +1,10 @@
+/* Hallmark · redesign (audit fixes) · genre: editorial · scope: app
+ * 색·타이포 토큰의 주인은 quartz.config.ts의 theme.colors다 (Quartz 소유).
+ * 별도 design.md를 두지 않는다 — 진실 원천을 둘로 나누지 않기 위해서다.
+ * contrast: AA pass — gray 4.7:1(light) / 5.4:1(dark), accent 5.3:1 / 10.3:1
+ * motion: 로드 1회 진입, stagger ≤ 0.5s, transform·opacity만, reduced-motion 대응
+ */
+
 @use "./base.scss";
 
 // ---------------------------------------------------------------------------
@@ -325,14 +332,102 @@ $stagger: 60ms;
 
 // 호버·상태 전환의 이징을 한 곳에서 맞춘다. 각 컴포넌트가 제 나름의 duration을
 // 쓰고 있어서 커서를 옮길 때마다 속도가 달라 보였다.
+//
+// 브라우저 기본 `ease`는 가속 구간이 뭉툭해서 다른 이징과 섞이면 어긋난 게
+// 보인다. 상태 전환을 갖는 요소는 빠짐없이 여기 목록에 올린다.
 .project-card,
+.project-card-main,
+.project-links a,
+.project-grid-more,
 .home-category-card,
+.home-category-card-content h3,
+.home-category-more,
+.site-nav-brand,
 .site-nav-links a,
 .hero-links a,
 .contribution-year,
-.recent-posts-list a {
+.recent-posts-list a,
+.recent-posts-title,
+.recent-posts-more,
+.site-footer a,
+.about-resume,
+.about-email {
   transition-timing-function: $ease-out-soft;
   transition-duration: 220ms;
+}
+
+// ---------------------------------------------------------------------------
+// 키보드 포커스
+//
+// 커스텀 컴포넌트들이 배경과 테두리를 직접 칠하고 있어서 브라우저 기본
+// outline이 묻힌다. 특히 연도 버튼과 카드는 포커스가 어디 있는지 전혀 보이지
+// 않았다.
+//
+// 링은 즉시 나타나야 한다 — transition을 걸면 키보드 사용자는 전환이 끝날
+// 때까지 자기 위치를 모른다. 위 이징 목록이 transition-property를 건드리지
+// 않으므로 outline은 애초에 전환 대상이 아니다.
+// ---------------------------------------------------------------------------
+%focus-ring {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+.site-nav-brand,
+.site-nav-links a,
+.hero-links a,
+.project-links a,
+.project-grid-more,
+.recent-posts-more,
+.home-category-more,
+.site-footer a,
+.about-resume,
+.about-email {
+  &:focus-visible {
+    @extend %focus-ring;
+    border-radius: 3px;
+  }
+}
+
+// 면을 가진 것들은 자기 모서리를 따라 링을 두른다
+.project-card-main:focus-visible {
+  @extend %focus-ring;
+  outline-offset: -2px;
+  border-radius: 10px;
+}
+
+.home-category-card:focus-visible {
+  @extend %focus-ring;
+  outline-offset: -2px;
+  border-radius: 12px;
+}
+
+.recent-posts-list a:focus-visible {
+  @extend %focus-ring;
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+.contribution-year:focus-visible {
+  @extend %focus-ring;
+  outline-offset: 2px;
+}
+
+// 누르는 순간을 손끝에 돌려준다. 연도 버튼은 진짜 버튼이라 눌림 상태가 있어야
+// 클릭이 먹었는지 알 수 있다.
+.contribution-year:active {
+  transform: translateY(1px);
+}
+
+// 한글은 어절로 끊는 게 맞지만(word-break: keep-all), 영문 긴 합성어나 URL이
+// 제목에 섞이면 끊을 자리가 없어 화면 밖으로 나간다. 마지막 수단으로만
+// 단어 안을 끊게 열어 둔다.
+.hero-headline,
+.about-hero-copy > h1,
+.project-card-body h3,
+.home-category-card-content h3,
+.recent-posts-title {
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 // 카드는 살짝 떠오르게. transform이라 레이아웃을 건드리지 않는다.

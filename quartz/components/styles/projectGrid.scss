@@ -1,7 +1,10 @@
 @use "../../styles/variables.scss" as *;
 
+// 히어로 다음에 오는 첫 섹션이라 위쪽 숨을 가장 크게 준다.
+// 세 섹션(Projects·Posts·Contribution)이 같은 간격을 쓰면 페이지가 한 가지
+// 리듬만 반복하게 되므로 여기서 의도적으로 벌린다.
 .project-grid-section {
-  margin: 3.5rem 0 0;
+  margin: 4.5rem 0 0;
 
   & .project-grid-header {
     display: flex;
@@ -26,10 +29,28 @@
   }
 }
 
+// 12칸 위에 7 / 5로 번갈아 얹는다. 균등 3분할은 어떤 카드가 더 중요한지
+// 말해주지 않고, 화면에서 가장 먼저 읽히는 템플릿 모양이기도 하다.
+// 홀수 장이면 마지막 줄 오른쪽이 비는데, 그 여백은 실수가 아니라 쉼표다.
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.1rem 1.25rem;
+
+  & > .project-card {
+    grid-column: span 7;
+
+    &:nth-child(2n) {
+      grid-column: span 5;
+    }
+  }
+
+  @media all and (max-width: 1000px) {
+    & > .project-card,
+    & > .project-card:nth-child(2n) {
+      grid-column: span 12;
+    }
+  }
 }
 
 .project-card {
@@ -63,6 +84,10 @@
     border-radius: 10px;
     flex-shrink: 0;
     object-fit: cover;
+    // base.scss의 전역 `img { margin: 1rem 0 }`가 본문 이미지를 겨냥한 규칙인데
+    // 여기까지 내려와서, 앱 아이콘(img)만 이니셜 배지(span)보다 16px 아래로
+    // 밀려 있었다. 카드 아이콘은 문단 이미지가 아니므로 되돌린다.
+    margin: 0;
   }
 
   & .project-icon--initial {

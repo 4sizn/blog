@@ -7,8 +7,12 @@
 html {
   scroll-behavior: smooth;
   text-size-adjust: none;
-  overflow-x: hidden;
-  width: 100vw;
+  // 100vw는 세로 스크롤바 폭을 포함해서, 스크롤바가 보이는 데스크톱에서
+  // 문서가 뷰포트보다 15px 넓어진다. overflow-x로 그걸 덮고 있었을 뿐이다.
+  // clip은 hidden과 달리 스크롤 컨테이너를 만들지 않아 자손의 sticky를
+  // 깨뜨리지 않는다.
+  width: 100%;
+  overflow-x: clip;
 
   @media all and ($mobile) {
     scroll-padding-top: 4rem;
@@ -21,6 +25,7 @@ body {
   background-color: var(--light);
   font-family: var(--bodyFont);
   color: var(--darkgray);
+  overflow-x: clip;
 }
 
 .text-highlight {

@@ -1,7 +1,8 @@
 @use "../../styles/variables.scss" as *;
 
+// 페이지의 마지막 섹션. 앞 목록과 성격이 완전히 달라서 크게 떨어뜨린다.
 .contribution-graph {
-  margin: 4rem 0 0;
+  margin: 5.5rem 0 0;
 
   & > h2 {
     font-family: var(--headerFont);

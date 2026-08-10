@@ -1,7 +1,9 @@
 @use "../../styles/variables.scss" as *;
 
+// 앞 섹션(4.5rem)보다 바짝 붙인다. 목록은 카드보다 밀도가 높은 물건이라
+// 같은 간격을 주면 페이지가 한 박자로만 흐른다.
 .recent-posts {
-  margin: 3.5rem 0 0;
+  margin: 2.75rem 0 0;
 
   & .recent-posts-header {
     display: flex;

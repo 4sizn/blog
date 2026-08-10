@@ -34,7 +34,7 @@ export default ((opts?: Options) => {
           )}
 
           <p class="site-footer-copyright">
-            © {year} {cfg.pageTitle}. All rights reserved.
+            © {year} {cfg.pageTitle}
           </p>
         </div>
       </footer>

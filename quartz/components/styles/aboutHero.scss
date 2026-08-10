@@ -30,18 +30,31 @@
     }
   }
 
+  // 한쪽 모서리만 두꺼운 색 띠는 어디서나 본 모양이라 눈이 그냥 지나친다.
+  // 테두리를 균일한 헤어라인으로 돌리고, 강조는 문장 앞의 작은 사각형
+  // 하나로만 준다 — 면적 대신 위치로 시선을 잡는 쪽이 오래 간다.
   & .about-callout {
-    margin: 1.75rem 0 0;
-    padding: 1.1rem 1.25rem;
+    margin: 2rem 0 0;
+    padding: 1.15rem 1.3rem;
     border: 1px solid var(--lightgray);
-    border-left: 3px solid var(--secondary);
     border-radius: 8px;
-    background-color: var(--highlight);
+    background-color: transparent;
 
     & p {
       margin: 0;
       font-size: 0.92rem;
       color: var(--darkgray);
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 0.42rem;
+        height: 0.42rem;
+        margin-right: 0.6rem;
+        vertical-align: 0.08em;
+        border-radius: 1px;
+        background-color: var(--secondary);
+      }
     }
   }
 
@@ -51,21 +64,28 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    // 사진이 들어오기 전까지는 자리만 지키면 된다. 4:3 전폭으로 두면 빈 색면이
+    // 화면에서 제일 큰 덩어리가 돼서 "아직 안 만든 곳"처럼 읽힌다.
+    max-width: 15rem;
+    justify-self: end;
   }
 
   & .about-photo {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1;
     object-fit: cover;
     border: 1px solid var(--lightgray);
     border-radius: 12px;
+    // base.scss의 전역 img 마진(1rem)이 카드 상단에 군더더기 여백을 만든다.
+    // 간격은 .about-hero-card의 gap이 이미 잡고 있다.
+    margin: 0;
   }
 
   & .about-photo--initial {
     display: grid;
     place-items: center;
     font-family: var(--headerFont);
-    font-size: 3.5rem;
+    font-size: 2.6rem;
     font-weight: 700;
     color: var(--secondary);
     background-color: var(--highlight);
