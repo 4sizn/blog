@@ -143,7 +143,7 @@ export const defaultContentPageLayout: PageLayout = {
           Component: Component.Search(),
           grow: true,
         },
-        { Component: Component.Darkmode() },
+        // 테마 토글은 SiteNav에만 둔다 — 사이드바에도 두면 화면에 두 개가 뜬다
         { Component: Component.ReaderMode() },
       ],
     }),
@@ -179,7 +179,6 @@ export const defaultListPageLayout: PageLayout = {
           Component: Component.Search(),
           grow: true,
         },
-        { Component: Component.Darkmode() },
       ],
     }),
     Component.Explorer({ sortFn: explorerSortFn, filterFn: explorerFilterFn }),

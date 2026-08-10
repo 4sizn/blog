@@ -1,6 +1,9 @@
 import { resolveRelative, type FullSlug } from "../util/path"
 import style from "./styles/siteNav.scss"
 import DarkmodeConstructor from "./Darkmode"
+import darkmodeStyle from "./styles/darkmode.scss"
+// @ts-ignore
+import darkmodeScript from "./scripts/darkmode.inline"
 import type { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 
 const Darkmode = DarkmodeConstructor()
@@ -71,6 +74,9 @@ const SiteNav: QuartzComponent = (props: QuartzComponentProps) => {
   )
 }
 
-SiteNav.css = style
+// 테마 토글은 네비에만 둔다. Darkmode를 레이아웃에서 뺐으므로 그 CSS·스크립트도
+// 여기서 같이 실어야 아이콘 모양과 클릭 동작이 살아남는다.
+SiteNav.css = `${style}\n${darkmodeStyle}`
+SiteNav.beforeDOMLoaded = darkmodeScript
 
 export default (() => SiteNav) satisfies QuartzComponentConstructor
