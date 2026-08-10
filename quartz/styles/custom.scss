@@ -234,3 +234,115 @@ body[data-slug="projects/index"] .page-listing,
 body[data-slug="blog/index"] .page-listing {
   display: none;
 }
+
+// ---------------------------------------------------------------------------
+// 모션
+//
+// victoreke.com은 Framer Motion으로 블록마다 opacity 0→1 + translateY 진입을
+// 태우고, 호버는 CSS transition 0.3s로 처리한다. 여기서는 런타임 의존 없이
+// CSS 키프레임으로 같은 인상을 낸다.
+//
+// 규칙 (hyperframes-animation 스킬의 모션 원칙을 따름)
+// - 한 묶음의 stagger 총합은 0.5s를 넘기지 않는다. 넘으면 도착이 한 박자로
+//   읽히지 않고 줄줄이 늘어지는 느낌이 된다
+// - transform·opacity만 건드린다. top/left/width/height는 레이아웃을 다시 잡게
+//   해서 프레임을 떨어뜨린다
+// - animation-fill-mode: both — 시작 전에도 끝난 뒤에도 상태를 붙잡아 둔다
+// ---------------------------------------------------------------------------
+$ease-out-soft: cubic-bezier(0.2, 0, 0, 1);
+$rise: 12px;
+$stagger: 60ms;
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY($rise);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @mixin rise($delay: 0ms, $duration: 460ms) {
+    animation: fade-up $duration $ease-out-soft both;
+    animation-delay: $delay;
+  }
+
+  // 히어로: 제목 → 설명 → 링크 순으로 한 박자에 들어온다
+  .hero-headline {
+    @include rise(0ms);
+  }
+  .hero-description {
+    @include rise($stagger);
+  }
+  .hero-links {
+    @include rise($stagger * 2);
+  }
+  .hero-art {
+    @include rise($stagger * 3, 620ms);
+  }
+
+  .about-hero-copy > h1 {
+    @include rise(0ms);
+  }
+  .about-hero-copy > p {
+    @include rise($stagger);
+  }
+  .about-callout {
+    @include rise($stagger * 2);
+  }
+  .about-hero-card {
+    @include rise($stagger * 2);
+  }
+
+  // 카드 묶음: 한 섹션 안에서만 순차로. 6장 × 60ms = 360ms로 0.5s 안에 든다
+  .project-grid > .project-card,
+  .home-category-grid > .home-category-card,
+  .recent-posts-list > li {
+    @include rise();
+
+    @for $i from 2 through 6 {
+      &:nth-child(#{$i}) {
+        animation-delay: ($i - 1) * $stagger;
+      }
+    }
+  }
+
+  // 섹션 제목은 카드보다 아주 조금 먼저
+  .project-grid-header,
+  .recent-posts-header,
+  .home-category-title-row,
+  .contribution-graph > h2 {
+    @include rise(0ms, 380ms);
+  }
+
+  .contribution-layout {
+    @include rise($stagger, 520ms);
+  }
+}
+
+// 호버·상태 전환의 이징을 한 곳에서 맞춘다. 각 컴포넌트가 제 나름의 duration을
+// 쓰고 있어서 커서를 옮길 때마다 속도가 달라 보였다.
+.project-card,
+.home-category-card,
+.site-nav-links a,
+.hero-links a,
+.contribution-year,
+.recent-posts-list a {
+  transition-timing-function: $ease-out-soft;
+  transition-duration: 220ms;
+}
+
+// 카드는 살짝 떠오르게. transform이라 레이아웃을 건드리지 않는다.
+@media (prefers-reduced-motion: no-preference) {
+  .project-card,
+  .home-category-card {
+    transition-property: border-color, background-color, transform;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
