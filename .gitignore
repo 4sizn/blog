@@ -19,3 +19,9 @@ content/.*
 # skills-lock.json 에 소스와 해시가 남아 있어 재설치로 복원된다.
 .agents/
 .claude/skills/
+
+# hallmark 스킬이 남기는 것들.
+# .hallmark/log.json 은 다음 실행이 읽는 이력, .hallmark-audit/ 은 감사용 스크린샷.
+# 둘 다 사이트 빌드와 무관하다.
+.hallmark/
+.hallmark-audit/
