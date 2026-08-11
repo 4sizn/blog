@@ -254,19 +254,41 @@ git status --porcelain | grep -c "_workspace"     # → 0
 git check-ignore -v _workspace/                  # → .gitignore:24:_workspace/
 ```
 
-**W-09 — 발동 (NFR-04) — 부분 검증**
+**W-09 — 발동 (NFR-04)**
 
-```bash
-# description 트리거 문구 포함 확인
-릴리즈 노트 / 새 버전 / 스토어 등록 / 마일스톤 / draft → 5종 모두 포함
+`skill-creator` 의 Description Optimization 절차와 별개 컨텍스트 시도를 함께 썼다.
+트리거 eval 20건(should-trigger 10 / should-not 10, near-miss 위주)을 만들어 두 방식으로 측정했다.
+
+*방식 1 — 별개 컨텍스트 시도 (실제 Claude Code)*
+
+| 시도 | 요청 | 기대 | 결과 |
+|------|------|------|------|
+| 1 | screen-saver v1.0.7 릴리즈 노트 | 발동 | **발동** — 절차대로 `gh release view` 를 돌려 v1.0.7 이 없음을 잡아냈다 |
+| 2 | `content/blog/releases` 의 draft 초안 마무리 | 발동 | **발동** — 1단계(초안 탐색)를 실행해 초안 0건임을 확인하고 되묻기로 판단 |
+| 3 | `content/blog/log` 회고 개요 | 미발동 | **미발동** — SKILL.md 의 "해당 없음: 회고·에세이" 절을 근거로 스스로 배제 |
+
+**3/3 정답.** 수용 기준("3회 시도 중 3회")을 이 방식으로 충족했다.
+
+*방식 2 — 헤드리스 `claude -p` (`scripts/run_eval.py`, 20쿼리 × 3회)*
+
+```
+Results: 10/20 passed
+  should-trigger 10건 → 전부 rate=0/3   (recall 0%)
+  should-not     10건 → 전부 rate=0/3   (전부 통과)
 ```
 
-세션 skill 목록에 `blog-release-note` 가 **등록된 것을 이 세션에서 확인했다**
-(파일 생성 직후 사용 가능 skill 목록에 나타났다).
+**이 수치는 description 품질의 근거가 못 된다.** 모든 쿼리가 예외 없이 0/3이고,
+같은 도구의 첫 실행은 `ANTHROPIC_API_KEY` 가 설정돼 있으나 401 무효 키여서
+`claude -p` 가 전 건 실패했다(`env -u ANTHROPIC_API_KEY` 로 우회 후 재실행). 재실행에서도
+should-not 쪽까지 0/3인 것은 헤드리스 모드에서 프로젝트 로컬 skill 이 후보로 올라가지 않았을
+가능성을 시사한다. **환경 한계로 판정 보류**한다.
 
-**하지 못한 것**: "신규 세션 3회 시도 중 3회 발동"은 이 세션에서 검증할 수 없다.
-같은 세션에서는 이미 등록된 상태이고, 발동 여부는 새 세션의 요청 문구에 달려 있다.
-**다음 세션에서 확인해야 하는 항목으로 남긴다.**
+*조치*: `skill-creator` 권고("Claude는 skill을 과소 발동하므로 description을 다소 밀어붙이게 쓴다")에 따라
+description에 ① 트리거 상황 4종을 문장으로 명시 ② "사용자가 skill 이름을 말하지 않아도" 문구 추가
+③ **해당 없음 경계**(log 회고·dev 정리·GitHub 릴리즈 본문·CHANGELOG·번역·코드 수정)를 함께 박았다.
+경계를 같이 넣은 이유는 트리거만 강화하면 near-miss 오발동이 늘기 때문이다.
+
+**추적 확인 (D-05 전제)**
 
 **W-18~W-20 — 이미지 (FR-10)**
 

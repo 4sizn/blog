@@ -1,6 +1,6 @@
 ---
 name: blog-release-note
-description: "4sizn 블로그(content/blog/releases/)의 릴리즈 노트를 12섹션 골격에 맞춰 쓴다. 릴리즈 노트·새 버전 글·릴리즈 글·스토어 등록 글·마일스톤 기록 요청에 사용한다. GitHub 릴리즈가 있는 프로젝트, App Store 앱처럼 릴리즈가 없는 프로젝트, 버전이 없는 마일스톤을 모두 다룬다. 문장은 humanize-korean 을 반드시 거치고 이미지를 최소 1장 넣는다. sync-releases.mjs 가 만든 draft 초안을 완성하는 일도 이 skill 이다."
+description: "4sizn 블로그(content/blog/releases/)의 릴리즈 노트를 12섹션 골격에 맞춰 쓴다. 사용자가 새 버전을 냈다며 블로그에 글을 쓰자고 하거나, 릴리즈 노트·릴리즈 글·새 버전 글·스토어 등록 글·마일스톤 기록을 언급하거나, content/blog/releases 의 draft 초안을 마무리하자고 하거나, 옛 릴리즈 글을 지금 골격으로 다시 쓰자고 하면 반드시 이 skill 을 먼저 쓴다 — 사용자가 skill 이름을 말하지 않아도 그렇다. GitHub 릴리즈가 있는 프로젝트, App Store 앱처럼 릴리즈가 없는 프로젝트, 버전이 오르지 않은 마일스톤을 모두 다룬다. 이미지를 최소 1장 넣고 문장은 humanize-korean 을 반드시 거친다. 해당 없음 — content/blog/log 의 회고·에세이, content/blog/dev 의 읽은 글 정리, GitHub 릴리즈 본문 자체 작성, CHANGELOG.md, 릴리즈 노트 번역, quartz 컴포넌트·sync-releases.mjs 코드 수정."
 version: 1.0.0
 ---
 
