@@ -4,6 +4,8 @@ import style from "./styles/homeCategoryThumbnails.scss"
 import { resolveRelative, pathToRoot, joinSegments, type FullSlug } from "../util/path"
 import type { QuartzComponent, QuartzComponentConstructor } from "./types"
 import type { QuartzPluginData } from "../plugins/vfile"
+// @ts-ignore
+import motionScript from "./scripts/homeCategoryMotion.inline"
 
 type Category = {
   slug: string
@@ -74,13 +76,13 @@ const HomeCategoryThumbnails: QuartzComponent = ({ allFiles, fileData, cfg }) =>
   }
 
   return (
-    <section class="home-category-thumbnails">
+    <section class="home-category-thumbnails" data-motion-root="category-list">
       {groups.map((group) => {
         const sectionId = `${group.slug}-section`
         const folderHref = resolveRelative(currentSlug, group.slug as FullSlug)
 
         return (
-          <div class="home-category-block" id={sectionId}>
+          <div class="home-category-block" id={sectionId} data-motion="category">
             <div class="home-category-title-row">
               <h2>{group.title}</h2>
               <a
@@ -114,7 +116,7 @@ const HomeCategoryThumbnails: QuartzComponent = ({ allFiles, fileData, cfg }) =>
                 return (
                   <a
                     href={resolveRelative(currentSlug, page.slug as FullSlug)}
-                    class="home-category-card"
+                    class={`home-category-card ${!rawImage ? "home-category-card--default-thumb" : ""}`}
                     title={title}
                   >
                     <article>
@@ -142,5 +144,6 @@ const HomeCategoryThumbnails: QuartzComponent = ({ allFiles, fileData, cfg }) =>
 }
 
 HomeCategoryThumbnails.css = style
+HomeCategoryThumbnails.afterDOMLoaded = motionScript
 
 export default (() => HomeCategoryThumbnails) satisfies QuartzComponentConstructor

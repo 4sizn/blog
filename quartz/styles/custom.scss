@@ -260,6 +260,10 @@ $ease-out-soft: cubic-bezier(0.2, 0, 0, 1);
 $rise: 12px;
 $stagger: 60ms;
 
+:root {
+  --home-motion-ease: #{$ease-out-soft};
+}
+
 @media (prefers-reduced-motion: no-preference) {
   @keyframes fade-up {
     from {
@@ -306,7 +310,6 @@ $stagger: 60ms;
 
   // 카드 묶음: 한 섹션 안에서만 순차로. 6장 × 60ms = 360ms로 0.5s 안에 든다
   .project-grid > .project-card,
-  .home-category-grid > .home-category-card,
   .recent-posts-list > li {
     @include rise();
 
@@ -432,8 +435,7 @@ $stagger: 60ms;
 
 // 카드는 살짝 떠오르게. transform이라 레이아웃을 건드리지 않는다.
 @media (prefers-reduced-motion: no-preference) {
-  .project-card,
-  .home-category-card {
+  .project-card {
     transition-property: border-color, background-color, transform;
 
     &:hover {
