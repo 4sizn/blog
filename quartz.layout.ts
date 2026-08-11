@@ -4,7 +4,7 @@ import * as Component from "./quartz/components"
 // sortFn은 toString()으로 직렬화되어 클라이언트에서 실행되므로
 // 외부 변수 참조 없이 자기 완결형이어야 함
 const explorerSortFn = (a: any, b: any) => {
-  const order: Record<string, number> = { log: 0, dev: 1, releases: 2 }
+  const order: Record<string, number> = { log: 0, dev: 1, releases: 2, projects: 3 }
   // 폴더 우선, 폴더끼리는 지정 순서
   if (a.isFolder && !b.isFolder) return -1
   if (!a.isFolder && b.isFolder) return 1
@@ -37,10 +37,12 @@ const landingSlugs = ["index", "about", PROJECTS_SLUG]
 const isLanding = (page: { fileData: { slug?: string } }) =>
   landingSlugs.includes(page.fileData.slug ?? "")
 
-// explorer는 블로그 글을 훑는 도구다. 글은 전부 blog/ 아래 있으므로 그건 남기고,
-// 네비로 가는 페이지(About·Projects)와 태그 인덱스만 목록에서 뺀다.
+// explorer는 Blog 아래의 글·프로젝트를 모두 노출한다. 포트폴리오 루트(/projects)와
+// 네비 페이지(About), 태그 인덱스만 숨긴다. `slug`은 index 노드까지 구분하므로
+// /blog/projects는 유지하면서 /projects/index만 제외할 수 있다.
 // sortFn과 마찬가지로 직렬화되어 클라이언트에서 실행되므로 자기 완결형이어야 한다.
-const explorerFilterFn = (node: any) => !["tags", "about", "projects"].includes(node.slugSegment)
+const explorerFilterFn = (node: any) =>
+  !["tags/index", "about", "projects/index"].includes(node.slug)
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
