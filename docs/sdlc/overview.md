@@ -34,7 +34,7 @@ issue: []
 | 설계 | design.md | approved | 2026-08-11 | 4sizn 승인. 컴포넌트 9개 · 설계 결정 12건 · 미추적 0건 |
 | 구현 | implementation.md | draft | 2026-08-11 | **S1~S5 완료 — 20/20**. 글 9건 보정·이미지 6장·발동 5/5 |
 | 리뷰 | reviews/20260811-implementation.md | draft | 2026-08-11 | CONDITIONAL PASS — major 1 (수정 완료) · minor 4 (3건 열림) |
-| 테스트 | — | — | — | 미착수 |
+| 테스트 | test-plan.md · test-runs/20260811-full.md | draft | 2026-08-11 | TC 31건 · 미커버 0 · PASS 28 / FAIL 0 / 미실행 3 |
 | 배포 | — | — | — | 미착수 |
 
 ## 미해결
