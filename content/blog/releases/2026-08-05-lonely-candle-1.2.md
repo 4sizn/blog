@@ -16,16 +16,18 @@ cssclasses:
   - release
   - changelog
 created: "2026-08-05"
-updated: "2026-08-05"
+updated: "2026-08-11"
 ---
 
 ## 🎉 [Lonely Candle] v1.2 릴리즈
 
 > 📅 릴리즈 날짜: 2026-08-05
 
+![App Store 스크린샷 — 손안에서 흔들리는 촛불](/static/lonely-candle/store-01.jpg)
+
 **손안의 진짜 촛불**입니다. 화면 속 촛불 하나가 기울이고, 흔들리고, 입김에 꺼지고, 다시 피어납니다. Blender(Mantaflow 유체 시뮬레이션)로 만든 촛불의 룩을 Godot 4.7 모바일 앱으로 포팅했습니다. 2026-08-03 App Store에 처음 공개되었습니다.
 
-### ✨ 주요 기능
+## 🎯 What it is
 
 - 🕯️ **자이로 스웨이** — 폰을 좌우로 기울이면 불꽃이 세계의 수직을 향해 부드럽게 출렁임
 - 🌬️ **마이크 입김** — "후—" 하고 불면 불꽃이 흔들리고, 세게 불면 꺼짐
@@ -36,24 +38,18 @@ updated: "2026-08-05"
 
 명상하거나 마음을 가라앉히고 싶은 밤, 잔잔한 무드등이 필요할 때, 생일 케이크의 촛불이 필요한 순간에 곁에 두세요.
 
-### 🆕 이번 버전 (v1.2)
+## ✨ What's New
 
 - 개발자 정보 팝업을 추가했습니다
 - 안정성을 개선했습니다
 
-### 💻 지원 플랫폼
+## 💻 Platforms
 
 - **iOS** — iOS 14.0+, App Store에서 무료 다운로드
 - **Android** — Play Console 내부 테스트 진행 중
 
-### 📦 다운로드
+## 🚀 Try it
 
 - [App Store에서 받기](https://apps.apple.com/kr/app/lonely-candle/id6796374959)
 
-### 👥 릴리즈 작성자
 
-- [@4sizn](https://github.com/4sizn)
-
----
-
-> 이 릴리즈 노트는 App Store 릴리즈 정보를 기반으로 작성되었습니다.

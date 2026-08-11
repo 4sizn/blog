@@ -76,6 +76,9 @@ content/blog/releases/{YYYY-MM-DD}-{repo}-{version}.md
 - 도입부에 **"새 버전 릴리즈는 아니다"** 를 명시한다
 - `✨ What's New` → 이번에 한 일. `🔜 What's Next` → 남은 일 (체크박스 허용)
 - 파일명은 버전 자리에 slug — `{YYYY-MM-DD}-{repo}-{slug}.md`
+- **서사 헤딩을 써도 된다.** 마일스톤 글은 "무엇을 했는가"보다 "왜 이제 했는가"가 본문인 경우가 많다.
+  `## 🗓️ 반년 동안 멈춰 있던 이유` 처럼 그 글에만 맞는 헤딩이 골격 섹션명보다 잘 읽히면 그것을 쓴다.
+  단 필수 넷(도입부·What's New·What's Next·Try it)은 이름을 바꾸지 않는다 — 독자가 글마다 같은 자리에서 찾는다
 
 실제 예: `content/blog/releases/2026-08-11-screen-saver-extension-store-assets.md`
 
