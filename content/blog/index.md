@@ -1,6 +1,7 @@
 ---
 title: "Blog"
 description: "개발하며 배운 것, 읽고 남긴 것, 그리고 릴리즈 기록."
+socialImage: "og-image.png"
 draft: false
 lang: ko
 ---
