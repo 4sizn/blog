@@ -51,15 +51,27 @@ branch: main
 | W-15 | 다중 릴리즈 조회 | **완료** | `8351668` | 누락 2건(v1.2.1·v1.2.3) 초안 회수 |
 | W-14 | `CLAUDE.md` 정정 | **완료** | `78a2993` | 경로 4곳 + 디렉토리 트리 + "자동 게시" 기술 |
 
-### S3~S5
+### S3 — skill (6.5h 예상)
+
+| WBS | 내용 | 상태 | 커밋 | 비고 |
+|-----|------|------|------|------|
+| W-06 | skill 골자 | **완료** | `a700954` | `SKILL.md` 128줄 — 발동 조건·9단계 절차·금지·검증 |
+| W-07 | 입력원 3종 + 마일스톤 규칙 | **완료** | `a700954` | SKILL.md §2 표 + `references/skeleton.md` 마일스톤 변형 |
+| W-08 | 부속 규칙 3종 | **완료** | `a700954` | `references/images.md`(이미지) · `writing.md`(문체·금지) · SKILL.md §8(프로젝트 페이지) |
+| W-17 | humanize 경유 강제 | **완료** | `a700954` | SKILL.md §5·§6 + `writing.md` + `.gitignore` `_workspace/` |
+| W-09 | 발동 테스트 | **부분** | — | 세션 등록은 확인. 신규 세션 3회 발동은 다음 세션에서 (아래 §6) |
+
+### S4~S5 — 사용자 지시로 이번 회차에서 중단
+
+2026-08-11 사용자 판단: **S3까지 끊는다.** 도구(skill)가 완성됐으므로 소급 보정 9건은
+앞으로 필요할 때 이 skill 로 처리한다.
 
 | WBS | 내용 | 상태 |
 |-----|------|------|
-| W-06~W-09, W-17 | skill 작성 | 미착수 — **다음 작업 (S3)** |
-| W-18~W-20 | 이미지 확보 | 미착수 |
-| W-10~W-12, W-16, W-13 | 글 9건 + 전체 검증 | 미착수 |
+| W-18~W-20 | 이미지 확보 (6h) | **보류** — 다음 회차 |
+| W-10~W-12, W-16, W-13 | 글 9건 + 전체 검증 (9h) | **보류** — 다음 회차 |
 
-**진행: 7 / 20**
+**진행: 11 / 20** (S4·S5의 9건은 보류)
 
 ### 3-1. W-02 매핑 실측 결과 (FR-01 판정)
 
@@ -97,6 +109,11 @@ W-13 전체 검증에서 다시 돌릴 값어치가 있으면 그때 `scripts/` 
 | `content/blog/releases/2026-02-23-ai-config-monitor-1.2.1.md` | 추가 (초안) | FR-12 |
 | `content/blog/releases/2026-02-24-ai-config-monitor-1.2.3.md` | 추가 (초안) | FR-12 |
 | `CLAUDE.md` | 수정 (경로·트리·흐름) | FR-11 |
+| `.claude/skills/blog-release-note/SKILL.md` | 추가 | FR-02, FR-03, FR-09, FR-13 |
+| `.claude/skills/blog-release-note/references/skeleton.md` | 추가 | FR-01, FR-08 |
+| `.claude/skills/blog-release-note/references/images.md` | 추가 | FR-10, NFR-03 |
+| `.claude/skills/blog-release-note/references/writing.md` | 추가 | FR-13, NFR-01 |
+| `.gitignore` | 수정 (`_workspace/` 추가, `.claude/skills/` 패턴 축소) | FR-13 ④ |
 
 ## 5. 설계 대비 변경
 
@@ -104,6 +121,7 @@ W-13 전체 검증에서 다시 돌릴 값어치가 있으면 그때 `scripts/` 
 |------|------|------|----------|
 | §5-1 신규 placeholder **8개** (합 18개) | **9개** (합 19개) — `{{INTRO_TODO}}` 추가 | 도입부는 골격의 **필수 섹션**인데 자동으로 채울 수 없다. 마커가 없으면 초안이 필수 섹션 없이 나온다 | `design.md` §5-1 갱신 완료 |
 | 릴리즈 본문 전체를 파싱 | 검증 로그 섹션(`Verification` 등)은 **건너뛴다** | `ai-config-monitor` v1.2.1 본문의 `## Verification` 항목이 `Improvements` 로 흡수돼 `bun run build passed` 와 로컬 절대 경로가 초안 본문에 실렸다. 게시되면 개인 경로가 노출된다 | `design.md` DD-13 추가 완료 |
+| skill을 `.claude/skills/` 에 두면 git 추적된다는 전제 (D-05) | `.gitignore:25` 가 `.claude/skills/` 전체를 무시하고 있었다. 패턴을 `.claude/skills/*` + `!.claude/skills/blog-release-note/` 로 축소했다 | 디렉토리 자체를 제외하면 하위 negation이 동작하지 않는다. `npx skills add` 로 받은 외부 스킬(hallmark 등)은 계속 무시되어야 하므로 전체 해제는 하지 않았다 | 설계 변경 아님 — 전제가 사실과 달랐던 것 |
 
 두 건 모두 `design.md` 승인 후 변경 이력에 기록했다. 그 밖에 설계와 다르게 구현한 것은 없다.
 
@@ -210,12 +228,54 @@ sed '/^<!-- SOURCE(/,/^-->/d' <초안> | grep -c "/Users/"
 grep -n "content/releases" CLAUDE.md    # → 없음 (수정 전 4곳)
 ```
 
+**W-06~W-08 — skill 구조**
+
+```bash
+find .claude/skills/blog-release-note -type f
+# → SKILL.md · references/skeleton.md · references/images.md · references/writing.md
+
+head -5 .claude/skills/blog-release-note/SKILL.md
+# → name: blog-release-note / version: 1.0.0
+```
+
+**W-17 — humanize 강제와 `_workspace/` 격리**
+
+```bash
+mkdir -p _workspace/2026-08-11-001 && touch _workspace/2026-08-11-001/01_input.txt
+git status --porcelain | grep -c "_workspace"     # → 0
+git check-ignore -v _workspace/                  # → .gitignore:24:_workspace/
+```
+
+**W-09 — 발동 (NFR-04) — 부분 검증**
+
+```bash
+# description 트리거 문구 포함 확인
+릴리즈 노트 / 새 버전 / 스토어 등록 / 마일스톤 / draft → 5종 모두 포함
+```
+
+세션 skill 목록에 `blog-release-note` 가 **등록된 것을 이 세션에서 확인했다**
+(파일 생성 직후 사용 가능 skill 목록에 나타났다).
+
+**하지 못한 것**: "신규 세션 3회 시도 중 3회 발동"은 이 세션에서 검증할 수 없다.
+같은 세션에서는 이미 등록된 상태이고, 발동 여부는 새 세션의 요청 문구에 달려 있다.
+**다음 세션에서 확인해야 하는 항목으로 남긴다.**
+
+**추적 확인 (D-05 전제)**
+
+```bash
+git check-ignore -v .claude/skills/blog-release-note/SKILL.md   # → 무시 안 됨
+git check-ignore -v .claude/skills/hallmark                     # → .gitignore:28 (외부 스킬은 계속 무시)
+git ls-files .claude/skills/                                    # → blog-release-note 4파일 추적
+```
+
 ## 7. 미해결
 
 - ~~중간 상태: 스크립트가 옛 placeholder를 채운다~~ → **S2에서 해소** (계약 19개 일치 확인)
 - ~~`design.md` §5-1에 `{{INTRO_TODO}}` 반영~~ → **완료** (DD-13도 함께 추가)
-- 초안 2건(`ai-config-monitor` v1.2.1·v1.2.3)이 `draft: true` 상태로 대기 중이다. W-16에서 완성한다.
-  **방치되면 영구 미게시**가 된다 (R-03) — 이번 프로젝트 안에서 소진하므로 지금은 위험이 낮다
-- 초안의 `description` 은 `tracked-repos.json` 의 저장소 설명이 그대로 들어간다. 릴리즈별 설명이 아니므로
-  사람이 고쳐야 한다. skill 절차(W-08)에 넣을 항목
-- push 보류 중 — `main` 이 `origin/main` 보다 앞서 있다 (사용자 지시: 구현 완료 후 한 번에)
+- **W-09 미완**: 신규 세션에서의 발동 3회 테스트가 남았다. 다음 세션에서 "릴리즈 노트 써줘"류 요청으로 확인한다
+- 초안 2건(`ai-config-monitor` v1.2.1·v1.2.3)이 `draft: true` 로 대기 중이다. S5(W-16)가 보류되어
+  **당장 게시되지 않는다.** 방치되면 영구 미게시가 된다 (R-03) — 다음 회차의 첫 작업 후보
+- ~~초안 `description` 이 저장소 설명 그대로~~ → skill 절차 7단계와 `references/skeleton.md` 에 반영 완료
+- FR-04 수용 기준 ③(draft 해제 시 게시)은 아직 확인하지 못했다. 초안을 완성하는 회차에서 확인한다
+- FR-07·FR-10·FR-12 ③④는 S4·S5 보류로 미충족이다. 요구사항 자체는 유효하며 다음 회차 대상이다
+- push 보류 중 — `main` 이 `origin/main` 보다 12커밋 앞서 있다
