@@ -130,7 +130,6 @@ export const defaultContentPageLayout: PageLayout = {
           "그래서 구현하면서 마주치는 문제를 인식하고 해결하며 제 것으로 만들어 왔습니다. 좋은 동료들과 이야기를 나눠가며 좋은 서비스를 만들고 싶습니다.",
         ],
         initial: "4",
-        resumeUrl: "https://app.notion.com/p/Resume-e199c36eaf564f718dbb5aa90794daf1",
         email: "4sizn@naver.com",
         callout:
           "함께 만들어보고 싶은 것이 있거나, 그냥 기술 이야기를 나누고 싶으시다면 편하게 연락 주세요.",
