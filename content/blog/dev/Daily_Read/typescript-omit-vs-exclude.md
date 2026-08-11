@@ -1,5 +1,6 @@
 ---
 title: "TypeScript Omit vs Exclude: 헷갈리는 두 유틸리티 타입의 차이"
+socialImage: "/static/blog-thumbnails/typescript-omit-exclude.jpg"
 description: "객체 프로퍼티를 제외하는 Omit과 유니온 타입 멤버를 제외하는 Exclude의 차이점과 활용법"
 tags:
   - Typescript
@@ -31,14 +32,14 @@ TypeScript를 사용하다 보면 기존 타입에서 일부를 제외한 새로
 
 ```typescript
 type User = {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-};
+  id: number
+  name: string
+  email: string
+  password: string
+}
 
 // password를 제외한 나머지 프로퍼티만 가진 타입
-type PublicUser = Omit<User, 'password'>;
+type PublicUser = Omit<User, "password">
 // { id: number; name: string; email: string; }
 ```
 
@@ -55,38 +56,39 @@ Omit<T, K>
 
 ```typescript
 type User = {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+  id: number
+  name: string
+  email: string
+  password: string
+  createdAt: Date
+  updatedAt: Date
+}
 
 // 여러 프로퍼티를 유니온으로 제외
-type UserDTO = Omit<User, 'password' | 'createdAt' | 'updatedAt'>;
+type UserDTO = Omit<User, "password" | "createdAt" | "updatedAt">
 // { id: number; name: string; email: string; }
 ```
 
 ### 실전 예시
 
 **API 응답과 요청 타입 분리**:
+
 ```typescript
 interface Post {
-  id: number;
-  title: string;
-  content: string;
-  authorId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  id: number
+  title: string
+  content: string
+  authorId: number
+  createdAt: Date
+  updatedAt: Date
 }
 
 // POST 요청시 사용 (id, createdAt, updatedAt는 서버에서 생성)
-type CreatePostDTO = Omit<Post, 'id' | 'createdAt' | 'updatedAt'>;
+type CreatePostDTO = Omit<Post, "id" | "createdAt" | "updatedAt">
 // { title: string; content: string; authorId: number; }
 
 // PUT 요청시 사용 (id는 URL 파라미터로, 날짜는 서버에서 생성)
-type UpdatePostDTO = Omit<Post, 'id' | 'authorId' | 'createdAt' | 'updatedAt'>;
+type UpdatePostDTO = Omit<Post, "id" | "authorId" | "createdAt" | "updatedAt">
 // { title: string; content: string; }
 ```
 
@@ -95,10 +97,10 @@ type UpdatePostDTO = Omit<Post, 'id' | 'authorId' | 'createdAt' | 'updatedAt'>;
 ### 기본 사용법
 
 ```typescript
-type Status = 'pending' | 'approved' | 'rejected' | 'cancelled';
+type Status = "pending" | "approved" | "rejected" | "cancelled"
 
 // 'cancelled'를 제외한 나머지 상태들
-type ActiveStatus = Exclude<Status, 'cancelled'>;
+type ActiveStatus = Exclude<Status, "cancelled">
 // 'pending' | 'approved' | 'rejected'
 ```
 
@@ -114,46 +116,48 @@ Exclude<T, U>
 ### 여러 멤버 제외하기
 
 ```typescript
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD';
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "OPTIONS" | "HEAD"
 
 // 여러 멤버를 유니온으로 제외
-type CommonHttpMethod = Exclude<HttpMethod, 'OPTIONS' | 'HEAD'>;
+type CommonHttpMethod = Exclude<HttpMethod, "OPTIONS" | "HEAD">
 // 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 ```
 
 ### 실전 예시
 
 **조건부 타입과 함께 사용**:
+
 ```typescript
-type Primitive = string | number | boolean | null | undefined;
+type Primitive = string | number | boolean | null | undefined
 
 // 객체와 함수만 남기기 (primitive 타입 제외)
-type NonPrimitive<T> = Exclude<T, Primitive>;
+type NonPrimitive<T> = Exclude<T, Primitive>
 
-type Example = NonPrimitive<string | number | object | Function>;
+type Example = NonPrimitive<string | number | object | Function>
 // object | Function
 ```
 
 **이벤트 핸들러 타입**:
-```typescript
-type MouseEvent = 'click' | 'dblclick' | 'mousedown' | 'mouseup' | 'mousemove';
-type KeyboardEvent = 'keydown' | 'keyup' | 'keypress';
 
-type AllEvents = MouseEvent | KeyboardEvent;
+```typescript
+type MouseEvent = "click" | "dblclick" | "mousedown" | "mouseup" | "mousemove"
+type KeyboardEvent = "keydown" | "keyup" | "keypress"
+
+type AllEvents = MouseEvent | KeyboardEvent
 
 // 마우스 이벤트만 제외
-type OnlyKeyboardEvents = Exclude<AllEvents, MouseEvent>;
+type OnlyKeyboardEvents = Exclude<AllEvents, MouseEvent>
 // 'keydown' | 'keyup' | 'keypress'
 ```
 
 ## 핵심 차이점
 
-| 특징 | Omit | Exclude |
-|---|---|---|
-| **대상** | 객체 타입 | 유니온 타입 |
-| **제외하는 것** | 객체의 프로퍼티 (키) | 유니온의 멤버 (타입) |
-| **결과** | 새로운 객체 타입 | 새로운 유니온 타입 |
-| **사용 상황** | 객체에서 일부 필드 제거 | 유니온에서 일부 옵션 제거 |
+| 특징            | Omit                    | Exclude                   |
+| --------------- | ----------------------- | ------------------------- |
+| **대상**        | 객체 타입               | 유니온 타입               |
+| **제외하는 것** | 객체의 프로퍼티 (키)    | 유니온의 멤버 (타입)      |
+| **결과**        | 새로운 객체 타입        | 새로운 유니온 타입        |
+| **사용 상황**   | 객체에서 일부 필드 제거 | 유니온에서 일부 옵션 제거 |
 
 ## 실전 조합 예시
 
@@ -161,19 +165,19 @@ type OnlyKeyboardEvents = Exclude<AllEvents, MouseEvent>;
 
 ```typescript
 interface User {
-  id: number;
-  name: string;
-  role: 'admin' | 'user' | 'guest';
-  email: string;
+  id: number
+  name: string
+  role: "admin" | "user" | "guest"
+  email: string
 }
 
 // 1. Omit으로 프로퍼티 제외
-type UserWithoutId = Omit<User, 'id'>;
+type UserWithoutId = Omit<User, "id">
 
 // 2. Omit + 타입 재정의로 role 옵션 제한
-type LimitedUser = Omit<User, 'role'> & {
-  role: Exclude<User['role'], 'admin'>;  // 'admin'을 제외한 role
-};
+type LimitedUser = Omit<User, "role"> & {
+  role: Exclude<User["role"], "admin"> // 'admin'을 제외한 role
+}
 // { id: number; name: string; email: string; role: 'user' | 'guest'; }
 ```
 
@@ -182,26 +186,26 @@ type LimitedUser = Omit<User, 'role'> & {
 ```typescript
 // 기본 엔티티
 interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: 'electronics' | 'clothing' | 'food' | 'books';
-  status: 'active' | 'inactive' | 'deleted';
-  createdAt: Date;
-  updatedAt: Date;
+  id: string
+  name: string
+  description: string
+  price: number
+  category: "electronics" | "clothing" | "food" | "books"
+  status: "active" | "inactive" | "deleted"
+  createdAt: Date
+  updatedAt: Date
 }
 
 // CREATE: id, 날짜 필드 제외
-type CreateProductDTO = Omit<Product, 'id' | 'createdAt' | 'updatedAt'>;
+type CreateProductDTO = Omit<Product, "id" | "createdAt" | "updatedAt">
 
 // UPDATE: id, 날짜 필드 제외 + 모든 필드 optional
-type UpdateProductDTO = Partial<Omit<Product, 'id' | 'createdAt' | 'updatedAt'>>;
+type UpdateProductDTO = Partial<Omit<Product, "id" | "createdAt" | "updatedAt">>
 
 // LIST: deleted 상태 제외
-type ListProduct = Omit<Product, 'status'> & {
-  status: Exclude<Product['status'], 'deleted'>;
-};
+type ListProduct = Omit<Product, "status"> & {
+  status: Exclude<Product["status"], "deleted">
+}
 ```
 
 ## 내부 구현 이해하기
@@ -209,10 +213,11 @@ type ListProduct = Omit<Product, 'status'> & {
 ### Omit의 내부 구현
 
 ```typescript
-type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
+type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
 ```
 
 흥미롭게도 `Omit`은 내부적으로 `Exclude`를 사용합니다!
+
 1. `keyof T`로 모든 키를 유니온 타입으로 만듦
 2. `Exclude`로 제외할 키를 빼냄
 3. `Pick`으로 남은 키들만 추출
@@ -220,7 +225,7 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 ### Exclude의 내부 구현
 
 ```typescript
-type Exclude<T, U> = T extends U ? never : T;
+type Exclude<T, U> = T extends U ? never : T
 ```
 
 조건부 타입을 사용하여 각 멤버를 검사하고, `U`에 속하면 `never`, 아니면 그대로 유지합니다.
@@ -236,10 +241,10 @@ type Exclude<T, U> = T extends U ? never : T;
 
 ```typescript
 // Omit: 중괄호 { } 안에서
-type Result1 = Omit<{ a: number; b: string }, 'b'>;
+type Result1 = Omit<{ a: number; b: string }, "b">
 
 // Exclude: 파이프 | 사이에서
-type Result2 = Exclude<'a' | 'b' | 'c', 'b'>;
+type Result2 = Exclude<"a" | "b" | "c", "b">
 ```
 
 ### 3. 에러 메시지로 확인
@@ -247,10 +252,10 @@ type Result2 = Exclude<'a' | 'b' | 'c', 'b'>;
 잘못 사용하면 TypeScript가 알려줍니다:
 
 ```typescript
-type Wrong1 = Omit<'a' | 'b', 'a'>;
+type Wrong1 = Omit<"a" | "b", "a">
 // ❌ Omit은 객체 타입에만 사용
 
-type Wrong2 = Exclude<{ a: number }, 'a'>;
+type Wrong2 = Exclude<{ a: number }, "a">
 // ⚠️ 의도한 대로 작동하지 않음
 ```
 
@@ -264,6 +269,7 @@ type Wrong2 = Exclude<{ a: number }, 'a'>;
 ### 체크리스트
 
 제외하고 싶은 대상이:
+
 - ☐ 객체의 특정 필드인가? → `Omit`
 - ☐ 유니온의 특정 옵션인가? → `Exclude`
 

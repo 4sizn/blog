@@ -1,5 +1,6 @@
 ---
 title: "Temporal: JavaScript의 시간을 다시 설계한 9년"
+socialImage: "/static/blog-thumbnails/temporal-js.jpg"
 description: "Bloomberg JS Blog의 글을 바탕으로 JavaScript Date의 한계를 정리하고, Temporal API가 왜 필요했는지 핵심 개념을 정리한다."
 tags:
   - JavaScript

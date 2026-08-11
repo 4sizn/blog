@@ -1,5 +1,6 @@
 ---
 title: "TypeScript에서 'd.ts' 파일이란 무엇입니까: 타입 선언 파일의 모든 것"
+socialImage: "/static/blog-thumbnails/dts-declarations.jpg"
 description: "JavaScript 라이브러리에 TypeScript 타입을 추가하는 선언 파일(.d.ts)의 역할과 사용법"
 tags:
   - Typescript
@@ -49,8 +50,8 @@ node_modules/
 
 ```typescript
 // math.d.ts - 선언 파일
-export function add(a: number, b: number): number;
-export function subtract(a: number, b: number): number;
+export function add(a: number, b: number): number
+export function subtract(a: number, b: number): number
 
 // 실제 구현 코드는 없고, 타입 정보만 있음
 ```
@@ -60,18 +61,18 @@ export function subtract(a: number, b: number): number;
 ```javascript
 // math.js - 실제 JavaScript 구현
 export function add(a, b) {
-  return a + b;
+  return a + b
 }
 
 export function subtract(a, b) {
-  return a - b;
+  return a - b
 }
 ```
 
 ```typescript
 // math.d.ts - 타입 선언
-export function add(a: number, b: number): number;
-export function subtract(a: number, b: number): number;
+export function add(a: number, b: number): number
+export function subtract(a: number, b: number): number
 ```
 
 TypeScript 컴파일러는 `.js` 파일의 구현과 `.d.ts` 파일의 선언을 매칭하여 타입 체크를 수행합니다.
@@ -84,10 +85,10 @@ JavaScript로 작성된 라이브러리를 TypeScript에서 사용할 때 필요
 
 ```typescript
 // lodash는 JavaScript로 작성됨
-import _ from 'lodash';
+import _ from "lodash"
 
 // TypeScript에서 타입 체크를 받으려면?
-_.chunk(['a', 'b', 'c', 'd'], 2);
+_.chunk(["a", "b", "c", "d"], 2)
 //  ^ 어떤 파라미터를 받는지 알 수 있을까?
 ```
 
@@ -95,8 +96,8 @@ _.chunk(['a', 'b', 'c', 'd'], 2);
 
 ```typescript
 // @types/lodash/index.d.ts
-declare module 'lodash' {
-  export function chunk<T>(array: T[], size: number): T[][];
+declare module "lodash" {
+  export function chunk<T>(array: T[], size: number): T[][]
   // ... 수백 개의 함수 선언
 }
 ```
@@ -106,13 +107,13 @@ declare module 'lodash' {
 ### 2. 타입 체크와 자동완성
 
 ```typescript
-import _ from 'lodash';
+import _ from "lodash"
 
 // 자동완성 제공
-_.ch  // chunk, chain 등이 자동완성됨
+_.ch // chunk, chain 등이 자동완성됨
 
 // 타입 체크
-_.chunk(['a', 'b', 'c'], '2');
+_.chunk(["a", "b", "c"], "2")
 //                       ^^^ ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
 ```
 
@@ -122,13 +123,13 @@ _.chunk(['a', 'b', 'c'], '2');
 // user.d.ts
 interface User {
   /** 사용자 고유 ID */
-  id: number;
+  id: number
 
   /** 사용자 이름 (2-50자) */
-  name: string;
+  name: string
 
   /** 이메일 주소 */
-  email: string;
+  email: string
 }
 
 /**
@@ -136,7 +137,7 @@ interface User {
  * @param id 사용자 ID
  * @returns 사용자 객체 또는 null
  */
-export function getUser(id: number): Promise<User | null>;
+export function getUser(id: number): Promise<User | null>
 ```
 
 ## 선언 파일의 위치
@@ -166,7 +167,7 @@ npm install --save-dev @types/express
   "name": "my-library",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts"  // 타입 선언 파일 위치
+  "types": "dist/index.d.ts" // 타입 선언 파일 위치
 }
 ```
 
@@ -186,7 +187,7 @@ src/
 
 ```typescript
 // untyped-library는 타입 정의가 없는 라이브러리
-import something from 'untyped-library';
+import something from "untyped-library"
 //                    ^^^^^^^^^^^^^^^^^^
 // ❌ Could not find a declaration file for module 'untyped-library'
 ```
@@ -195,13 +196,13 @@ import something from 'untyped-library';
 
 ```typescript
 // src/types/untyped-modules.d.ts
-declare module 'untyped-library';
+declare module "untyped-library"
 ```
 
 이제 에러는 사라지지만, 타입은 `any`가 됩니다.
 
 ```typescript
-import something from 'untyped-library';
+import something from "untyped-library"
 // something의 타입은 any
 ```
 
@@ -209,32 +210,32 @@ import something from 'untyped-library';
 
 ```typescript
 // src/types/untyped-library.d.ts
-declare module 'untyped-library' {
+declare module "untyped-library" {
   export interface Config {
-    apiKey: string;
-    timeout?: number;
+    apiKey: string
+    timeout?: number
   }
 
-  export function initialize(config: Config): void;
-  export function getData(): Promise<any>;
+  export function initialize(config: Config): void
+  export function getData(): Promise<any>
 
   const library: {
-    version: string;
-    initialize: typeof initialize;
-    getData: typeof getData;
-  };
+    version: string
+    initialize: typeof initialize
+    getData: typeof getData
+  }
 
-  export default library;
+  export default library
 }
 ```
 
 이제 완전한 타입 체크가 가능합니다!
 
 ```typescript
-import library, { initialize, getData } from 'untyped-library';
+import library, { initialize, getData } from "untyped-library"
 
-initialize({ apiKey: 'abc123' });  // ✅
-initialize({ apiKey: 123 });       // ❌ Error: Type 'number' is not assignable to type 'string'
+initialize({ apiKey: "abc123" }) // ✅
+initialize({ apiKey: 123 }) // ❌ Error: Type 'number' is not assignable to type 'string'
 ```
 
 ## 선언 파일 작성 패턴
@@ -243,26 +244,26 @@ initialize({ apiKey: 123 });       // ❌ Error: Type 'number' is not assignable
 
 ```typescript
 // 기본 함수
-declare function greet(name: string): string;
+declare function greet(name: string): string
 
 // 오버로딩
-declare function format(value: string): string;
-declare function format(value: number): string;
-declare function format(value: Date): string;
+declare function format(value: string): string
+declare function format(value: number): string
+declare function format(value: Date): string
 
 // 제네릭
-declare function identity<T>(value: T): T;
+declare function identity<T>(value: T): T
 ```
 
 ### 클래스 선언
 
 ```typescript
 declare class EventEmitter {
-  constructor();
+  constructor()
 
-  on(event: string, listener: Function): this;
-  off(event: string, listener: Function): this;
-  emit(event: string, ...args: any[]): boolean;
+  on(event: string, listener: Function): this
+  off(event: string, listener: Function): this
+  emit(event: string, ...args: any[]): boolean
 }
 ```
 
@@ -271,16 +272,16 @@ declare class EventEmitter {
 ```typescript
 // 인터페이스
 interface User {
-  id: number;
-  name: string;
-  email: string;
+  id: number
+  name: string
+  email: string
 }
 
 // 타입 별칭
-type ID = string | number;
+type ID = string | number
 
 // 유니온 타입
-type Status = 'pending' | 'success' | 'error';
+type Status = "pending" | "success" | "error"
 ```
 
 ### 네임스페이스
@@ -288,19 +289,19 @@ type Status = 'pending' | 'success' | 'error';
 ```typescript
 declare namespace MyLibrary {
   interface Config {
-    debug: boolean;
+    debug: boolean
   }
 
-  function init(config: Config): void;
+  function init(config: Config): void
 
   namespace Utils {
-    function formatDate(date: Date): string;
+    function formatDate(date: Date): string
   }
 }
 
 // 사용
-MyLibrary.init({ debug: true });
-MyLibrary.Utils.formatDate(new Date());
+MyLibrary.init({ debug: true })
+MyLibrary.Utils.formatDate(new Date())
 ```
 
 ### 모듈 확장 (Module Augmentation)
@@ -309,21 +310,21 @@ MyLibrary.Utils.formatDate(new Date());
 
 ```typescript
 // express.d.ts
-import 'express';
+import "express"
 
-declare module 'express' {
+declare module "express" {
   interface Request {
     user?: {
-      id: number;
-      name: string;
-    };
+      id: number
+      name: string
+    }
   }
 }
 
 // 이제 req.user를 사용할 수 있음
-app.get('/profile', (req, res) => {
-  console.log(req.user?.name);  // 타입 체크 O
-});
+app.get("/profile", (req, res) => {
+  console.log(req.user?.name) // 타입 체크 O
+})
 ```
 
 ### 전역 선언
@@ -333,19 +334,19 @@ app.get('/profile', (req, res) => {
 declare global {
   interface Window {
     myApp: {
-      version: string;
-      init(): void;
-    };
+      version: string
+      init(): void
+    }
   }
 
-  const API_URL: string;
+  const API_URL: string
 }
 
-export {};  // 모듈로 만들기 위한 빈 export
+export {} // 모듈로 만들기 위한 빈 export
 
 // 사용
-window.myApp.init();
-console.log(API_URL);
+window.myApp.init()
+console.log(API_URL)
 ```
 
 ## 실전 예제
@@ -361,16 +362,16 @@ console.log(API_URL);
 // awesome-library.d.ts
 declare namespace AwesomeLibrary {
   interface Options {
-    theme: 'light' | 'dark';
-    language: string;
+    theme: "light" | "dark"
+    language: string
   }
 
-  function init(options: Options): void;
-  function destroy(): void;
+  function init(options: Options): void
+  function destroy(): void
 }
 
 // 사용
-AwesomeLibrary.init({ theme: 'dark', language: 'ko' });
+AwesomeLibrary.init({ theme: "dark", language: "ko" })
 ```
 
 ### 예제 2: Node.js 환경 변수
@@ -379,41 +380,41 @@ AwesomeLibrary.init({ theme: 'dark', language: 'ko' });
 // env.d.ts
 declare namespace NodeJS {
   interface ProcessEnv {
-    NODE_ENV: 'development' | 'production' | 'test';
-    API_URL: string;
-    API_KEY: string;
-    PORT: string;
+    NODE_ENV: "development" | "production" | "test"
+    API_URL: string
+    API_KEY: string
+    PORT: string
   }
 }
 
 // 사용
-const apiUrl = process.env.API_URL;  // string 타입
-const port = parseInt(process.env.PORT);
+const apiUrl = process.env.API_URL // string 타입
+const port = parseInt(process.env.PORT)
 ```
 
 ### 예제 3: 이미지 import
 
 ```typescript
 // images.d.ts
-declare module '*.png' {
-  const value: string;
-  export default value;
+declare module "*.png" {
+  const value: string
+  export default value
 }
 
-declare module '*.jpg' {
-  const value: string;
-  export default value;
+declare module "*.jpg" {
+  const value: string
+  export default value
 }
 
-declare module '*.svg' {
-  import React from 'react';
-  const SVG: React.FC<React.SVGProps<SVGSVGElement>>;
-  export default SVG;
+declare module "*.svg" {
+  import React from "react"
+  const SVG: React.FC<React.SVGProps<SVGSVGElement>>
+  export default SVG
 }
 
 // 사용
-import logo from './logo.png';  // string
-import Icon from './icon.svg';  // React Component
+import logo from "./logo.png" // string
+import Icon from "./icon.svg" // React Component
 ```
 
 ### 예제 4: CSS Modules
@@ -443,8 +444,8 @@ import styles from './Button.module.css';
 ```json
 {
   "compilerOptions": {
-    "declaration": true,           // .d.ts 파일 생성
-    "declarationMap": true,        // .d.ts.map 파일 생성 (소스맵)
+    "declaration": true, // .d.ts 파일 생성
+    "declarationMap": true, // .d.ts.map 파일 생성 (소스맵)
     "outDir": "./dist",
     "rootDir": "./src"
   }
@@ -456,11 +457,11 @@ import styles from './Button.module.css';
 ```typescript
 // src/math.ts
 export function add(a: number, b: number): number {
-  return a + b;
+  return a + b
 }
 
 export function subtract(a: number, b: number): number {
-  return a - b;
+  return a - b
 }
 ```
 
@@ -468,8 +469,8 @@ export function subtract(a: number, b: number): number {
 
 ```typescript
 // dist/math.d.ts
-export declare function add(a: number, b: number): number;
-export declare function subtract(a: number, b: number): number;
+export declare function add(a: number, b: number): number
+export declare function subtract(a: number, b: number): number
 ```
 
 ## 주의사항
@@ -479,11 +480,11 @@ export declare function subtract(a: number, b: number): number;
 ```typescript
 // ❌ 잘못된 예
 export function greet(name: string): string {
-  return `Hello, ${name}`;  // 구현 코드는 .d.ts에 들어가면 안 됨
+  return `Hello, ${name}` // 구현 코드는 .d.ts에 들어가면 안 됨
 }
 
 // ✅ 올바른 예
-export declare function greet(name: string): string;
+export declare function greet(name: string): string
 ```
 
 ### 2. 타입만 export
@@ -491,22 +492,22 @@ export declare function greet(name: string): string;
 ```typescript
 // types.d.ts
 export interface User {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
-export type Status = 'active' | 'inactive';
+export type Status = "active" | "inactive"
 
 // 값은 export 불가
-export const MAX_USERS = 100;  // ❌ Error
+export const MAX_USERS = 100 // ❌ Error
 ```
 
 ### 3. declare 키워드 사용
 
 ```typescript
 // 모듈 외부에서 사용 가능하도록
-declare const API_URL: string;
-declare function fetchData(): Promise<any>;
+declare const API_URL: string
+declare function fetchData(): Promise<any>
 declare class HttpClient {}
 ```
 
