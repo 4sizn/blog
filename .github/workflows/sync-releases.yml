@@ -47,7 +47,7 @@ jobs:
       - name: Check for new releases
         id: check
         run: |
-          if [ -z "$(git status --porcelain content/releases/)" ]; then
+          if [ -z "$(git status --porcelain content/blog/releases/)" ]; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "📝 새로운 릴리즈가 없습니다."
           else
@@ -60,7 +60,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add content/releases/
+          git add content/blog/releases/
           git commit -m "chore: sync new GitHub releases [skip ci]
 
           Automatically synced from tracked repositories.
@@ -78,7 +78,7 @@ jobs:
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "변경된 파일:" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            git diff --name-only HEAD~1 content/releases/ 2>/dev/null || echo "새 파일 추가됨"
+            git diff --name-only HEAD~1 content/blog/releases/ 2>/dev/null || echo "새 파일 추가됨"
             echo '```' >> $GITHUB_STEP_SUMMARY
           else
             echo "📝 새로운 릴리즈가 없습니다." >> $GITHUB_STEP_SUMMARY
