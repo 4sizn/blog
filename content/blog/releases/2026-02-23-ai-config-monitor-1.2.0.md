@@ -1,6 +1,7 @@
 ---
 title: "[2026-02-23] [AI Config Monitor] v1.2.0 릴리즈"
-description: "AI Config Monitor의 새로운 버전 v1.2.0이 출시되었습니다."
+description: "서버가 내려간 것을 놓치지 않도록 깜빡이는 ALERT 배너를 넣고 헬스체크 주기를 30초에서 10초로 줄였습니다."
+socialImage: "/static/ai-config-monitor/alert-banner.jpg"
 tags:
   - release
   - tool
@@ -15,50 +16,56 @@ cssclasses:
   - release
   - changelog
 created: "2026-02-23"
-updated: "2026-02-23"
+updated: "2026-08-11"
 ---
 
 ## 🎉 [AI Config Monitor] v1.2.0 릴리즈
 
 > 📅 릴리즈 날짜: 2026-02-23
 
-### ✨ 새로운 기능
+![서버 상태가 바뀌면 화면 위쪽에 뜨는 빨간 ALERT 배너와 헬스 요약](/static/ai-config-monitor/alert-banner.jpg)
 
-- **깜빡이는 ALERT 배너**: 서버 다운 시 `bgRed`/`bgYellow` 교차 배너 표시
-- **레인보우 PROJECT 애니메이션**: 알림 활성화 시 프로젝트명을 무지개색으로 강조
-- **초기 상태 감지 강화**: 시작 직후 STOPPED/ERROR 상태를 즉시 감지
-- **`--interval` CLI 플래그**: 헬스체크 주기를 실행 시점에 설정 가능 (최소 3초)
-- **심각도별 알림 벨 패턴**: `urgent` / `warning` / `info` 단계별 사운드 분리
+v1.2.0을 공개합니다. 모니터를 보고도 서버가 내려간 것을 놓치는 문제에 집중했습니다.
 
-### 🔧 개선사항
+## ✨ What's New
 
-- 헬스체크 기본 주기 단축: `30초 → 10초` (옵션으로 조정 가능)
-- HTTP 타임아웃 단축: `3초 → 2초`
-- Docker 캐시 TTL 단축: `10초 → 5초`
-- 체크 사이클 내 프로세스 목록 캐시 공유로 조회 성능 개선
-- 모든 패널에 스코프 시스템 추가: `global` / `project` / `project.local`
-- 초광폭 터미널(`>=140`)에서 MCP 패널 `COMMAND` 컬럼 노출
-- 넓은 화면에서 Skills 패널 `MODIFIED` / `SOURCE` 컬럼 노출
-- Overview 패널 2단 레이아웃 지원
+### 깜빡이는 ALERT 배너
 
-### 🐛 버그 수정
+상태가 바뀌어도 표 안에서 글자 색만 조용히 달라졌습니다. 화면을 띄워두고 다른 일을 하다 돌아오면 언제 죽었는지 알 수 없었습니다.
 
-- ANSI 인식 문자열 잘림 버그 수정 (`truncateAnsi` / `fitWidth`)
+서버가 내려가면 화면 위쪽에 배너가 뜨고 빨강과 노랑을 번갈아 깜빡입니다. 눈이 화면 어디에 있어도 걸립니다. 프로젝트 이름은 알림이 켜질 때 무지개색으로 흐릅니다.
 
-### 📝 기타 변경사항
+### 시작할 때의 상태도 잡는다
 
-- 코드 변경 규모: 9개 파일 변경, `+269 / -61`
+그전에는 상태가 바뀌는 순간만 감지했습니다. 모니터를 켰을 때 이미 죽어 있던 서버는 아무 알림도 내지 않았습니다.
 
-### 🔗 관련 링크
+시작 직후 STOPPED와 ERROR를 즉시 잡아 알립니다.
+
+### `--interval` 플래그
+
+헬스체크 주기를 직접 정할 수 있습니다. 최소값은 3초입니다.
+
+### 심각도별 알림음
+
+알림을 urgent·warning·info 세 단계로 나눠 벨 패턴을 다르게 했습니다. 소리만 듣고 급한 것인지 구분할 수 있습니다.
+
+## 🔧 Improvements
+
+- 헬스체크 주기를 30초에서 10초로 줄였습니다
+- HTTP 타임아웃을 3초에서 2초로 줄였습니다
+- Docker 캐시 TTL을 10초에서 5초로 줄였습니다
+- 한 번의 체크 사이클 안에서 프로세스 목록을 캐시로 공유해 중복 조회를 없앴습니다
+
+## ⚙️ Under the Hood
+
+9개 파일이 바뀌었고 269줄이 늘고 61줄이 줄었습니다.
+
+## 🔜 What's Next
+
+이다음 v1.2.1에서 Codex 설정을 읽기 시작했고 v1.2.2에서 터미널에 잔상이 남는 문제를 고쳤습니다.
+
+## 🚀 Try it
 
 - [GitHub 릴리즈 페이지](https://github.com/4sizn/ai-config-monitor/releases/tag/v1.2.0)
 - [저장소](https://github.com/4sizn/ai-config-monitor)
-- [이슈 트래커](https://github.com/4sizn/ai-config-monitor/issues)
-
-### 👥 릴리즈 작성자
-
-- [@4sizn](https://github.com/4sizn)
-
----
-
-> 이 릴리즈 노트는 자동으로 생성되었습니다.
+- [프로젝트 페이지](/projects/ai-config-monitor)

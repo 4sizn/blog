@@ -1,6 +1,7 @@
 ---
 title: "[2026-02-23] [AI Config Monitor] v1.2.1 릴리즈"
-description: "AI 설정 모니터링 도구"
+description: "Codex의 프로젝트 MCP 설정을 읽고, --project 를 생략하면 현재 폴더를 프로젝트로 삼습니다."
+socialImage: "/static/ai-config-monitor/mcp-servers.jpg"
 tags:
   - release
   - tool
@@ -8,59 +9,48 @@ tags:
 aliases:
   - "AI Config Monitor 1.2.1"
   - "AI Config Monitor 릴리즈"
-draft: true
+draft: false
 lang: ko
 enableToc: true
 cssclasses:
   - release
   - changelog
 created: "2026-02-23"
-updated: "2026-02-23"
+updated: "2026-08-11"
 ---
 
 ## 🎉 [AI Config Monitor] v1.2.1 릴리즈
 
 > 📅 릴리즈 날짜: 2026-02-23
 
-<!-- TODO(hero): 이번 릴리즈를 한 장으로 보여주는 이미지. 확보 방법은 skill 의 references/images.md -->
+![MCP 서버 목록 — 아래 두 줄이 프로젝트 스코프로 잡힌 서버](/static/ai-config-monitor/mcp-servers.jpg)
 
-<!-- TODO(intro): "v1.2.1 을 공개합니다. 이번 버전에서는 ___ 에 집중했습니다." 2~3문장으로 쓴다 -->
-
-<!-- 선택: 🎯 What it is — 첫 공개 릴리즈에서만. 제품이 무엇인지 2~3문장 -->
+v1.2.1을 공개합니다. Codex의 프로젝트 설정을 읽고 옵션 없이 실행해도 지금 있는 폴더를 봅니다.
 
 ## ✨ What's New
 
-<!-- TODO(whats-new): 기능마다 ### 제목을 달고 "왜 만들었는지 / 무엇이 달라졌는지"를 쓴다.
-     각 기능에 이미지를 붙인다. 아래 후보를 그대로 목록으로 두면 안 된다.
-       (릴리즈 본문에서 뽑을 항목이 없었다. 커밋 로그를 직접 확인한다)
--->
+### Codex 프로젝트 설정 감지
+
+프로젝트 단위 MCP 설정을 `.mcp.json`에서만 읽었습니다. Codex는 `.codex/mcp.json`에 따로 두는데 그 파일은 보지 않았습니다.
+
+두 파일을 모두 읽습니다. 파일 감시 경로에도 넣었으므로 내용을 고치면 화면에 바로 반영됩니다.
+
+### `--project`를 생략해도 된다
+
+프로젝트 스코프를 보려면 매번 경로를 적어야 했습니다.
+
+생략하면 현재 작업 디렉토리를 프로젝트로 삼습니다. 프로젝트 폴더에서 그냥 실행하면 됩니다.
 
 ## 🔧 Improvements
 
-- Add project MCP detection for Codex config (.codex/mcp.json) in addition to .mcp.json
-- Default project scope to current working directory when --project is omitted
-- Improve process health matching for uvx-launched MCP servers (e.g. uvx blender-mcp)
-- Watch .codex/mcp.json for live reload in file watcher paths
+- `uvx`로 띄운 MCP 서버의 프로세스를 찾지 못하던 문제를 다듬었습니다. `uvx blender-mcp`처럼 실행 명령이 한 겹 감싸여 있으면 헬스 체크가 매칭에 실패했습니다
 
-<!-- 선택: 💻 Platforms — 지원 OS·최소 버전·배포 상태. 앱·데스크톱 프로젝트만 -->
-<!-- 선택: 📜 Version History — 이전 버전 표. 버전이 잦은 프로젝트만 -->
+## 🔜 What's Next
 
-<!-- TODO(next): ## 🔜 What's Next 섹션을 만들고 다음 방향을 쓴다. 미정이면 "미정"이라고 쓴다 -->
+이다음 v1.2.2에서 터미널 렌더링을, v1.2.3에서 Codex의 toml 설정 읽기를 고쳤습니다.
 
 ## 🚀 Try it
 
-- [릴리즈 페이지](https://github.com/4sizn/ai-config-monitor/releases/tag/v1.2.1)
+- [GitHub 릴리즈 페이지](https://github.com/4sizn/ai-config-monitor/releases/tag/v1.2.1)
 - [저장소](https://github.com/4sizn/ai-config-monitor)
-<!-- 다운로드·스토어·문서 링크가 있으면 여기에 추가한다 -->
-
-<!-- SOURCE(원본 릴리즈 본문 — 다듬을 때 근거로 쓰고 게시 전 삭제한다)
-## Whats Changed
-- Add project MCP detection for Codex config (.codex/mcp.json) in addition to .mcp.json
-- Default project scope to current working directory when --project is omitted
-- Improve process health matching for uvx-launched MCP servers (e.g. uvx blender-mcp)
-- Watch .codex/mcp.json for live reload in file watcher paths
-
-## Verification
-- bun run build passed
-- Confirmed parser detects Blender MCP from /Users/hsshin-rsupport/Documents/lotus/blender-test/.codex/mcp.json
--->
+- [프로젝트 페이지](/projects/ai-config-monitor)
