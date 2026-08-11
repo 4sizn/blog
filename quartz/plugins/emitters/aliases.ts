@@ -7,6 +7,8 @@ import path from "path"
 
 async function* processFile(ctx: BuildCtx, file: VFile) {
   const ogSlug = simplifySlug(file.data.slug!)
+  const baseUrl = ctx.cfg.configuration.baseUrl
+  const ogImagePath = baseUrl ? `https://${baseUrl}/static/og-image.png` : undefined
 
   for (const aliasTarget of file.data.aliases ?? []) {
     const aliasTargetSlug = (
@@ -26,6 +28,16 @@ async function* processFile(ctx: BuildCtx, file: VFile) {
         <link rel="canonical" href="${redirUrl}">
         <meta name="robots" content="noindex">
         <meta charset="utf-8">
+        ${
+          ogImagePath
+            ? `<meta property="og:image" content="${ogImagePath}">
+        <meta property="og:image:url" content="${ogImagePath}">
+        <meta name="twitter:image" content="${ogImagePath}">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">`
+            : ""
+        }
         <meta http-equiv="refresh" content="0; url=${redirUrl}">
         </head>
         </html>

@@ -1,7 +1,7 @@
 import { QuartzEmitterPlugin } from "../types"
 import { i18n } from "../../i18n"
 import { unescapeHTML } from "../../util/escape"
-import { FullSlug, getFileExtension, isAbsoluteURL, joinSegments, QUARTZ } from "../../util/path"
+import { FullSlug, joinSegments, QUARTZ } from "../../util/path"
 import { ImageOptions, SocialImageOptions, defaultImage, getSatoriFonts } from "../../util/og"
 import sharp from "sharp"
 import satori, { SatoriOptions } from "satori"
@@ -143,35 +143,18 @@ export const CustomOgImages: QuartzEmitterPlugin<Partial<SocialImageOptions>> = 
       const baseUrl = ctx.cfg.configuration.baseUrl
       return {
         additionalHead: [
-          (pageData) => {
-            const isRealFile = pageData.filePath !== undefined
-            let userDefinedOgImagePath = pageData.frontmatter?.socialImage
-
-            if (userDefinedOgImagePath) {
-              userDefinedOgImagePath = isAbsoluteURL(userDefinedOgImagePath)
-                ? userDefinedOgImagePath
-                : `https://${baseUrl}/static/${userDefinedOgImagePath}`
-            }
-
-            const generatedOgImagePath = isRealFile
-              ? `https://${baseUrl}/${pageData.slug!}-og-image.webp`
-              : undefined
-            const defaultOgImagePath = `https://${baseUrl}/static/og-image.png`
-            const ogImagePath = userDefinedOgImagePath ?? generatedOgImagePath ?? defaultOgImagePath
-            const ogImageMimeType = `image/${(getFileExtension(ogImagePath) ?? ".png").replace(/^\./, "")}`
+          () => {
+            // The site uses one art-directed social card everywhere. This keeps shared
+            // links visually consistent across the homepage, indexes, and every article.
+            const ogImagePath = `https://${baseUrl}/static/og-image.png`
             return (
               <>
-                {!userDefinedOgImagePath && (
-                  <>
-                    <meta property="og:image:width" content={fullOptions.width.toString()} />
-                    <meta property="og:image:height" content={fullOptions.height.toString()} />
-                  </>
-                )}
-
+                <meta property="og:image:width" content={fullOptions.width.toString()} />
+                <meta property="og:image:height" content={fullOptions.height.toString()} />
                 <meta property="og:image" content={ogImagePath} />
                 <meta property="og:image:url" content={ogImagePath} />
                 <meta name="twitter:image" content={ogImagePath} />
-                <meta property="og:image:type" content={ogImageMimeType} />
+                <meta property="og:image:type" content="image/png" />
               </>
             )
           },
