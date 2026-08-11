@@ -8,6 +8,8 @@ interface Options {
   paragraphs: string[]
   /** 우측 카드에 띄울 이미지 경로. 없으면 이니셜을 대신 그린다 */
   photo?: string
+  /** 인물 사진의 대체 텍스트 */
+  photoAlt?: string
   /** 이니셜 폴백에 쓸 글자 */
   initial: string
   resumeUrl?: string
@@ -23,7 +25,7 @@ const defaults: Options = {
 }
 
 export default ((opts?: Partial<Options>) => {
-  const { headline, paragraphs, photo, initial, resumeUrl, email, callout } = {
+  const { headline, paragraphs, photo, photoAlt, initial, resumeUrl, email, callout } = {
     ...defaults,
     ...opts,
   }
@@ -51,8 +53,8 @@ export default ((opts?: Partial<Options>) => {
             <img
               class="about-photo"
               src={joinSegments(baseDir, photo.replace(/^\//, ""))}
-              alt=""
-              loading="lazy"
+              alt={photoAlt ?? ""}
+              loading="eager"
             />
           ) : (
             <div class="about-photo about-photo--initial" aria-hidden="true">

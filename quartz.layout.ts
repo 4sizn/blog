@@ -131,6 +131,8 @@ export const defaultContentPageLayout: PageLayout = {
           "IT 트렌드와 신기술에 관심이 많고, 다가올 미래를 자주 상상하는 편입니다. 다만 기발한 아이디어는 누구나 떠올릴 수 있고, 완성하지 않으면 머릿속에만 떠다니는 무형의 이미지로 남는다고 생각합니다.",
           "그래서 구현하면서 마주치는 문제를 인식하고 해결하며 제 것으로 만들어 왔습니다. 좋은 동료들과 이야기를 나눠가며 좋은 서비스를 만들고 싶습니다.",
         ],
+        photo: "static/about/profile-seaside.webp",
+        photoAlt: "바다를 배경으로 두 팔을 펼친 신희석",
         initial: "4",
         email: "4sizn@naver.com",
         callout:

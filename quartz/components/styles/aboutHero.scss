@@ -66,14 +66,15 @@
     gap: 1rem;
     // 사진이 들어오기 전까지는 자리만 지키면 된다. 4:3 전폭으로 두면 빈 색면이
     // 화면에서 제일 큰 덩어리가 돼서 "아직 안 만든 곳"처럼 읽힌다.
-    max-width: 15rem;
+    max-width: 22rem;
     justify-self: end;
   }
 
   & .about-photo {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
+    object-position: 51% 52%;
     border: 1px solid var(--lightgray);
     border-radius: 12px;
     // base.scss의 전역 img 마진(1rem)이 카드 상단에 군더더기 여백을 만든다.
