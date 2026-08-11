@@ -53,7 +53,10 @@ issue: []
 
 **보류·별건**
 
-- 커밋 12건이 `main` 에 쌓여 있고 **push 하지 않았다**
+- **`DEPLOY_TOKEN` secret 이 비어 있다.** `blog` 저장소에 등록된 secret이 하나도 없어
+  `deploy-main-site.yaml` 이 `exit 1` 로 끝난다 (2026-08-11 로그 확인). 지금은 로컬에서
+  `4sizn.github.io` 를 클론해 `public/` 을 갈아끼우는 방식으로 배포한다 — **push 마다 수동 작업이 필요하다**.
+  근본 해결은 `4sizn.github.io` 쓰기 권한 PAT 를 만들어 secret 에 등록하는 것이고, 토큰 생성은 사용자만 할 수 있다
 - 수동 작성 글 4건은 Out of scope라 작성자 섹션·한국어 헤딩이 남는다. 골격과 일시적 불일치 — 별건
 - `main` 푸시 배포가 `DEPLOY_TOKEN` 없이 실패하는 문제는 이 프로젝트 범위 밖
 
