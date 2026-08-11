@@ -61,17 +61,25 @@ branch: main
 | W-17 | humanize 경유 강제 | **완료** | `a700954` | SKILL.md §5·§6 + `writing.md` + `.gitignore` `_workspace/` |
 | W-09 | 발동 테스트 | **부분** | — | 세션 등록은 확인. 신규 세션 3회 발동은 다음 세션에서 (아래 §6) |
 
-### S4~S5 — 사용자 지시로 이번 회차에서 중단
+### S4 — 이미지 확보 (6h 예상)
 
-2026-08-11 사용자 판단: **S3까지 끊는다.** 도구(skill)가 완성됐으므로 소급 보정 9건은
-앞으로 필요할 때 이 skill 로 처리한다.
+| WBS | 내용 | 상태 | 커밋 | 비고 |
+|-----|------|------|------|------|
+| W-20 | screen-saver 이미지 배정 | **완료** | `1ce6d62` | 기존 스토어 스크린샷 재사용 (시계 → v1.0.4, 원클릭 → v1.0.6) |
+| W-19 | blog 당시 커밋 재현 캡처 | **완료** | `1ce6d62` | worktree로 2월 3일·11일 시점 빌드 후 캡처 |
+| W-18 | ai-config-monitor 터미널 캡처 | **완료** | `1ce6d62` | 클론·`bun` 빌드·실행 후 4장 (ALERT·서버표·Overview·update) |
 
-| WBS | 내용 | 상태 |
-|-----|------|------|
-| W-18~W-20 | 이미지 확보 (6h) | **보류** — 다음 회차 |
-| W-10~W-12, W-16, W-13 | 글 9건 + 전체 검증 (9h) | **보류** — 다음 회차 |
+### S5 — 글 작성 (9h 예상)
 
-**진행: 11 / 20** (S4·S5의 9건은 보류)
+| WBS | 내용 | 상태 | 커밋 | 비고 |
+|-----|------|------|------|------|
+| W-10 | screen-saver 2건 | **완료** | `2eaa5a1` | skill 첫 실전. humanize light 0.5~0.6%, 등급 A |
+| W-11 | blog 2건 | **완료** | `12277b7` | v1.0.0의 What's Next에 이 프로젝트가 고친 결함을 기록 |
+| W-12 | ai-config-monitor 3건 | **완료** | `12277b7` | v1.2.0·1.2.2·1.2.4 |
+| W-16 | 누락 2건 | **완료** | `12277b7` | v1.2.1·1.2.3 — 초안에서 완성, `draft` 해제 |
+| W-13 | 전체 빌드·링크 검증 | **완료** | `12277b7` | 9건 전부 통과 (아래 §6) |
+
+**진행: 20 / 20**
 
 ### 3-1. W-02 매핑 실측 결과 (FR-01 판정)
 
@@ -260,6 +268,59 @@ git check-ignore -v _workspace/                  # → .gitignore:24:_workspace/
 같은 세션에서는 이미 등록된 상태이고, 발동 여부는 새 세션의 요청 문구에 달려 있다.
 **다음 세션에서 확인해야 하는 항목으로 남긴다.**
 
+**W-18~W-20 — 이미지 (FR-10)**
+
+```bash
+# ai-config-monitor: 저장소에 이미지 자산이 전무하므로 직접 실행해 캡처
+git clone → bun install → bun run build → Terminal.app 에서 실행 → screencapture
+
+# 세 번 다시 찍은 이유 (모두 개인정보 노출)
+# ① -R 영역 캡처가 창 밖 바탕화면까지 담았다 → Quartz 로 창 bounds 를 읽어 창 내부만 캡처
+# ② Skills 탭의 SOURCE 열에 /Users/... 가 전부 노출 → 해당 탭 폐기
+# ③ 셸 프롬프트에 사용자명@호스트명 → PROMPT='%% ' 로 덮어씀
+#    프로젝트 경로도 scratchpad(경로에 사용자명 포함) → /tmp/acm-demo 로 이동
+
+# blog: 2월 커밋 재현
+git worktree add <scratch>/blog-100 1b7f6e1   # 2026-02-03
+npx quartz build   # → Found 27 input files (당시 상태), 릴리즈 2건
+git worktree add <scratch>/blog-101 a24936a   # 2026-02-11 → 릴리즈 4건
+
+# 용량
+find quartz/static -type f -size +300k   # → 없음 (최대 278KB)
+```
+
+**W-10~W-16 — 글 9건 (FR-07·FR-12)**
+
+```bash
+# humanize-korean 경유 (FR-13) — run_id 2026-08-11-001 ~ 009
+python3 prepare_monolith_input.py --run-dir <abs>/_workspace/2026-08-11-{NNN} --genre blog
+# → route_hint=light 전 건 (risk_band low, 003만 medium)
+# Agent(humanize-monolith) ×2 콜로 9건 처리, 강도 보수
+# → 변경률 0.0~1.4%, 등급 A, 자체검증 6/6
+
+python3 verify_gates.py --before 01_input.txt --after final.md --genre blog
+# → 9건 모두 gate: OK — 수렴 / P3 golden PASS
+
+# 사실 대조 (FR-13 ③) — 버전·수치·플래그·파일명·고유명사·헤딩·숫자 집합
+# → 9건 전부 일치, 불일치 0건
+
+# 게시 검증
+TODO( · {{ · SOURCE( · 커밋 프리픽스 · /Users/ · 작성자 섹션 · 본문 h1 · draft: true
+# → 9건 모두 0건, 이미지 각 1장 이상
+
+npx quartz build
+# → Filtered out 12 → 10   ← 초안 2건이 draft 를 벗고 게시됨 (FR-04 ③ 확인)
+# → Emitted 254 files, 깨진 링크 0건
+```
+
+**humanize-korean 이 잡은 것 (사람이 못 잡았을 오류)**
+
+| 파일 | 초고 | 지적 |
+|------|------|------|
+| v1.0.6 | `화면을 덮인 채로` | `덮이다`는 피동사여서 목적격을 취할 수 없다 → `화면이 덮인 채로` |
+| v1.2.1 | `한 겹 감싸져 있으면` | 이중 피동 → `감싸여 있으면` |
+| v1.2.2 | `toml 설정을 … 붙였습니다` | 서술어가 앞 목적어를 지배하지 못한다. **사실 관계 수정이라 손대지 않고 지적만** → 사람이 교정 |
+
 **추적 확인 (D-05 전제)**
 
 ```bash
@@ -272,10 +333,12 @@ git ls-files .claude/skills/                                    # → blog-relea
 
 - ~~중간 상태: 스크립트가 옛 placeholder를 채운다~~ → **S2에서 해소** (계약 19개 일치 확인)
 - ~~`design.md` §5-1에 `{{INTRO_TODO}}` 반영~~ → **완료** (DD-13도 함께 추가)
-- **W-09 미완**: 신규 세션에서의 발동 3회 테스트가 남았다. 다음 세션에서 "릴리즈 노트 써줘"류 요청으로 확인한다
-- 초안 2건(`ai-config-monitor` v1.2.1·v1.2.3)이 `draft: true` 로 대기 중이다. S5(W-16)가 보류되어
-  **당장 게시되지 않는다.** 방치되면 영구 미게시가 된다 (R-03) — 다음 회차의 첫 작업 후보
-- ~~초안 `description` 이 저장소 설명 그대로~~ → skill 절차 7단계와 `references/skeleton.md` 에 반영 완료
-- FR-04 수용 기준 ③(draft 해제 시 게시)은 아직 확인하지 못했다. 초안을 완성하는 회차에서 확인한다
-- FR-07·FR-10·FR-12 ③④는 S4·S5 보류로 미충족이다. 요구사항 자체는 유효하며 다음 회차 대상이다
-- push 보류 중 — `main` 이 `origin/main` 보다 12커밋 앞서 있다
+- **W-09 미완**: 신규 세션에서의 발동 3회 테스트가 남았다. 다음 세션에서 "릴리즈 노트 써줘"류 요청으로 확인한다.
+  이 세션에서는 등록 확인 + skill 을 실제 호출해 9건을 쓴 것까지가 검증 범위다
+- ~~초안 2건이 `draft: true` 로 대기~~ → W-16에서 완성, `draft` 해제 확인 (R-03 해소)
+- ~~FR-04 ③ 미확인~~ → 빌드의 `Filtered out` 12 → 10 으로 확인
+- ~~FR-07·FR-10·FR-12 미충족~~ → 전부 충족
+- **`DEPLOY_TOKEN` 부재**로 Actions 배포가 실패한다. 수동 배포(4sizn.github.io 클론 → `public/` 교체 → push)로
+  우회 중이며 push 마다 반복해야 한다. 토큰 등록은 사용자만 할 수 있다
+- 수동 작성 글 4건(`gardeneel-desktop-1.6.0`·`lonely-candle-1.2`·`swing-golf-1.2`·`store-assets`)은
+  Out of scope라 작성자 섹션과 한국어 헤딩이 남아 골격과 어긋난다 — 별건
