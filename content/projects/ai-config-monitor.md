@@ -2,6 +2,7 @@
 title: "AI Config Monitor"
 description: "AI 도구 설정 파일의 변경을 추적하는 CLI"
 projectOrder: 4
+projectCategory: toy
 projectStack:
   - CLI
 projectLinks:

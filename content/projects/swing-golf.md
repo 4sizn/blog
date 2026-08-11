@@ -2,6 +2,7 @@
 title: "Swing Golf"
 description: "폰을 골프채처럼 실제로 휘둘러 치는 모션 골프 게임"
 projectOrder: 2
+projectCategory: toy
 featured: true
 projectIcon: "static/swing-golf-appicon.jpg"
 projectStack:

@@ -2,6 +2,7 @@
 title: "Lonely Candle"
 description: "기울이면 출렁이고 입김에 꺼지는, 손안의 진짜 촛불"
 projectOrder: 3
+projectCategory: toy
 featured: true
 projectIcon: "static/lonely-candle-appicon.jpg"
 projectStack:

@@ -2,6 +2,7 @@
 title: "Screen Saver Extension"
 description: "탭 하나를 전체화면 스크린세이버로 바꿔주는 브라우저 확장"
 projectOrder: 5
+projectCategory: toy
 projectStack:
   - Chrome Extension
   - WXT

@@ -12,6 +12,8 @@ interface Options {
   showMore?: boolean
   /** featured: true 인 것만 고를지 */
   featuredOnly?: boolean
+  /** 프로젝트 성격으로 목록을 나눌지 */
+  category?: string
 }
 
 const PROJECT_ROOT = "projects"
@@ -61,6 +63,10 @@ export default ((opts?: Options) => {
 
     if (opts?.featuredOnly) {
       projects = projects.filter((p) => p.frontmatter?.featured === true)
+    }
+
+    if (opts?.category) {
+      projects = projects.filter((p) => p.frontmatter?.projectCategory === opts.category)
     }
 
     projects.sort((a, b) => orderOf(a) - orderOf(b))

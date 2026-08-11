@@ -68,7 +68,11 @@ export const sharedPageComponents: SharedLayout = {
       condition: (page) => page.fileData.slug === "index",
     }),
     Component.ConditionalRender({
-      component: Component.ProjectGrid(),
+      component: Component.ProjectGrid({ title: "Toy Projects", category: "toy" }),
+      condition: (page) => page.fileData.slug === PROJECTS_SLUG,
+    }),
+    Component.ConditionalRender({
+      component: Component.ProjectGrid({ title: "Career Projects", category: "career" }),
       condition: (page) => page.fileData.slug === PROJECTS_SLUG,
     }),
     Component.ConditionalRender({

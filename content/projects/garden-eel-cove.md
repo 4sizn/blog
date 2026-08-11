@@ -2,6 +2,7 @@
 title: "Garden Eel Cove"
 description: "바탕화면 하단 투명 스트립에 정원장어들이 사는 데스크톱 앱"
 projectOrder: 1
+projectCategory: toy
 featured: true
 projectStack:
   - Desktop
