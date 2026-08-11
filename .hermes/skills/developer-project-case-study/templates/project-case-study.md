@@ -10,7 +10,7 @@ draft: true
 lang: ko
 ---
 
-> **근거 범위**: `[repository]`의 `[commit]`을 기준으로 코드·테스트·Git 이력을 분석했다. 제품 소개나 릴리즈 노트는 [별도 기록](/blog/releases/[slug])으로 분리한다.
+> **근거 범위**: `[repository]`의 `[commit]`을 기준으로 코드·테스트·Git 이력을 분석했다. 회사 프로젝트처럼 소스를 공개할 수 없을 때는 `[Notion retrospective URL]`의 `[published dates]`를 근거로 하고, 코드·내부 이슈·운영 지표를 검토하지 않았음을 밝힌다. 제품 소개나 릴리즈 노트는 [별도 기록](/blog/releases/[slug])으로 분리한다.
 
 ## 출발점: [사용자에게 실제로 어려운 문제]
 

@@ -1,6 +1,6 @@
 ---
 name: developer-project-case-study
-description: Create or revise a `/blog/projects` post as a developer production case study. Use whenever a user asks to document a self-made product, game, app, project journey, technical retrospective, implementation story, or to add a Projects post. Ground every claim in inspected source code, tests, git history, issue records, or run artifacts; do not write a release note, marketing introduction, or feature list disguised as a case study.
+description: Create or revise a `/blog/projects` post as a developer production case study, including migration of technical retrospectives from Notion or other prior blogs. Use whenever a user asks to document a self-made product, game, app, project journey, technical retrospective, implementation story, company-project experience, or to add a Projects post. Ground every claim in inspected source code, tests, git history, issue records, published retrospective material, or run artifacts; do not write a release note, marketing introduction, or feature list disguised as a case study.
 created_by: agent
 ---
 
@@ -15,6 +15,16 @@ created_by: agent
 3. Inspect chronological history with `git log`; identify initial architecture, meaningful corrective iterations, and release/operational work separately.
 4. Record evidence in a private drafting note: file paths + symbols, commit IDs/dates, and commands actually run. Do not claim a metric, device result, customer reaction, or cause that the evidence does not establish.
 5. Use screenshots only as visual context. Do not infer system behavior from a screenshot alone.
+
+## Migrating technical retrospectives (Notion / prior blog)
+
+Use a published retrospective as evidence when primary company source is private or unavailable. It is a record of the author's contemporaneous reasoning, not permission to disclose company code.
+
+1. Inspect the supplied page directly. Capture its title, publication date, concrete problem, alternatives considered, chosen response, and any stated limitation. Follow linked entries only when they supply the next step of the same technical narrative.
+2. Synthesize a single project chapter around the engineering decision. Do not mechanically copy a Day 0/Day 1 series, copy screenshots, or reproduce private source snippets and internal tracker URLs.
+3. Preserve the technical causal chain: observed behavior → diagnosis/constraint → rejected option → chosen boundary → outcome or remaining limitation. Mark a result as qualitative when the source does not contain a measured result.
+4. Attribute the evidence in the post's **근거 범위** with the original public Notion URL and published dates. Use a short source list at the end when several posts underpin the chapter.
+5. For company work, never infer product metrics, client data, architecture beyond the authored retrospective, or current operational state. State that source code and internal artifacts were not inspected when applicable.
 
 ## Required post shape
 
