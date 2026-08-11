@@ -69,9 +69,9 @@ v2.0.0 - 중대한 변경 (Major)
 #    - 매일 오전 9시 자동 실행
 #    - 또는 수동 트리거: https://github.com/4sizn/blog/actions/workflows/sync-releases.yml
 
-# 3. 블로그에 자동 게시
-#    - content/releases/YYYY-MM-DD-blog-1.1.0.md 생성
-#    - GitHub Pages 자동 배포
+# 3. 블로그에 초안 생성 (자동 게시가 아니다)
+#    - content/blog/releases/YYYY-MM-DD-blog-1.1.0.md 생성 (draft: true)
+#    - blog-release-note skill 로 다듬고 draft 를 지워야 게시된다
 ```
 
 ### 🔧 Quartz 엔진 업그레이드
@@ -239,8 +239,8 @@ git push origin main
                   │
                   ▼
 ┌─────────────────────────────────────────────┐
-│  content/releases/ 폴더에 글 자동 생성       │
-│  - {repo}-{version}.md 형식                 │
+│  content/blog/releases/ 에 초안 생성         │
+│  - {date}-{repo}-{version}.md (draft: true) │
 │  - 자동 커밋 & 푸시                          │
 └─────────────────┬───────────────────────────┘
                   │
@@ -303,12 +303,12 @@ node scripts/sync-releases.mjs
 
 **파일명 형식:**
 ```
-content/releases/{YYYY-MM-DD}-{repo-name}-{version}.md
+content/blog/releases/{YYYY-MM-DD}-{repo-name}-{version}.md
 ```
 
 **예시:**
 ```
-content/releases/2026-02-03-screen-saver-extension-1.0.4.md
+content/blog/releases/2026-02-03-screen-saver-extension-1.0.4.md
 ```
 
 **URL:**
@@ -391,16 +391,25 @@ chmod +x scripts/sync-releases.mjs
 │   └── workflows/
 │       └── sync-releases.yml       # 릴리즈 동기화 워크플로우
 │
-├── content/                         # 블로그 콘텐츠
+├── content/                         # 블로그 콘텐츠 (빌드 대상)
 │   ├── index.md                    # 메인 페이지
-│   ├── releases/                   # 릴리즈 노트 (자동 생성)
-│   │   ├── index.md
-│   │   └── 2026-02-03-screen-saver-extension-1.0.4.md
-│   └── templates/                  # 템플릿
-│       └── new_releases.md         # 릴리즈 노트 템플릿
+│   ├── about.md
+│   ├── blog/
+│   │   ├── log/                    # 회고·생각
+│   │   ├── dev/                    # 읽고 정리한 것
+│   │   └── releases/               # 릴리즈 노트 (스크립트가 초안 생성)
+│   ├── projects/                   # 프로젝트 카드 (ProjectGrid 가 읽는다)
+│   ├── templates/                  # 템플릿 — ignorePatterns 로 빌드 제외
+│   │   ├── new_releases.md         # 릴리즈 노트 골격 (12섹션)
+│   │   └── new_post.md
+│   └── private/                    # 비공개 — 빌드 제외
+│
+├── docs/sdlc/                       # SDLC 산출물 (빌드 대상 아님)
 │
 ├── scripts/
-│   └── sync-releases.mjs           # 릴리즈 동기화 스크립트
+│   └── sync-releases.mjs           # 릴리즈 초안 생성 스크립트
+│
+├── .claude/skills/                  # 프로젝트 로컬 skill
 │
 ├── quartz/                          # Quartz 엔진
 ├── public/                          # 빌드 결과물 (git ignore)
