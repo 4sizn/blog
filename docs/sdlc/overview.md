@@ -33,6 +33,7 @@ issue: []
 | 계획 | plan.md | approved | 2026-08-11 | 4sizn 승인. WBS 20건 · 리스크 14건 · 미커버 0건 · 29h |
 | 설계 | design.md | approved | 2026-08-11 | 4sizn 승인. 컴포넌트 9개 · 설계 결정 12건 · 미추적 0건 |
 | 구현 | implementation.md | draft | 2026-08-11 | **S1~S5 완료 — 20/20**. 글 9건 보정·이미지 6장·발동 5/5 |
+| 리뷰 | reviews/20260811-implementation.md | draft | 2026-08-11 | CONDITIONAL PASS — major 1 (수정 완료) · minor 4 (3건 열림) |
 | 테스트 | — | — | — | 미착수 |
 | 배포 | — | — | — | 미착수 |
 
@@ -44,7 +45,7 @@ issue: []
 **다음 회차에 남은 것**
 
 - 헤드리스 `claude -p` 환경의 skill 발동은 판정 보류 — 그 환경 자동화를 붙일 때 다시 확인 (W-09 §6)
-- 수동 작성 글 4건은 Out of scope라 작성자 섹션·한국어 헤딩이 남아 골격과 어긋난다 — 별건
+- 리뷰 지적 3건 열림 (minor) — skill 검증 명령 플레이스홀더, 검증 스크립트 재현성, ai-config-monitor 캡처의 개발 도구 구성 노출
 - `/sdlc:review`·`/sdlc:test` 미실행 — 필요하면 별도 회차
 
 **보류·별건**

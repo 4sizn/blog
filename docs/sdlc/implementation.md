@@ -374,5 +374,24 @@ git ls-files .claude/skills/                                    # → blog-relea
 - ~~FR-07·FR-10·FR-12 미충족~~ → 전부 충족
 - **`DEPLOY_TOKEN` 부재**로 Actions 배포가 실패한다. 수동 배포(4sizn.github.io 클론 → `public/` 교체 → push)로
   우회 중이며 push 마다 반복해야 한다. 토큰 등록은 사용자만 할 수 있다
-- 수동 작성 글 4건(`gardeneel-desktop-1.6.0`·`lonely-candle-1.2`·`swing-golf-1.2`·`store-assets`)은
-  Out of scope라 작성자 섹션과 한국어 헤딩이 남아 골격과 어긋난다 — 별건
+- ~~수동 작성 글 4건이 골격과 어긋난다~~ → 사용자 지시로 In scope 전환, 2026-08-11 정합 완료 (`2d04b7b`).
+  구조만 바꾸고 문장은 그대로 뒀으므로 humanize 경유는 하지 않았다
+
+### 7-1. `gardeneel-desktop` 이미지 생략 근거 (FR-10 ③)
+
+수용 기준이 요구하는 기록이다. 13건 중 이 한 건만 이미지가 없다.
+
+| 확인한 것 | 결과 |
+|-----------|------|
+| GitHub 릴리즈 첨부 자산 | `GardenEelCove-windows.zip`, `GardenEelCove.dmg` — 배포 바이너리뿐 |
+| README 이미지 | 없음 (`![...]`·`<img>` 0건) |
+| 로컬 클론 | 없음 (`lotus/` 하위에 `gardeneel-desktop` 디렉토리가 없다) |
+| 앱 아이콘 | `quartz/static/` 에 없다 (Swing Golf·Lonely Candle 은 있다) |
+
+**판단**: 화면을 얻으려면 `dmg` 를 내려받아 설치·실행해야 한다. 사용자 환경에 앱을 설치하는 것은
+릴리즈 노트를 쓰기 위한 대가로 과하고, 되돌리기도 번거롭다. 앱 아이콘 같은 대체물은 "이번 릴리즈를
+한 장으로 보여준다"는 Hero 의 목적을 채우지 못한다 — 억지 장식 이미지를 넣지 않는다는 규칙(R-14)에
+따라 **생략**한다.
+
+**해소 조건**: 이 앱을 다시 손볼 때 실행 화면을 캡처해 `quartz/static/gardeneel-desktop/` 에 넣고
+그때 이 글에 Hero 를 추가한다.

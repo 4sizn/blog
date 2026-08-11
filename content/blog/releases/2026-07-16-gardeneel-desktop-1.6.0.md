@@ -58,5 +58,3 @@ updated: "2026-08-11"
 - [GitHub 릴리즈 페이지](https://github.com/4sizn/gardeneel-desktop/releases/tag/v1.6.0)
 - [저장소](https://github.com/4sizn/gardeneel-desktop)
 - [이슈 트래커](https://github.com/4sizn/gardeneel-desktop/issues)
-
-
