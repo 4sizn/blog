@@ -50,6 +50,24 @@ lang: ko
 | Realtime | WebRTC, WebSocket, MQTT      |
 | Etc      | Unity                        |
 
+## Tools
+
+<div class="about-tools-intro">매일 사용하는 개발, 디자인, 지식 관리 도구입니다.</div>
+
+<ul class="about-tools-list">
+  <li><a href="https://code.visualstudio.com/" rel="noopener noreferrer"><span class="about-tool-mark" aria-hidden="true">VS</span><span><strong>VS Code</strong><small>코드 편집기</small></span></a></li>
+  <li><a href="https://developer.apple.com/xcode/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/xcode" alt="" width="24" height="24" loading="lazy" /><span><strong>Xcode</strong><small>Apple 플랫폼 개발</small></span></a></li>
+  <li><a href="https://developer.android.com/studio" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/androidstudio" alt="" width="24" height="24" loading="lazy" /><span><strong>Android Studio</strong><small>Android 개발</small></span></a></li>
+  <li><a href="https://openai.com/codex/" rel="noopener noreferrer"><span class="about-tool-mark" aria-hidden="true">AI</span><span><strong>Codex</strong><small>AI 코딩 에이전트</small></span></a></li>
+  <li><a href="https://www.anthropic.com/claude" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/claude" alt="" width="24" height="24" loading="lazy" /><span><strong>Claude</strong><small>AI 어시스턴트</small></span></a></li>
+  <li><a href="https://gemini.google.com/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/googlegemini" alt="" width="24" height="24" loading="lazy" /><span><strong>Gemini</strong><small>AI 어시스턴트</small></span></a></li>
+  <li><a href="https://obsidian.md/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/obsidian" alt="" width="24" height="24" loading="lazy" /><span><strong>Obsidian</strong><small>지식 관리</small></span></a></li>
+  <li><a href="https://www.figma.com/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/figma" alt="" width="24" height="24" loading="lazy" /><span><strong>Figma</strong><small>인터페이스 디자인</small></span></a></li>
+  <li><a href="https://godotengine.org/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/godotengine" alt="" width="24" height="24" loading="lazy" /><span><strong>Godot</strong><small>게임 개발</small></span></a></li>
+  <li><a href="https://www.blender.org/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/blender" alt="" width="24" height="24" loading="lazy" /><span><strong>Blender</strong><small>3D 제작</small></span></a></li>
+  <li><a href="https://www.aseprite.org/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/aseprite" alt="" width="24" height="24" loading="lazy" /><span><strong>Aseprite</strong><small>픽셀 아트</small></span></a></li>
+</ul>
+
 ## 지향하는 것
 
 먼 미래의 기술 흐름을 정확히 내다볼 수는 없습니다.

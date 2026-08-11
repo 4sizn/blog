@@ -233,6 +233,113 @@ body[data-slug="about"] .center > article {
       color: var(--darkgray);
     }
   }
+
+  // Usage의 Tools 목록은 기존 Skills 테이블과 역할을 나눈다.
+  // 브랜드 아이콘, 도구명, 사용하는 맥락을 한 행으로 읽을 수 있게 구성한다.
+  & .about-tools-intro {
+    margin: -0.25rem 0 1rem;
+    color: var(--gray);
+    font-size: 0.92rem;
+  }
+
+  & .about-tools-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & > li {
+      margin: 0;
+      border-bottom: 1px solid var(--lightgray);
+
+      &:nth-child(odd) {
+        border-right: 1px solid var(--lightgray);
+      }
+    }
+
+    & a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-height: 4.5rem;
+      padding: 0.8rem 1rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition:
+        background-color 160ms ease,
+        color 160ms ease;
+
+      &:hover {
+        background-color: var(--lightgray);
+        color: var(--secondary);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--secondary);
+        outline-offset: -2px;
+      }
+    }
+
+    & img,
+    & .about-tool-mark {
+      flex: 0 0 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    & img {
+      object-fit: contain;
+    }
+
+    & .about-tool-mark {
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--lightgray);
+      border-radius: 0.3rem;
+      color: var(--gray);
+      font-family: var(--codeFont);
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    & span {
+      display: grid;
+      gap: 0.1rem;
+      min-width: 0;
+    }
+
+    & strong {
+      color: inherit;
+      font-family: var(--headerFont);
+      font-size: 0.95rem;
+      line-height: 1.25;
+    }
+
+    & small {
+      color: var(--gray);
+      font-size: 0.78rem;
+      line-height: 1.35;
+    }
+  }
+
+  @media all and (max-width: 640px) {
+    & .about-tools-list {
+      grid-template-columns: 1fr;
+
+      & > li:nth-child(odd) {
+        border-right: 0;
+      }
+
+      & a {
+        min-height: 4.25rem;
+        padding-inline: 0.8rem;
+      }
+    }
+  }
 }
 
 // Project·Blog는 폴더 인덱스라 FolderContent가 파일 목록을 덧붙인다.
