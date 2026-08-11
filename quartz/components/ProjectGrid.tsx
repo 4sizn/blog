@@ -1,5 +1,6 @@
 import style from "./styles/projectGrid.scss"
 import { resolveRelative, pathToRoot, joinSegments, type FullSlug } from "../util/path"
+import { projectDetailSlug } from "../util/projectLinks"
 import type { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import type { QuartzPluginData } from "../plugins/vfile"
 
@@ -58,6 +59,9 @@ export default ((opts?: Options) => {
   const ProjectGrid: QuartzComponent = ({ allFiles, fileData }: QuartzComponentProps) => {
     const currentSlug = (fileData.slug ?? "index") as FullSlug
     const baseDir = pathToRoot(currentSlug)
+    const availableSlugs = new Set(
+      allFiles.flatMap((page) => (typeof page.slug === "string" ? [page.slug] : [])),
+    )
 
     let projects = allFiles.filter(isProject).filter((p) => p.frontmatter?.title)
 
@@ -105,12 +109,17 @@ export default ((opts?: Options) => {
             const icon = project.frontmatter?.projectIcon
             const stack = toStringArray(project.frontmatter?.projectStack)
             const links = toLinkMap(project.frontmatter?.projectLinks)
+            const targetSlug = projectDetailSlug(
+              project.slug,
+              project.frontmatter?.projectCategory,
+              availableSlugs,
+            )
 
             return (
               <article class="project-card">
                 <a
                   class="project-card-main"
-                  href={resolveRelative(currentSlug, project.slug as FullSlug)}
+                  href={resolveRelative(currentSlug, targetSlug as FullSlug)}
                 >
                   {typeof icon === "string" && icon ? (
                     <img
