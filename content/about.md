@@ -52,7 +52,7 @@ lang: ko
 
 ## Tools
 
-<div class="about-tools-intro">매일 사용하는 개발, 디자인, 지식 관리 도구입니다.</div>
+<div class="about-usage-intro">매일 사용하는 개발, 디자인, 지식 관리 도구입니다.</div>
 
 <ul class="about-tools-list">
   <li><a href="https://code.visualstudio.com/" rel="noopener noreferrer"><span class="about-tool-mark" aria-hidden="true">VS</span><span><strong>VS Code</strong><small>코드 편집기</small></span></a></li>
@@ -66,6 +66,23 @@ lang: ko
   <li><a href="https://godotengine.org/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/godotengine" alt="" width="24" height="24" loading="lazy" /><span><strong>Godot</strong><small>게임 개발</small></span></a></li>
   <li><a href="https://www.blender.org/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/blender" alt="" width="24" height="24" loading="lazy" /><span><strong>Blender</strong><small>3D 제작</small></span></a></li>
   <li><a href="https://www.aseprite.org/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/aseprite" alt="" width="24" height="24" loading="lazy" /><span><strong>Aseprite</strong><small>픽셀 아트</small></span></a></li>
+  <li><a href="https://git-scm.com/downloads" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/git" alt="" width="24" height="24" loading="lazy" /><span><strong>Git Bash</strong><small>Git 명령줄</small></span></a></li>
+  <li><a href="https://www.google.com/chrome/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/googlechrome" alt="" width="24" height="24" loading="lazy" /><span><strong>Google Chrome</strong><small>웹 브라우저</small></span></a></li>
+  <li><a href="https://www.apple.com/safari/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/safari" alt="" width="24" height="24" loading="lazy" /><span><strong>Safari</strong><small>웹 브라우저</small></span></a></li>
+  <li><a href="https://www.notion.so/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/notion" alt="" width="24" height="24" loading="lazy" /><span><strong>Notion</strong><small>문서와 협업</small></span></a></li>
+</ul>
+
+## Platform
+
+<div class="about-usage-intro">개발, 협업, 배포를 위해 사용하는 플랫폼입니다.</div>
+
+<ul class="about-tools-list about-platform-list">
+  <li><a href="https://github.com/4sizn" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/github" alt="" width="24" height="24" loading="lazy" /><span><strong>GitHub</strong><small>코드와 협업</small></span></a></li>
+  <li><a href="https://about.gitlab.com/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/gitlab" alt="" width="24" height="24" loading="lazy" /><span><strong>GitLab</strong><small>DevSecOps 플랫폼</small></span></a></li>
+  <li><a href="https://discord.com/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/discord" alt="" width="24" height="24" loading="lazy" /><span><strong>Discord</strong><small>커뮤니티와 협업</small></span></a></li>
+  <li><a href="https://vercel.com/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/vercel" alt="" width="24" height="24" loading="lazy" /><span><strong>Vercel</strong><small>웹 배포</small></span></a></li>
+  <li><a href="https://firebase.google.com/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/firebase" alt="" width="24" height="24" loading="lazy" /><span><strong>Firebase</strong><small>앱 백엔드</small></span></a></li>
+  <li><a href="https://www.cloudflare.com/" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/cloudflare" alt="" width="24" height="24" loading="lazy" /><span><strong>Cloudflare</strong><small>네트워크와 보안</small></span></a></li>
 </ul>
 
 ## 지향하는 것

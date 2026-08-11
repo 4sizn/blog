@@ -236,7 +236,7 @@ body[data-slug="about"] .center > article {
 
   // Usage의 Tools 목록은 기존 Skills 테이블과 역할을 나눈다.
   // 브랜드 아이콘, 도구명, 사용하는 맥락을 한 행으로 읽을 수 있게 구성한다.
-  & .about-tools-intro {
+  & .about-usage-intro {
     margin: -0.25rem 0 1rem;
     color: var(--gray);
     font-size: 0.92rem;
