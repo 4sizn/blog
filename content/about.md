@@ -13,7 +13,7 @@ lang: ko
 | Client   | React, Next.js, jQuery, RxJS |
 | Backend  | Express, NestJS              |
 | Realtime | WebRTC, WebSocket, MQTT      |
-| Etc      | Unity                        |
+| Etc      | Unity, Godot                 |
 
 ## Tools
 
