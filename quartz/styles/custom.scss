@@ -259,27 +259,13 @@ body[data-slug="about"] .center > article {
       }
     }
 
-    & a {
+    & .about-usage-item {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       min-height: 4.5rem;
       padding: 0.8rem 1rem;
       color: var(--dark);
-      text-decoration: none;
-      transition:
-        background-color 160ms ease,
-        color 160ms ease;
-
-      &:hover {
-        background-color: var(--lightgray);
-        color: var(--secondary);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--secondary);
-        outline-offset: -2px;
-      }
     }
 
     & img,
@@ -334,7 +320,7 @@ body[data-slug="about"] .center > article {
         border-right: 0;
       }
 
-      & a {
+      & .about-usage-item {
         min-height: 4.25rem;
         padding-inline: 0.8rem;
       }
