@@ -18,7 +18,15 @@ content/.*
 # npx skills add 로 받아온 외부 스킬 본체와 심링크.
 # skills-lock.json 에 소스와 해시가 남아 있어 재설치로 복원된다.
 .agents/
-.claude/skills/
+
+# humanize-korean 스킬이 cwd 에 만드는 윤문 작업 폴더.
+# 릴리즈 노트를 쓸 때마다 생기며 산출물은 글 자체이므로 저장소에 남길 필요가 없다.
+_workspace/
+
+# npx skills add 로 받아온 외부 스킬은 skills-lock.json 으로 복원되므로 추적하지 않는다.
+# 이 저장소에서 직접 만든 skill 은 저장소와 함께 관리한다.
+.claude/skills/*
+!.claude/skills/blog-release-note/
 
 # hallmark 스킬이 남기는 것들.
 # .hallmark/log.json 은 다음 실행이 읽는 이력, .hallmark-audit/ 은 감사용 스크린샷.
