@@ -28,12 +28,12 @@ updated: "2026-01-11"
 
 ```javascript
 class Counter extends React.Component {
-  state = { count: 0 }
+  state = { count: 0 };
 
   handleClick = () => {
-    this.setState({ count: this.state.count + 1 })
-    console.log(this.state.count) // 왜 0일까? "비동기"라서?
-  }
+    this.setState({ count: this.state.count + 1 });
+    console.log(this.state.count);  // 왜 0일까? "비동기"라서?
+  };
 }
 ```
 
@@ -50,29 +50,29 @@ class Counter extends React.Component {
 ```javascript
 // Promise를 반환하는 비동기 함수
 async function fetchData() {
-  const response = await fetch("/api/data")
-  return response.json()
+  const response = await fetch('/api/data');
+  return response.json();
 }
 
 // setTimeout/setInterval 등의 비동기 작업
 setTimeout(() => {
-  console.log("비동기 실행")
-}, 1000)
+  console.log('비동기 실행');
+}, 1000);
 ```
 
 ### setState의 실제 특성
 
 ```javascript
 // setState는 Promise를 반환하지 않는다
-this.setState({ count: 1 }) // Promise가 아님!
+this.setState({ count: 1 });  // Promise가 아님!
 
 // await을 사용할 수 없다
-await this.setState({ count: 1 }) // ❌ 에러는 아니지만 의미 없음
+await this.setState({ count: 1 });  // ❌ 에러는 아니지만 의미 없음
 
 // 콜백은 있지만 이것도 비동기의 증거는 아님
 this.setState({ count: 1 }, () => {
-  console.log("업데이트 완료")
-})
+  console.log('업데이트 완료');
+});
 ```
 
 ## 진짜 이유: 배치 업데이트 (Batching)
@@ -84,13 +84,13 @@ React는 성능을 위해 **여러 setState 호출을 모아서 한 번에 처�
 ```javascript
 handleClick = () => {
   // React 이벤트 핸들러 내부
-  this.setState({ count: this.state.count + 1 })
-  this.setState({ count: this.state.count + 1 })
-  this.setState({ count: this.state.count + 1 })
+  this.setState({ count: this.state.count + 1 });
+  this.setState({ count: this.state.count + 1 });
+  this.setState({ count: this.state.count + 1 });
 
   // 3번 호출했지만, 리렌더링은 1번만 발생!
   // count는 1 증가 (3이 아님)
-}
+};
 ```
 
 ### 왜 배치 업데이트를 할까?
@@ -99,15 +99,15 @@ handleClick = () => {
 
 ```javascript
 // 배치 없이 즉시 적용한다면?
-this.setState({ a: 1 }) // 리렌더링
-this.setState({ b: 2 }) // 리렌더링
-this.setState({ c: 3 }) // 리렌더링
+this.setState({ a: 1 });  // 리렌더링
+this.setState({ b: 2 });  // 리렌더링
+this.setState({ c: 3 });  // 리렌더링
 // → 3번의 불필요한 리렌더링!
 
 // 배치 업데이트
-this.setState({ a: 1 })
-this.setState({ b: 2 })
-this.setState({ c: 3 })
+this.setState({ a: 1 });
+this.setState({ b: 2 });
+this.setState({ c: 3 });
 // → 모두 모아서 1번만 리렌더링!
 ```
 
@@ -173,33 +173,33 @@ componentDidMount() {
 // React 18+
 handleClick = () => {
   setTimeout(() => {
-    setCount((c) => c + 1) // 배치됨!
-    setCount((c) => c + 1) // 배치됨!
+    setCount(c => c + 1);  // 배치됨!
+    setCount(c => c + 1);  // 배치됨!
     // 두 업데이트가 함께 처리됨
-  }, 1000)
-}
+  }, 1000);
+};
 
-fetch("/api").then(() => {
-  setCount((c) => c + 1) // 배치됨!
-  setFlag((f) => !f) // 배치됨!
+fetch('/api').then(() => {
+  setCount(c => c + 1);  // 배치됨!
+  setFlag(f => !f);      // 배치됨!
   // 함께 처리됨
-})
+});
 ```
 
 ### 배치를 원하지 않는다면?
 
 ```javascript
-import { flushSync } from "react-dom"
+import { flushSync } from 'react-dom';
 
 function handleClick() {
   flushSync(() => {
-    setCount((c) => c + 1)
-  })
+    setCount(c => c + 1);
+  });
   // 여기서 DOM이 이미 업데이트됨
 
   flushSync(() => {
-    setFlag((f) => !f)
-  })
+    setFlag(f => !f);
+  });
   // 별도로 즉시 업데이트됨
 }
 ```
@@ -210,15 +210,15 @@ function handleClick() {
 
 ```javascript
 // ❌ 잘못된 방법 - 이전 state 직접 참조
-this.setState({ count: this.state.count + 1 })
-this.setState({ count: this.state.count + 1 })
-this.setState({ count: this.state.count + 1 })
+this.setState({ count: this.state.count + 1 });
+this.setState({ count: this.state.count + 1 });
+this.setState({ count: this.state.count + 1 });
 // count: 1 (의도와 다름)
 
 // ✅ 올바른 방법 - 함수형 업데이트
-this.setState((prevState) => ({ count: prevState.count + 1 }))
-this.setState((prevState) => ({ count: prevState.count + 1 }))
-this.setState((prevState) => ({ count: prevState.count + 1 }))
+this.setState(prevState => ({ count: prevState.count + 1 }));
+this.setState(prevState => ({ count: prevState.count + 1 }));
+this.setState(prevState => ({ count: prevState.count + 1 }));
 // count: 3 (의도대로)
 ```
 
@@ -226,30 +226,33 @@ this.setState((prevState) => ({ count: prevState.count + 1 }))
 
 ```javascript
 // 업데이트 완료 후 작업이 필요하다면
-this.setState({ count: this.state.count + 1 }, () => {
-  console.log("업데이트 완료:", this.state.count)
-  // 여기서는 업데이트된 값을 사용 가능
-})
+this.setState(
+  { count: this.state.count + 1 },
+  () => {
+    console.log('업데이트 완료:', this.state.count);
+    // 여기서는 업데이트된 값을 사용 가능
+  }
+);
 ```
 
 ### 3. Hooks에서의 패턴
 
 ```javascript
 function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const handleClick = () => {
     // ✅ 함수형 업데이트
-    setCount((c) => c + 1)
-    setCount((c) => c + 1)
-    setCount((c) => c + 1)
+    setCount(c => c + 1);
+    setCount(c => c + 1);
+    setCount(c => c + 1);
     // count: 3
-  }
+  };
 
   // 업데이트 후 작업은 useEffect로
   useEffect(() => {
-    console.log("count 변경됨:", count)
-  }, [count])
+    console.log('count 변경됨:', count);
+  }, [count]);
 }
 ```
 
@@ -259,28 +262,28 @@ function Counter() {
 
 ```javascript
 function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const increment = () => {
     // ❌ 잘못된 방법
-    setCount(count + 1)
-    setCount(count + 1)
-    setCount(count + 1)
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
     // count: 1만 증가
 
     // ✅ 올바른 방법
-    setCount((c) => c + 1)
-    setCount((c) => c + 1)
-    setCount((c) => c + 1)
+    setCount(c => c + 1);
+    setCount(c => c + 1);
+    setCount(c => c + 1);
     // count: 3 증가
-  }
+  };
 
   return (
     <div>
       <p>Count: {count}</p>
       <button onClick={increment}>+3</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -288,24 +291,24 @@ function Counter() {
 
 ```javascript
 function Form() {
-  const [formData, setFormData] = useState({ name: "", email: "" })
+  const [formData, setFormData] = useState({ name: '', email: '' });
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     // ✅ 함수형 업데이트로 안전하게
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
-    }))
-  }
+      [name]: value
+    }));
+  };
 
   return (
     <form>
       <input name="name" onChange={handleChange} />
       <input name="email" onChange={handleChange} />
     </form>
-  )
+  );
 }
 ```
 
@@ -313,25 +316,25 @@ function Form() {
 
 ```javascript
 function UserProfile() {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchUser = async () => {
-    setLoading(true)
+    setLoading(true);
 
     try {
-      const response = await fetch("/api/user")
-      const data = await response.json()
+      const response = await fetch('/api/user');
+      const data = await response.json();
 
       // React 18+: 자동으로 배치됨
-      setUser(data)
-      setLoading(false)
+      setUser(data);
+      setLoading(false);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  return <div>{loading ? "Loading..." : user?.name}</div>
+  return <div>{loading ? 'Loading...' : user?.name}</div>;
 }
 ```
 
@@ -354,18 +357,18 @@ function UserProfile() {
 
 ```javascript
 // ✅ 항상 함수형 업데이트 사용
-setState((prev) => ({ ...prev, newValue }))
+setState(prev => ({ ...prev, newValue }));
 
 // ✅ 업데이트 후 작업은 useEffect
 useEffect(() => {
   // state가 변경된 후 실행
-}, [state])
+}, [state]);
 
 // ✅ 즉시 DOM 업데이트가 필요하면 flushSync (React 18+)
-import { flushSync } from "react-dom"
+import { flushSync } from 'react-dom';
 flushSync(() => {
-  setState(newValue)
-})
+  setState(newValue);
+});
 ```
 
 ---

@@ -41,18 +41,18 @@ updated: "2026-01-11"
 
 ```javascript
 // 0 이상 1 미만의 부동소수점 난수 반환
-Math.random() // 0.347281947...
+Math.random();  // 0.347281947...
 
 // 정수 뽑기
-Math.floor(Math.random() * 10) // 0~9 사이의 정수
-Math.floor(Math.random() * 100) // 0~99 사이의 정수
+Math.floor(Math.random() * 10);  // 0~9 사이의 정수
+Math.floor(Math.random() * 100);  // 0~99 사이의 정수
 
 // 범위 지정
 function randomRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-randomRange(1, 6) // 1~6 사이 (주사위)
+randomRange(1, 6);  // 1~6 사이 (주사위)
 ```
 
 ### 실제 동작 방식
@@ -63,19 +63,19 @@ randomRange(1, 6) // 1~6 사이 (주사위)
 // 실제로는 이런 알고리즘을 사용 (단순화된 예시)
 class SimplePRNG {
   constructor(seed) {
-    this.seed = seed
+    this.seed = seed;
   }
 
   next() {
     // Linear Congruential Generator (LCG) 알고리즘
-    this.seed = (this.seed * 1103515245 + 12345) % 2147483648
-    return this.seed / 2147483648
+    this.seed = (this.seed * 1103515245 + 12345) % 2147483648;
+    return this.seed / 2147483648;
   }
 }
 
-const rng = new SimplePRNG(Date.now())
-console.log(rng.next()) // 0.347281947...
-console.log(rng.next()) // 0.892743561...
+const rng = new SimplePRNG(Date.now());
+console.log(rng.next());  // 0.347281947...
+console.log(rng.next());  // 0.892743561...
 ```
 
 ## Math.random()은 무작위가 아니다?
@@ -86,20 +86,20 @@ console.log(rng.next()) // 0.892743561...
 
 ```javascript
 // V8 엔진의 내부 구현 (개념적 예시)
-let seed = 12345
+let seed = 12345;
 
 function predictableRandom() {
-  seed = (seed * 1103515245 + 12345) & 0x7fffffff
-  return seed / 2147483648
+  seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+  return seed / 2147483648;
 }
 
 // 항상 같은 순서
-console.log(predictableRandom()) // 0.347281947...
-console.log(predictableRandom()) // 0.892743561...
+console.log(predictableRandom());  // 0.347281947...
+console.log(predictableRandom());  // 0.892743561...
 
 // 시드를 초기화하면 같은 수열 반복
-seed = 12345
-console.log(predictableRandom()) // 0.347281947... (동일!)
+seed = 12345;
+console.log(predictableRandom());  // 0.347281947... (동일!)
 ```
 
 ### 증명 2: 주기성
@@ -110,19 +110,19 @@ PRNG는 유한한 주기를 가집니다. 충분히 많은 난수를 생성하�
 // 간단한 LCG의 주기 문제
 class BadRNG {
   constructor(seed) {
-    this.seed = seed
-    this.history = new Set()
+    this.seed = seed;
+    this.history = new Set();
   }
 
   next() {
-    this.seed = (this.seed * 1103515245 + 12345) % 65536
+    this.seed = (this.seed * 1103515245 + 12345) % 65536;
 
     if (this.history.has(this.seed)) {
-      console.log("주기 감지! 같은 값이 반복됩니다.")
+      console.log('주기 감지! 같은 값이 반복됩니다.');
     }
-    this.history.add(this.seed)
+    this.history.add(this.seed);
 
-    return this.seed / 65536
+    return this.seed / 65536;
   }
 }
 ```
@@ -134,21 +134,21 @@ class BadRNG {
 ```javascript
 // 편향 테스트
 function testBias(samples = 1000000) {
-  const buckets = Array(10).fill(0)
+  const buckets = Array(10).fill(0);
 
   for (let i = 0; i < samples; i++) {
-    const num = Math.floor(Math.random() * 10)
-    buckets[num]++
+    const num = Math.floor(Math.random() * 10);
+    buckets[num]++;
   }
 
-  console.log("분포:", buckets)
-  console.log("각 버킷 예상:", samples / 10)
+  console.log('분포:', buckets);
+  console.log('각 버킷 예상:', samples / 10);
 
   // 이론적으로는 각 버킷이 100,000개씩
   // 실제로는 약간의 편차 존재
 }
 
-testBias()
+testBias();
 ```
 
 ## JavaScript에서 정수 뽑기의 함정
@@ -157,10 +157,10 @@ testBias()
 
 ```javascript
 // ❌ 나쁜 방법: 편향 발생
-Math.round(Math.random() * 10) // 0과 10이 다른 숫자의 절반 확률
+Math.round(Math.random() * 10);  // 0과 10이 다른 숫자의 절반 확률
 
 // ✅ 올바른 방법
-Math.floor(Math.random() * 11) // 0~10 균등 분포
+Math.floor(Math.random() * 11);  // 0~10 균등 분포
 ```
 
 ### 편향 원인
@@ -187,56 +187,56 @@ Math.floor(Math.random() * 11) // 0~10 균등 분포
 
 ```javascript
 // crypto.getRandomValues()
-const array = new Uint32Array(1)
-crypto.getRandomValues(array)
-const randomNumber = array[0] / (0xffffffff + 1)
+const array = new Uint32Array(1);
+crypto.getRandomValues(array);
+const randomNumber = array[0] / (0xFFFFFFFF + 1);
 
-console.log(randomNumber) // 진짜 랜덤에 가까움
+console.log(randomNumber);  // 진짜 랜덤에 가까움
 
 // 헬퍼 함수
 function cryptoRandom() {
-  const array = new Uint32Array(1)
-  crypto.getRandomValues(array)
-  return array[0] / (0xffffffff + 1)
+  const array = new Uint32Array(1);
+  crypto.getRandomValues(array);
+  return array[0] / (0xFFFFFFFF + 1);
 }
 
 function cryptoRandomInt(min, max) {
-  const range = max - min + 1
-  const bytesNeeded = Math.ceil(Math.log2(range) / 8)
-  const maxValue = Math.pow(256, bytesNeeded)
-  const randomBytes = new Uint8Array(bytesNeeded)
+  const range = max - min + 1;
+  const bytesNeeded = Math.ceil(Math.log2(range) / 8);
+  const maxValue = Math.pow(256, bytesNeeded);
+  const randomBytes = new Uint8Array(bytesNeeded);
 
-  let randomValue
+  let randomValue;
   do {
-    crypto.getRandomValues(randomBytes)
-    randomValue = 0
+    crypto.getRandomValues(randomBytes);
+    randomValue = 0;
     for (let i = 0; i < bytesNeeded; i++) {
-      randomValue = (randomValue << 8) + randomBytes[i]
+      randomValue = (randomValue << 8) + randomBytes[i];
     }
-  } while (randomValue >= maxValue - (maxValue % range))
+  } while (randomValue >= maxValue - (maxValue % range));
 
-  return min + (randomValue % range)
+  return min + (randomValue % range);
 }
 
-console.log(cryptoRandomInt(1, 6)) // 진짜 랜덤 주사위
+console.log(cryptoRandomInt(1, 6));  // 진짜 랜덤 주사위
 ```
 
 ### 2. Node.js crypto 모듈
 
 ```javascript
-const crypto = require("crypto")
+const crypto = require('crypto');
 
 // 진정한 난수
 function secureRandom() {
-  return crypto.randomInt(0, Number.MAX_SAFE_INTEGER) / Number.MAX_SAFE_INTEGER
+  return crypto.randomInt(0, Number.MAX_SAFE_INTEGER) / Number.MAX_SAFE_INTEGER;
 }
 
 // 범위 지정
 function secureRandomInt(min, max) {
-  return crypto.randomInt(min, max + 1)
+  return crypto.randomInt(min, max + 1);
 }
 
-console.log(secureRandomInt(1, 6))
+console.log(secureRandomInt(1, 6));
 ```
 
 ### 3. 외부 엔트로피 사용
@@ -245,21 +245,21 @@ console.log(secureRandomInt(1, 6))
 // 사용자 입력, 시스템 이벤트 등을 조합
 class EntropyPool {
   constructor() {
-    this.pool = []
+    this.pool = [];
   }
 
   addEntropy(value) {
-    this.pool.push(value)
+    this.pool.push(value);
   }
 
   generate() {
     // 여러 소스의 엔트로피 혼합
-    const mouseMovement = Math.random()
-    const timestamp = Date.now()
-    const performance = performance.now()
+    const mouseMovement = Math.random();
+    const timestamp = Date.now();
+    const performance = performance.now();
 
-    const combined = mouseMovement + timestamp + performance
-    return combined % 1
+    const combined = mouseMovement + timestamp + performance;
+    return (combined % 1);
   }
 }
 ```
@@ -277,8 +277,8 @@ class EntropyPool {
 function randomParticlePosition() {
   return {
     x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-  }
+    y: Math.random() * canvas.height
+  };
 }
 ```
 
@@ -293,13 +293,13 @@ function randomParticlePosition() {
 ```javascript
 // 반드시 crypto 사용
 function generateSecureToken(length = 32) {
-  const array = new Uint8Array(length)
-  crypto.getRandomValues(array)
-  return Array.from(array, (byte) => byte.toString(16).padStart(2, "0")).join("")
+  const array = new Uint8Array(length);
+  crypto.getRandomValues(array);
+  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
-const token = generateSecureToken()
-console.log(token) // "a3f5c7e9d2b4f8a1c5e7d9f3b2a4c6e8..."
+const token = generateSecureToken();
+console.log(token);  // "a3f5c7e9d2b4f8a1c5e7d9f3b2a4c6e8..."
 ```
 
 ## 결론
@@ -317,12 +317,12 @@ console.log(token) // "a3f5c7e9d2b4f8a1c5e7d9f3b2a4c6e8..."
 
 ```javascript
 // 일반 용도
-const x = Math.random()
-const dice = Math.floor(Math.random() * 6) + 1
+const x = Math.random();
+const dice = Math.floor(Math.random() * 6) + 1;
 
 // 보안 용도
-const token = crypto.getRandomValues(new Uint8Array(32))
-const secureId = [...token].map((b) => b.toString(16).padStart(2, "0")).join("")
+const token = crypto.getRandomValues(new Uint8Array(32));
+const secureId = [...token].map(b => b.toString(16).padStart(2, '0')).join('');
 ```
 
 **진정한 무작위를 만들어 보자**는 컴퓨터 과학의 오랜 과제입니다. 완벽한 해답은 아직 없지만, 우리는 용도에 맞는 최선의 방법을 선택할 수 있습니다.
