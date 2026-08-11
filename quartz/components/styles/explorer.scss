@@ -245,7 +245,9 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
       z-index: 100;
       position: absolute;
       top: 0;
-      left: 0;
+      // #quartz-body has 1rem mobile gutter; align the drawer to the viewport
+      // so translateX(-100vw) does not leave that gutter visible at the left edge.
+      left: -1rem;
       margin-top: 0;
       background-color: var(--light);
       max-width: 100vw;
