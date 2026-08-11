@@ -1,9 +1,11 @@
 ---
 title: 블로그 릴리즈 노트 골격 + 작성 skill 설계서
 stage: design
-status: draft
+status: approved
 created: 2026-08-11
 updated: 2026-08-11
+approved_by: 4sizn
+approved_at: 2026-08-11
 repo: 4sizn-blog
 branch: main
 ---
@@ -285,8 +287,11 @@ version: 1.0.0
 
 ## 10. 승인
 
-- [ ] 모든 요구사항이 추적표에서 설계에 대응되는가 (§8 — 빈 칸 없음)
-- [ ] 설계 결정의 이유가 기록되었는가 (§7 — DD-01~DD-12, 버린 대안 포함)
+- [x] 모든 요구사항이 추적표에서 설계에 대응되는가 (§8 — 빈 칸 없음)
+- [x] 설계 결정의 이유가 기록되었는가 (§7 — DD-01~DD-12, 버린 대안 포함)
 - [x] §9 미확인 2건에 답했다 (2026-08-11 — DD-11·DD-12)
 
-승인되면 `status: approved` 로 변경하고 `/sdlc:implement` 로 진행한다.
+**2026-08-11 4sizn 승인 완료** (`status: approved`). 다음 단계는 `/sdlc:implement`.
+
+착수 순서는 `plan.md` 3절 세션 순서를 따른다 — S1(골격) → S2(파이프라인) → S3(skill) → S4(이미지) → S5(글 9건).
+첫 작업은 **W-01 골격 템플릿**이며, W-03·W-06·W-10 이후가 전부 여기에 의존한다.
