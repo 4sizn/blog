@@ -33,7 +33,12 @@
       "Bash(gh repo view:*)",
       "Bash(npm view:*)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(npx get-shit-done-cc --global)"
+      "Bash(npx get-shit-done-cc --global)",
+      "Bash(python3 -c ' *)",
+      "Bash(lsof -ti:8080)",
+      "Bash(head -20 /Users/hsshin-rsupport/Documents/lotus/4sizn-blog/content/log/*.md)",
+      "Bash(grep *)",
+      "Bash(touch *)"
     ]
   }
 }
