@@ -3,6 +3,7 @@ title: "SpecialForce ARVR"
 description: "Unity와 FSM 기반 AI로 제작한 VR FPS 게임"
 projectOrder: 4
 projectCategory: career
+projectImage: "static/specialforce-arvr/game-cover.webp"
 projectStack:
   - Unity
   - C#

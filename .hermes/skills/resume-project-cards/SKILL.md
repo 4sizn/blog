@@ -44,6 +44,19 @@ YYYY.MM – YYYY.MM
 - Evidence-supported outcome, limitation, or decision.
 ```
 
+## Drive export evidence matrix
+
+Before editing, make a private working matrix. Every public change must be traceable to one inspected source field or approved local asset:
+
+```text
+Drive export entry → projects slug → blog/projects slug → approved local asset → verified public link
+```
+
+- Treat the export CSV/HTML’s explicit name, date range, description, tags, and public URL as primary facts.
+- Keep raw export paths and unpublished source files out of public Markdown; only publish the concise synthesized résumé fact.
+- If an exported image is a portrait, unrelated document, private UI, participant image, or cannot be confidently assigned to the entry, do not use it as a project thumbnail.
+- For an approved project image, copy/optimize it under `quartz/static/<slug>/`; never depend on a Drive URL at runtime. Document its source relation in the implementation/commit review, not the rendered site.
+
 ## Portfolio vs. case-study boundary
 
 - `/projects`: recruiter-readable context; product, period, role, technologies, and scoped contribution. Keep it skimmable.

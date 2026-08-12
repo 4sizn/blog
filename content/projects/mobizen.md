@@ -3,6 +3,7 @@ title: "모비즌"
 description: "PC와 모바일을 연결하는 미러링 서비스 및 WebRTC POC"
 projectOrder: 3
 projectCategory: career
+projectImage: "static/mobizen/service-overview.webp"
 projectStack:
   - JavaScript
   - jQuery
