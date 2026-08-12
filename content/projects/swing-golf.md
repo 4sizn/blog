@@ -27,4 +27,6 @@ lang: ko
 
 ## 관련 기록
 
-[제작기](/blog/projects/swing-golf)는 센서 바이어스·클럽별 감도·결정론적 비행 계산을 다룹니다.
+- 최신 릴리즈: v1.3 (2026-08-09)
+- [v1.3 릴리즈 노트](/blog/releases/2026-08-09-swing-golf-1.3)
+- [제작기](/blog/projects/swing-golf)는 센서 바이어스·클럽별 감도·결정론적 비행 계산을 다룹니다.
