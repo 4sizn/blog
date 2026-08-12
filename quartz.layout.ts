@@ -1,31 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-
-// sortFn은 toString()으로 직렬화되어 클라이언트에서 실행되므로
-// 외부 변수 참조 없이 자기 완결형이어야 함
-const explorerSortFn = (a: any, b: any) => {
-  const order: Record<string, number> = { log: 0, dev: 1, releases: 2, projects: 3 }
-  // 폴더 우선, 폴더끼리는 지정 순서
-  if (a.isFolder && !b.isFolder) return -1
-  if (!a.isFolder && b.isFolder) return 1
-  if (a.isFolder && b.isFolder) {
-    const oa = order[a.slugSegment] ?? 99
-    const ob = order[b.slugSegment] ?? 99
-    if (oa !== ob) return oa - ob
-    return a.displayName.localeCompare(b.displayName, undefined, {
-      numeric: true,
-      sensitivity: "base",
-    })
-  }
-  // 파일끼리는 날짜 최신순, 날짜 없으면 뒤로
-  const da = a.data?.date ? new Date(a.data.date).getTime() : 0
-  const db = b.data?.date ? new Date(b.data.date).getTime() : 0
-  if (da !== db) return db - da
-  return a.displayName.localeCompare(b.displayName, undefined, {
-    numeric: true,
-    sensitivity: "base",
-  })
-}
+import { explorerSortFn } from "./quartz/util/explorerSort"
 
 // 사이드바 없이 풀폭으로 그리는 포트폴리오형 페이지들. styles/custom.scss가
 // 같은 목록을 data-slug로 참조하므로 한쪽만 고치면 어긋난다.

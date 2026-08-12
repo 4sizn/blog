@@ -18,6 +18,10 @@ export type ContentDetails = {
   content: string
   richContent?: string
   date?: Date
+  /** Explicit frontmatter dates retained for client-side chronological navigation. */
+  published?: Date
+  created?: Date
+  modified?: Date
   description?: string
 }
 
@@ -114,6 +118,15 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
               ? escapeHTML(toHtml(tree as Root, { allowDangerousHtml: true }))
               : undefined,
             date: date,
+            // `date` uses the site's default date type (modified here). Keep only
+            // explicitly authored source dates so Explorer can sort by original
+            // publication chronology after bulk metadata updates.
+            published: file.data.frontmatter?.published ? file.data.dates?.published : undefined,
+            created:
+              file.data.frontmatter?.created || file.data.frontmatter?.date
+                ? file.data.dates?.created
+                : undefined,
+            modified: file.data.frontmatter?.modified ? file.data.dates?.modified : undefined,
             description: file.data.description ?? "",
           })
         }
