@@ -3,7 +3,7 @@ title: "4sizn Blog"
 description: "개인 작업과 생각, 프로젝트 기록을 Markdown으로 정리해 공개하는 4sizn의 블로그다."
 recordType: self-owned-product
 sourceScope: public-product-record
-socialImage: "/static/4sizn-blog/4sizn-blog-thumbnail.png"
+socialImage: "/static/4sizn-blog/blog-home.png"
 tags: [project, blog]
 draft: false
 lang: ko
@@ -21,7 +21,7 @@ lang: ko
 
 글은 주제별로 찾아 읽고, 프로젝트는 카드로 빠르게 훑은 뒤 상세 기록으로 이어진다. 프로젝트 기록에는 제품의 맥락과 작업 범위를 남기고, 릴리즈 노트에는 버전별 변화를 분리해 둔다.
 
-![4sizn Blog의 프로젝트와 글 목록을 보여주는 화면](/static/4sizn-blog/4sizn-blog-thumbnail.png)
+![4sizn Blog의 실제 글 목록과 탐색 화면](/static/4sizn-blog/blog-home.png)
 
 ## 작업
 

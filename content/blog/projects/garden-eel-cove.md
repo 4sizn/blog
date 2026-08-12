@@ -20,7 +20,7 @@ Garden Eel Cove는 바탕화면 하단의 투명한 스트립 안에 정원장�
 
 장어는 마우스가 다가오면 구멍으로 숨고, 조용해지면 다시 고개를 내민다. 트레이 메뉴에서는 먹이를 주고, 잡은 장어 수와 먹이를 준 횟수를 확인할 수 있다. 장어와 먹이가 있는 영역 밖에서는 뒤의 바탕화면과 창을 계속 사용할 수 있도록 동작한다.
 
-![바탕화면 하단에서 정원장어들이 움직이는 Garden Eel Cove 장면](/static/garden-eel/garden-eel-cove-thumbnail.png)
+![바탕화면 하단의 정원장어들이 보이는 Garden Eel Cove 장면](/static/garden-eel/garden-eel-cove-user-provided.png)
 
 ## 작업
 
