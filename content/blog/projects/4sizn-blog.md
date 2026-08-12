@@ -1,38 +1,48 @@
 ---
 title: "4sizn Blog"
-description: "Quartz 기반 개인 블로그로, Markdown 콘텐츠·프로젝트 카드·릴리즈 초안을 관리한다."
-recordType: code-evidence
-sourceScope: repository-history
-tags: [project, quartz, github-actions]
+description: "개인 작업과 생각, 프로젝트 기록을 Markdown으로 정리해 공개하는 4sizn의 블로그다."
+recordType: self-owned-product
+sourceScope: public-product-record
+socialImage: "/static/4sizn-blog/4sizn-blog-thumbnail.png"
+tags: [project, blog]
 draft: false
 lang: ko
 ---
 
-> **검토 범위**
-> 이 저장소의 Markdown 콘텐츠 구조, Quartz 컴포넌트, 릴리즈 동기화 스크립트와 변경 이력을 기준으로 정리한다.
+> **기록 범위**
+> 공개된 사이트와 프로젝트 소개, 관련 공개 기록을 바탕으로 정리한다.
+> 비공개 구현·운영 데이터·확인하지 않은 환경은 포함하지 않는다.
 
-## 프로젝트
+## 간략소개
 
-4sizn Blog는 Quartz 기반 개인 블로그다. 콘텐츠는 Markdown으로 관리하고, `/projects`에는 포트폴리오 카드를, `/blog/projects`에는 프로젝트별 기록을, `/blog/releases`에는 버전별 변경을 둔다.
+4sizn Blog는 직접 만든 프로젝트와 개발 기록, 일상에서 남긴 생각을 한곳에 정리하는 개인 블로그다. 포트폴리오의 짧은 요약과 프로젝트별 상세 기록, 버전별 릴리즈 노트를 서로 다른 읽기 흐름으로 둔다.
 
-## 콘텐츠와 프로젝트 카드
+## 서비스
 
-`content/`는 블로그 본문과 프로젝트 메타데이터를 함께 관리한다. `/projects` 카드 렌더링은 `quartz/components/ProjectGrid.tsx`가 담당하며, frontmatter의 `projectCategory`, `projectOrder`, `projectStack`, `projectLinks`를 읽어 Toy와 Career 항목을 구분한다.
+글은 주제별로 찾아 읽고, 프로젝트는 카드로 빠르게 훑은 뒤 상세 기록으로 이어진다. 프로젝트 기록에는 제품의 맥락과 작업 범위를 남기고, 릴리즈 노트에는 버전별 변화를 분리해 둔다.
 
-카드용 메타데이터와 본문을 같은 콘텐츠 모델에 두어 별도의 프로젝트 목록을 중복 관리하지 않는다. `/projects`는 이력서형 요약을, `/blog/projects`는 근거 범위가 다른 상세 기록을 제공한다.
+![4sizn Blog의 프로젝트와 글 목록을 보여주는 화면](/static/4sizn-blog/4sizn-blog-thumbnail.png)
 
-## 릴리즈 초안 흐름
+## 작업
 
-릴리즈 동기화 스크립트는 새 릴리즈를 Markdown 초안으로 만들고, 초안은 `draft: true` 상태로 남는다. 자동 수집은 초안 생성까지 담당하며, 공개 여부와 글의 맥락은 편집 단계에서 결정한다.
+### 기록의 구조
 
-## 관련 변경
+- 글, 프로젝트 요약, 프로젝트 상세 기록, 릴리즈 노트를 목적에 따라 구분
+- 같은 프로젝트라도 포트폴리오에서는 짧게, 상세 기록에서는 맥락과 작업 범위 중심으로 소개
+- 버전별 변화는 릴리즈 기록으로, 제품의 맥락과 작업은 프로젝트 기록으로 나누어 읽을 수 있게 구성
 
-- `8cf484e` · 프로젝트 카드 기본 썸네일 교체
-- `0811a3d` · Swing Golf의 Blog Projects 경로 이관
-- `81faeae` · 초기 프로젝트 글 템플릿과 관리 스킬 추가
+### 공개 전의 편집
+
+- 자동으로 수집된 릴리즈 정보는 바로 게시하지 않고 초안으로 남기는 흐름
+- 공개 여부와 문맥은 사람이 다시 확인한 뒤 결정
+- 개인 작업의 변화와 생각을 시간에 따라 이어 읽을 수 있는 아카이브 구성
+
+## 공개와 현재 범위
+
+이 사이트는 공개 웹에서 읽을 수 있다. 릴리즈별 변경은 [Releases](/blog/releases)에서, 프로젝트의 짧은 요약은 [Projects](/projects)에서 확인할 수 있다.
 
 ## 관련 기록
 
-- [소스](https://github.com/4sizn/blog)
+- [4sizn Blog](https://4sizn.github.io/)
 - [포트폴리오 요약](/projects/4sizn-blog)
 - [Releases](/blog/releases)

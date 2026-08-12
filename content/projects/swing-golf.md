@@ -29,4 +29,4 @@ lang: ko
 
 - 최신 릴리즈: v1.3 (2026-08-09)
 - [v1.3 릴리즈 노트](/blog/releases/2026-08-09-swing-golf-1.3)
-- [제작기](/blog/projects/swing-golf)는 센서 바이어스·클럽별 감도·결정론적 비행 계산을 다룹니다.
+- [상세 기록](/blog/projects/swing-golf)에서 게임의 흐름과 작업 범위를 소개합니다.
