@@ -64,8 +64,7 @@ Drive export entry → projects slug → blog/projects slug → approved local a
 
 - `/projects`: recruiter-readable context; product, period, role, technologies, and scoped contribution. Keep it skimmable.
 - `/blog/projects`: developer production story; problem → decision → iteration → verification, sourced from implementation/history/public retrospective evidence.
-- For Toy cards, link the main card to its matching `/blog/projects/<slug>` only when the article exists; otherwise retain its `/projects/<slug>` detail route.
-- For Career cards, retain the `/projects/<slug>` résumé detail route unless an explicitly approved case-study route is available.
+- For every portfolio card with a matching published `/blog/projects/<slug>` record, route the primary card link to that record regardless of `projectCategory`. Retain `/projects/<slug>` only as the fallback when no matching project record exists.
 
 ## Asset rules
 

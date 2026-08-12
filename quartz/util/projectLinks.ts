@@ -1,16 +1,14 @@
 const BLOG_PROJECT_PREFIX = "blog/"
 
 /**
- * Portfolio cards stay in /projects, but toy-project detail cards point at the
- * corresponding long-form build note when that note exists in /blog/projects.
+ * Every portfolio card uses its matching long-form project record when one is
+ * published under /blog/projects; otherwise it preserves the portfolio route.
  */
 export function projectDetailSlug(
   projectSlug: string,
-  category: unknown,
+  _category: unknown,
   availableSlugs: ReadonlySet<string>,
 ): string {
-  if (category !== "toy") return projectSlug
-
   const buildNoteSlug = `${BLOG_PROJECT_PREFIX}${projectSlug}`
   return availableSlugs.has(buildNoteSlug) ? buildNoteSlug : projectSlug
 }

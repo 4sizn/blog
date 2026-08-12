@@ -16,10 +16,10 @@ test("toy portfolio cards use their matching blog build note", () => {
   )
 })
 
-test("career portfolio cards preserve their portfolio detail route", () => {
+test("career portfolio cards use their matching blog project record", () => {
   assert.equal(
     projectDetailSlug("projects/remote-meeting", "career", availableSlugs),
-    "projects/remote-meeting",
+    "blog/projects/remote-meeting",
   )
 })
 
@@ -30,9 +30,9 @@ test("toy cards fall back to their portfolio route when no build note exists", (
   )
 })
 
-test("missing categories preserve the portfolio route", () => {
+test("category does not affect a published project record target", () => {
   assert.equal(
     projectDetailSlug("projects/lonely-candle", undefined, availableSlugs),
-    "projects/lonely-candle",
+    "blog/projects/lonely-candle",
   )
 })
