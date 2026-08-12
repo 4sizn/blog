@@ -1,37 +1,47 @@
 ---
-title: "Screen Saver Extension 제작기 — 현재 탭을 덮되, 안전한 페이지는 건드리지 않기"
-description: "탭별 전체화면 상태·브라우저 저장소·제한 페이지 정책을 분리한 확장 개발 기록"
+title: "Screen Saver Extension"
+description: "현재 탭을 전체 화면 스크린세이버로 전환하는 Chrome 확장 프로그램이다."
+recordType: code-evidence
+sourceScope: repository-history
 socialImage: "/static/screen-saver/01-one-click.jpg"
 tags: [project, chrome-extension, react]
 draft: false
 lang: ko
 ---
 
-## 문제: 한 번의 실행은 쉬워도, 잘못된 페이지에서의 실행은 위험하다
+> **검토 범위**
+> 공개 소스와 변경 이력을 기준으로 정리한다. 사용자의 실제 탭·계정 정보와 스토어 운영 데이터는 포함하지 않는다.
 
-이 확장은 현재 탭을 스크린세이버로 전환한다. 그러나 로그인·계정 관리·웹 스토어에서 화면을 덮으면 사용자는 입력 흐름을 잃을 수 있다. 그래서 기능보다 먼저 실행해도 되는 페이지를 판정하고 탭 상태를 복구하는 경계를 설계했다. 이 글은 공개 소스와 Git 이력에 근거한다.
+## 프로젝트
 
-## 구조: 정책·상태·설정을 각각 저장했다
+Screen Saver Extension은 현재 탭을 전체 화면 스크린세이버로 전환하는 Chrome 확장 프로그램이다. 화면 전환뿐 아니라, 실행하면 안 되는 페이지를 구분하고 탭별 실행 상태와 지속 설정을 나누는 범위가 함께 있다.
 
-`entrypoints/background.ts`는 탭 URL을 확인하고 content script를 주입할 수 없는 프로토콜과 도메인을 제한한다. 탭별 활성 상태는 `lib/storage.ts`의 `chrome.storage.session`에 두어 service worker 재시작 뒤에도 복구하고, 화면·시계·언어·단축키는 `lib/settingsStorage.ts`의 sync storage에 분리한다. 사용자가 선택한 지속 설정과 일시적인 탭 실행 상태를 같은 저장소에 섞지 않은 선택이다.
+## 실행 정책
 
-## 반복한 문제
+`entrypoints/background.ts`는 탭 URL을 확인하고 content script를 주입할 수 없는 프로토콜과 도메인을 제한한다. 브라우저 내부 페이지뿐 아니라 웹 스토어와 계정처럼 일반 HTTPS 도메인인 민감한 화면도 정책 범위에 포함된다.
 
-### URL 정책은 프로토콜과 도메인을 함께 다뤄야 했다
+`4917375`에는 새 Chrome Web Store 도메인을 제한 목록에 추가한 변경이 남아 있다. 프로토콜만으로는 충분하지 않은 페이지 판정을 도메인 정책과 함께 다루는 흐름이다.
 
-`4917375`는 새 Chrome Web Store 도메인을 제한 목록에 추가했다. `chrome://` 같은 프로토콜 차단만으로는 웹 스토어·Google 계정처럼 일반 HTTPS 도메인인 민감한 화면을 막을 수 없었다. 따라서 제한 목록을 두 층으로 나누고, background 단계에서 아이콘과 실행을 비활성화한다.
+## 탭 상태와 설정
 
-### 설정이 아닌 실행 상태의 유효 기간
+탭별 활성 상태는 `lib/storage.ts`의 `chrome.storage.session`에 두고, 화면·시계·언어·단축키 설정은 `lib/settingsStorage.ts`의 sync storage에 둔다. 지속해야 하는 사용자 설정과 탭이 닫히면 사라져야 하는 실행 상태를 구분한다.
 
-`85362d2`는 전역 단축키와 활성 상태 저장 방식을 보정했다. 화면을 계속 유지해야 하는 값과 탭이 닫히면 사라져야 하는 값을 구분함으로써, 탭 전환·service worker 수명과 상관없이 예측 가능한 종료 흐름을 만들었다.
+`85362d2`에는 전역 단축키와 활성 상태 저장 방식을 보정한 변경이 남아 있다.
 
-## 이력에서 확인한 변화
+## 관련 변경
 
-- `85362d2` — 전역 단축키와 활성 상태 개선
-- `23f3f01` — 제한 페이지 정책을 문서화
-- `4917375` — 새 Web Store 도메인 차단
-- `c01a9a1` — Web Store 등록용 스크린샷 추가
+- `85362d2` · 전역 단축키와 활성 상태 개선
+- `23f3f01` · 제한 페이지 정책 문서화
+- `4917375` · 새 Web Store 도메인 차단
+- `c01a9a1` · Web Store 등록용 스크린샷 추가
 
-## 검증 범위와 현재 상태
+## 확인 범위
 
-이 글은 `entrypoints/background.ts`, `lib/storage.ts`, `lib/settingsStorage.ts`, `wxt.config.ts`와 공개 이력을 검토해 작성했다. 스토어 자산 작업은 [별도 기록](/blog/releases/2026-08-11-screen-saver-extension-store-assets)으로, 릴리즈 변경은 [v1.0.6](/blog/releases/2026-02-04-screen-saver-extension-1.0.6)으로 분리한다. [소스](https://github.com/4sizn/screen-saver-extension)와 [포트폴리오 요약](/projects/screen-saver-extension)을 확인할 수 있다.
+이 기록은 `entrypoints/background.ts`, `lib/storage.ts`, `lib/settingsStorage.ts`, `wxt.config.ts`와 공개 이력에서 확인한 구성이다. 제한 목록의 모든 외부 페이지와 service worker 재시작 상황은 확장 실행 환경에서 추가 확인이 필요하다.
+
+## 관련 기록
+
+- [소스](https://github.com/4sizn/screen-saver-extension)
+- [포트폴리오 요약](/projects/screen-saver-extension)
+- [스토어 자산 기록](/blog/releases/2026-08-11-screen-saver-extension-store-assets)
+- [v1.0.6 릴리즈 노트](/blog/releases/2026-02-04-screen-saver-extension-1.0.6)
