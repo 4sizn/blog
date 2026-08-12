@@ -1,6 +1,6 @@
 ---
-title: "[2026-08-11] [Screen Saver Extension] Chrome Web Store 등록 준비"
-description: "Screen Saver Extension v1.0.6의 Chrome Web Store 제출 자산을 준비했습니다. 등록용 스크린샷 5장과 권한 정당화 문서를 정리했습니다."
+title: "[2026-08-11] [Screen Saver Extension] Chrome Web Store 게시"
+description: "Screen Saver Extension v1.0.6의 Chrome Web Store 등록 자산을 준비하고, 2026년 8월 13일 스토어에 게시했습니다."
 socialImage: "/static/screen-saver/01-one-click.jpg"
 tags:
   - release
@@ -9,6 +9,7 @@ tags:
 aliases:
   - "Screen Saver Extension 스토어 등록 준비"
   - "Screen Saver Extension 웹스토어 스크린샷"
+  - "Screen Saver Extension Chrome Web Store 게시"
 draft: false
 lang: ko
 enableToc: true
@@ -16,21 +17,22 @@ cssclasses:
   - release
   - changelog
 created: "2026-08-11"
-updated: "2026-08-11"
+updated: "2026-08-13"
 ---
 
-## 📦 [Screen Saver Extension] Chrome Web Store 등록 준비
+## 📦 [Screen Saver Extension] Chrome Web Store 게시
 
-> 📅 작업 날짜: 2026-08-10 · 현재 버전: v1.0.6 (2026-02-04)
+> 📅 등록 자산 작업: 2026-08-10 · 스토어 게시: 2026-08-13 · 현재 버전: v1.0.6 (2026-02-04)
 
-새 버전 릴리즈는 아닙니다. 확장 코드는 v1.0.6 그대로이고, **Chrome Web Store 제출에 필요한 자산**을 준비했습니다.
-등록용 스크린샷 5장을 만들고, 이미 써 둔 권한 정당화 문서를 정리했습니다.
+새 버전 릴리즈는 아닙니다. 확장 코드는 v1.0.6 그대로이며, 등록용 스크린샷 5장과 권한 정당화 문서를 준비한 뒤 **2026년 8월 13일 Chrome 웹 스토어에 게시했습니다.**
+
+- [Chrome 웹 스토어에서 Screen Saver 보기](https://chromewebstore.google.com/detail/screen-saver/obkphjnocmgeagllcjpiopdagfpkfbie)
 
 ## 🗓️ 반년 동안 멈춰 있던 이유
 
 마지막 코드 커밋은 2월 4일 v1.0.6이었습니다. 기능은 그때 이미 다 붙어 있었습니다.
 원클릭 활성화, 기본 이미지 15장, 커스텀 이미지 업로드, Cover/Contain 표시 모드, 디지털 시계, 단축키, 4개 언어.
-그런데도 스토어에는 올라가지 않았습니다.
+그런데도 스토어에는 올라가지 않았습니다. 등록 자산을 정리한 뒤 게시를 마쳤습니다.
 
 남아 있던 건 코드가 아니라 **스토어 등록 자산**이었습니다. 스크린샷 다섯 장, 그리고 그걸 만들 마음.
 기능 하나 추가하는 것보다 이게 더 미뤄졌다는 게 좀 웃깁니다.
@@ -90,13 +92,13 @@ export한 PNG 다섯 장이 4.6MB였습니다. 그림 자체는 그라디언트 
 배경을 불투명하게 굽고(flatten) RGB로 다시 저장했더니 2.6MB가 됐습니다. 43% 줄었습니다.
 크기는 스토어 규격인 1280x800 그대로입니다.
 
-| 스크린샷 | flatten 전 | flatten 후 |
-|----------|-----------|-----------|
-| 01 one-click | 891KB | 487KB |
-| 02 nature-library | 1057KB | 656KB |
-| 03 custom-images | 993KB | 569KB |
-| 04 display-clock | 1181KB | 717KB |
-| 05 controls-privacy | 569KB | 235KB |
+| 스크린샷            | flatten 전 | flatten 후 |
+| ------------------- | ---------- | ---------- |
+| 01 one-click        | 891KB      | 487KB      |
+| 02 nature-library   | 1057KB     | 656KB      |
+| 03 custom-images    | 993KB      | 569KB      |
+| 04 display-clock    | 1181KB     | 717KB      |
+| 05 controls-privacy | 569KB      | 235KB      |
 
 투명 배경이 필요한 자산이 아니라면 export 단계에서 배경색을 지정해 굽는 게 낫습니다.
 스토어에 올라가는 스크린샷은 투명일 이유가 애초에 없습니다.
@@ -110,10 +112,9 @@ export한 PNG 다섯 장이 4.6MB였습니다. 그림 자체는 그라디언트 
 - 권한별 정당화 — `activeTab`, `notifications`, `storage`, `tabs`, `unlimitedStorage`
 - 호스트 권한 정당화 — 번들된 기본 이미지 15장을 모든 탭에서 불러오기 위한 `web_accessible_resources`
 
-## 🔜 What's Next
+## ✅ Chrome 웹 스토어 게시
 
-- [ ] Chrome Web Store 개발자 대시보드에 제출
-- [ ] 심사 통과 후 스토어 링크를 프로젝트 페이지와 README에 반영
+2026년 8월 13일, v1.0.6이 Chrome 웹 스토어에 게시되었습니다. 이 글은 새 버전의 릴리즈 노트가 아니라 등록 자산을 준비하고 공개하기까지의 기록입니다.
 
 정리해 보면 이번 작업에서 시간을 쓴 곳은 확장 코드가 아니라 "확장을 설명하는 것"이었습니다.
 기능을 다섯 문장으로 줄이고, 그중 무엇을 첫 장에 둘지 고르는 일. 심사용 자료라기보다
@@ -122,6 +123,6 @@ export한 PNG 다섯 장이 4.6MB였습니다. 그림 자체는 그라디언트 
 ## 🚀 Try it
 
 - [저장소](https://github.com/4sizn/screen-saver-extension)
+- [Chrome 웹 스토어](https://chromewebstore.google.com/detail/screen-saver/obkphjnocmgeagllcjpiopdagfpkfbie)
 - [v1.0.6 릴리즈 노트](/blog/releases/2026-02-04-screen-saver-extension-1.0.6)
 - [프로젝트 페이지](/projects/screen-saver-extension)
-

@@ -10,7 +10,7 @@ lang: ko
 ---
 
 > **기록 범위**
-> 공개된 프로젝트 소개와 릴리즈·스토어 준비 기록, 승인된 이미지를 바탕으로 정리한다.
+> 공개된 프로젝트 소개와 릴리즈·Chrome 웹 스토어 정보, 승인된 이미지를 바탕으로 정리한다.
 > 사용자의 탭·계정 정보, 비공개 구현·운영 데이터는 포함하지 않는다.
 
 ## 간략소개
@@ -40,10 +40,11 @@ Screen Saver Extension은 지금 보고 있는 탭을 전체 화면 스크린세
 
 ## 공개와 현재 범위
 
-마지막 공개 릴리즈는 v1.0.6이다. 확장은 브라우저와 페이지의 보안 정책에 따라 일부 주소에서 실행되지 않는다.
+v1.0.6은 Chrome 웹 스토어에 게시되어 있다. 확장은 브라우저와 페이지의 보안 정책에 따라 일부 주소에서 실행되지 않는다.
 
 ## 관련 기록
 
 - [소스](https://github.com/4sizn/screen-saver-extension)
+- [Chrome 웹 스토어](https://chromewebstore.google.com/detail/screen-saver/obkphjnocmgeagllcjpiopdagfpkfbie)
 - [포트폴리오 요약](/projects/screen-saver-extension)
 - [v1.0.6 릴리즈 노트](/blog/releases/2026-02-04-screen-saver-extension-1.0.6)

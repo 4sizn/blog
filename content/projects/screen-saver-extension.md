@@ -9,6 +9,7 @@ projectStack:
   - WXT
   - React
 projectLinks:
+  Chrome 웹 스토어: "https://chromewebstore.google.com/detail/screen-saver/obkphjnocmgeagllcjpiopdagfpkfbie"
   GitHub: "https://github.com/4sizn/screen-saver-extension"
 draft: false
 lang: ko
@@ -29,6 +30,7 @@ lang: ko
 보안상 동작하지 않습니다.
 
 - 최신 릴리즈: v1.0.6 (2026-02-04)
-- Chrome Web Store 제출 준비 중 — 등록용 스크린샷 5장 완료 (2026-08-10)
+- Chrome 웹 스토어 게시 완료 — v1.0.6 (2026-08-13)
+- [Chrome 웹 스토어](https://chromewebstore.google.com/detail/screen-saver/obkphjnocmgeagllcjpiopdagfpkfbie)
 - [스토어 등록 준비 기록](../blog/releases/2026-08-11-screen-saver-extension-store-assets)
 - [v1.0.6 릴리즈 노트](../blog/releases/2026-02-04-screen-saver-extension-1.0.6)
