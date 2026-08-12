@@ -68,10 +68,12 @@ Day5는 state·props가 바뀌지 않았는데도 컴포넌트가 다시 렌더�
 
 - [리모트미팅 서비스](https://www.remotemeeting.com/ko/home)
 - [서비스 소개 영상](https://www.youtube.com/watch?v=dkZdxNhFHBM)
-- [Day0 — 서비스 UserList 상태 구조 개선안](REDACTED-NOTION-SOURCE-URL)
-- [Day1 — Recoil `atomEffect/onSet` 상태 이슈](REDACTED-NOTION-SOURCE-URL)
-- [Day2 — Component와 State 간 단일책임원칙](REDACTED-NOTION-SOURCE-URL)
-- [Day4 — React dependency 이슈 해결책](REDACTED-NOTION-SOURCE-URL)
-- [Day5 — React custom Hooks 모르고 쓰면 ‘독!’](REDACTED-NOTION-SOURCE-URL)
+- 2022-03-07 · Day0 — 서비스 UserList 상태 구조 개선안
+- 2022-03-07 · Day1 — Recoil `atomEffect/onSet` 상태 이슈
+- 2022-03-09 · Day2 — Component와 State 간 단일책임원칙
+- 2022-03-10 · Day4 — React dependency 이슈 해결책
+- 2022-03-14 · Day5 — React custom Hooks 모르고 쓰면 ‘독!’
+
+원문 회고의 raw Notion URL·페이지 식별자는 공개 사이트에 남기지 않는다. 위 목록은 이 글의 분석 근거를 식별하기 위한 제목·날짜 기록이며, 서비스 자체의 검증 가능한 공개 링크만 연결한다.
 
 [포트폴리오 요약](/projects/remote-meeting)은 역할·기간·기술 스택을 간결히 유지하고, 이 글은 당시의 설계 판단을 기록한다.

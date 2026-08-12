@@ -17,7 +17,7 @@ created: "2022-04-13"
 updated: "2026-08-12"
 ---
 
-> **마이그레이션 범위**: 2022년 4월 13일 공개한 [원문 Notion 메모](REDACTED-NOTION-SOURCE-URL)를 옮겼다. 원문은 작성 중인 짧은 메모였으므로, 원문에 없는 역사·성능·설계 효과를 새로 주장하지 않고 핵심 결론과 용어의 경계를 정리한다.
+> **마이그레이션 범위**: 2022년 4월 13일 공개한 Notion 메모를 옮겼다. 원문은 작성 중인 짧은 메모였으므로, 원문에 없는 역사·성능·설계 효과를 새로 주장하지 않고 핵심 결론과 용어의 경계를 정리한다. 원문 URL과 페이지 식별자는 공개 사이트에 보관하지 않는다.
 
 ## `React.FC`가 가리키는 것
 
@@ -61,5 +61,5 @@ function Greeting() {
 
 ## 출처
 
-- [React.FC is not Functional Component — Notion 원문, 2022-04-13](REDACTED-NOTION-SOURCE-URL)
+- 원문의 핵심 결론: `React.FC`는 함수 컴포넌트 자체가 아니라 TypeScript의 함수 컴포넌트 타입이다. 2022-04-13 Notion 메모에서 옮긴 근거이며, 원문 URL·페이지 식별자는 공개 사이트에 남기지 않는다.
 - [React RFC #863 — “functional component”를 “function component”로 바꾸자는 제안](https://github.com/reactjs/rfcs/pull/863)
