@@ -14,6 +14,9 @@ projectLinks:
   App Store: "https://apps.apple.com/kr/app/lonely-candle/id6796374959"
 draft: false
 lang: ko
+created: "2025-04-07"
+published: "2025-04-08"
+updated: "2025-04-08"
 ---
 
 화면 속 촛불 하나가 기울이고, 흔들리고, 입김에 꺼지고, 다시 피어납니다.

@@ -6,6 +6,8 @@ sourceScope: supplied-project-record
 tags: [project, career, javascript, jquery, webrtc]
 draft: false
 lang: ko
+created: "2021-12-12"
+updated: "2021-12-12"
 ---
 
 > **기록 범위**

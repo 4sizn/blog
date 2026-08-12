@@ -15,6 +15,8 @@ projectLinks:
   소개 영상: "https://www.youtube.com/watch?v=dkZdxNhFHBM"
 draft: false
 lang: ko
+created: "2021-12-12"
+updated: "2021-12-12"
 ---
 
 ## 기간

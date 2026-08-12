@@ -15,6 +15,8 @@ projectLinks:
   서비스: "https://www.mobizen.com/"
 draft: false
 lang: ko
+created: "2021-12-12"
+updated: "2021-12-12"
 ---
 
 ## 기간

@@ -7,6 +7,9 @@ socialImage: "/static/lonely-candle-appicon.jpg"
 tags: [project, godot, ios]
 draft: false
 lang: ko
+created: "2025-04-07"
+published: "2025-04-08"
+updated: "2025-04-08"
 ---
 
 > **검토 범위**
