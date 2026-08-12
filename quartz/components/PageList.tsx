@@ -6,24 +6,36 @@ import { GlobalConfiguration } from "../cfg"
 
 export type SortFn = (f1: QuartzPluginData, f2: QuartzPluginData) => number
 
-export function byDateAndAlphabetical(cfg: GlobalConfiguration): SortFn {
+export function byLatestPostDate(_cfg: GlobalConfiguration): SortFn {
   return (f1, f2) => {
-    // Sort by date/alphabetical
-    if (f1.dates && f2.dates) {
-      // sort descending
-      return getDate(cfg, f2)!.getTime() - getDate(cfg, f1)!.getTime()
-    } else if (f1.dates && !f2.dates) {
-      // prioritize files with dates
+    // A bulk migration can give many posts the same modified timestamp. Use the
+    // original publication chronology for post lists instead: explicit published,
+    // then explicit created. The date transformer fills an absent published value
+    // with "now", so its raw frontmatter is the only reliable presence signal.
+    const postDate = (file: QuartzPluginData) => {
+      if (file.frontmatter?.published) return file.dates?.published
+      if (file.frontmatter?.created || file.frontmatter?.date) return file.dates?.created
+      return file.dates?.modified
+    }
+    const f1Date = postDate(f1)
+    const f2Date = postDate(f2)
+
+    if (f1Date && f2Date) {
+      return f2Date.getTime() - f1Date.getTime()
+    } else if (f1Date) {
       return -1
-    } else if (!f1.dates && f2.dates) {
+    } else if (f2Date) {
       return 1
     }
 
-    // otherwise, sort lexographically by title
     const f1Title = f1.frontmatter?.title.toLowerCase() ?? ""
     const f2Title = f2.frontmatter?.title.toLowerCase() ?? ""
     return f1Title.localeCompare(f2Title)
   }
+}
+
+export function byDateAndAlphabetical(cfg: GlobalConfiguration): SortFn {
+  return byLatestPostDate(cfg)
 }
 
 export function byDateAndAlphabeticalFolderFirst(cfg: GlobalConfiguration): SortFn {
