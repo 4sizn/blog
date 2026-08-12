@@ -3,7 +3,7 @@ title: "AI Config Monitor"
 description: "여러 AI 도구의 설정 상태를 한 화면에서 살피고 갱신 여부를 확인하는 커맨드라인 도구다."
 recordType: self-owned-product
 sourceScope: public-product-record
-socialImage: "/static/ai-config-monitor/update-check.jpg"
+socialImage: "/static/ai-config-monitor/overview-redacted.png"
 tags: [project, cli]
 draft: false
 lang: ko
@@ -21,7 +21,7 @@ AI Config Monitor는 여러 AI 도구를 함께 쓰는 환경에서 설정이 �
 
 명령을 실행하면 서버, skills, hooks, plugins처럼 작업 환경을 이루는 항목을 읽기 쉬운 형태로 보여 준다. 변경을 계속 지켜보거나 현재 상태만 점검할 수 있고, 새 버전이 필요한 경우에는 같은 도구 안에서 업데이트 여부를 확인한다.
 
-![AI Config Monitor의 업데이트 확인 화면](/static/ai-config-monitor/update-check.jpg)
+![AI Config Monitor의 설정 현황 화면](/static/ai-config-monitor/overview-redacted.png)
 
 ## 작업
 
