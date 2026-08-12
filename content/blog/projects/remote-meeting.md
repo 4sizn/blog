@@ -24,6 +24,8 @@ lang: ko
 
 화상 미팅 화면은 사용자 정보, 영상 스트림, 화면 모드, 서버에서 전달되는 출력 위치·크기 정보가 함께 맞물리는 서비스다. 하나의 화면에 여러 종류의 비디오와 옵션이 공존하므로, 화면에 무엇을 어떻게 출력할지와 데이터 사이의 대응 관계가 업무 범위의 중심에 있다.
 
+![리모트미팅 화상 미팅 서비스 화면](/static/remote-meeting/service-meeting.webp)
+
 - [리모트미팅 서비스](https://www.remotemeeting.com/ko/home)
 - [서비스 소개 영상](https://www.youtube.com/watch?v=dkZdxNhFHBM)
 

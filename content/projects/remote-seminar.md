@@ -3,6 +3,7 @@ title: "리모트 세미나"
 description: "React·Redux로 개발한 웹 브라우저 기반 온라인 웨비나·관리자 서비스"
 projectOrder: 2
 projectCategory: career
+projectImage: "/static/remote-seminar/webinar-overview.webp"
 projectStack:
   - TypeScript
   - React

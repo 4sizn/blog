@@ -3,6 +3,7 @@ title: "리모트미팅"
 description: "jQuery UI를 React·Recoil로 리뉴얼한 웹·모바일 화상 미팅 서비스"
 projectOrder: 1
 projectCategory: career
+projectImage: "/static/remote-meeting/service-meeting.webp"
 projectStack:
   - TypeScript
   - React

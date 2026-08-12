@@ -19,6 +19,12 @@ lang: ko
 
 웨비나는 웹(Web)과 세미나(Seminar)를 결합한 온라인 세미나다. 시간과 공간의 제약에서 벗어나 세미나를 개최할 수 있는 제품 맥락을 다룬다. 제품 범위에는 세미나 신규 기능과 관리자 기능이 함께 포함된다.
 
+![리모트 세미나 웨비나 서비스 화면](/static/remote-seminar/webinar-overview.webp)
+
+![리모트 세미나 행사 화면](/static/remote-seminar/webinar-event.webp)
+
+![리모트 세미나 제품 소개 화면](/static/remote-seminar/webinar-product.webp)
+
 ## 업무
 
 ### 웨비나 기능
@@ -37,6 +43,12 @@ lang: ko
 - Normalizr를 이용한 세미나 데이터 정규화
 
 당시 기록에는 방송인과 청취자 사이의 카운트다운, 세미나 글 작성과 미리보기, 설문지 작성과 미리보기 사이의 실시간 반영 사례가 남아 있다. 공개 자료만으로 메시지 형식·충돌 처리·운영 규모를 확인할 수 없으므로 이 글은 기능 범위에 한정한다.
+
+![세미나 글 작성과 미리보기의 실시간 동기화](/static/remote-seminar/writing-preview-sync.gif)
+
+![방송인과 청취자 사이의 카운트다운 동기화](/static/remote-seminar/countdown-sync.gif)
+
+![설문지 작성과 미리보기의 실시간 동기화](/static/remote-seminar/survey-preview-sync.gif)
 
 ### 관리자 서비스
 
