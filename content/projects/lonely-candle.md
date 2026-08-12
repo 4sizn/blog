@@ -5,6 +5,7 @@ projectOrder: 3
 projectCategory: toy
 featured: true
 projectIcon: "static/lonely-candle-appicon.jpg"
+projectImage: "static/lonely-candle/store-01.jpg"
 projectStack:
   - iOS
   - Godot

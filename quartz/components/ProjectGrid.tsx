@@ -107,6 +107,7 @@ export default ((opts?: Options) => {
                 project.frontmatter.description) ||
               ""
             const icon = project.frontmatter?.projectIcon
+            const image = project.frontmatter?.projectImage
             const stack = toStringArray(project.frontmatter?.projectStack)
             const links = toLinkMap(project.frontmatter?.projectLinks)
             const targetSlug = projectDetailSlug(
@@ -121,7 +122,14 @@ export default ((opts?: Options) => {
                   class="project-card-main"
                   href={resolveRelative(currentSlug, targetSlug as FullSlug)}
                 >
-                  {typeof icon === "string" && icon ? (
+                  {typeof image === "string" && image ? (
+                    <img
+                      class="project-image"
+                      src={joinSegments(baseDir, image.replace(/^\//, ""))}
+                      alt={`${title} 화면`}
+                      loading="lazy"
+                    />
+                  ) : typeof icon === "string" && icon ? (
                     <img
                       class="project-icon"
                       src={joinSegments(baseDir, icon.replace(/^\//, ""))}

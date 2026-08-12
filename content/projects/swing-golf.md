@@ -5,6 +5,7 @@ projectOrder: 2
 projectCategory: toy
 featured: true
 projectIcon: "static/swing-golf-appicon.jpg"
+projectImage: "static/swing-golf/store-01.jpg"
 projectStack:
   - iOS
   - Godot
@@ -15,8 +16,15 @@ draft: false
 lang: ko
 ---
 
-버튼 대신 휴대폰의 가속도계와 자이로스코프를 읽어 스윙을 판정하는 모바일 골프 게임입니다.
+## 공개
 
-- App Store 첫 공개: 2026-08-03
-- [제작기](../blog/projects/swing-golf)
-- [릴리즈 노트](../blog/releases/2026-08-05-swing-golf-1.2)
+2026.08
+
+## 기획 및 개발
+
+- 휴대폰을 골프채처럼 휘두르는 움직임을 게임 입력으로 해석하는 iOS 골프 게임을 기획·개발했습니다.
+- 가속도계·자이로스코프 입력을 스윙 상태 머신, 볼 물리, 조준 프리뷰로 연결했습니다.
+
+## 관련 기록
+
+[제작기](/blog/projects/swing-golf)는 센서 바이어스·클럽별 감도·결정론적 비행 계산을 다룹니다.
