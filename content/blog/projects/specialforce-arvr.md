@@ -14,6 +14,10 @@ SpecialForce ARVR은 국내 FPS 게임 SpecialForce의 후속 VR 밀리터리 FP
 
 FPS의 적 AI, 플레이어 UI, 튜토리얼은 서로 분리된 화면 요소처럼 보이지만 VR에서는 플레이어가 공간 속에서 행동 상태와 다음 목표를 이해해야 한다. 당시 이력은 FSM 기반 AI와 UI·튜토리얼, VR 환경의 사용자 친화적 UI와 QA를 함께 기록한다.
 
+![SpecialForce ARVR의 공개 게임 커버](/static/specialforce-arvr/game-cover.webp)
+
+_Notion Project Experience에 포함된 공개 게임 커버를 로컬 WebP로 최적화해 옮겼다. 인물·참여자·운영 화면을 포함하지 않는 제품 식별용 이미지다._
+
 ## 맡은 개발 범위
 
 ### Unity 기반 게임 제작

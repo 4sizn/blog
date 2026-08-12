@@ -55,7 +55,9 @@ Drive export entry → projects slug → blog/projects slug → approved local a
 - Treat the export CSV/HTML’s explicit name, date range, description, tags, and public URL as primary facts.
 - Keep raw export paths and unpublished source files out of public Markdown; only publish the concise synthesized résumé fact.
 - If an exported image is a portrait, unrelated document, private UI, participant image, or cannot be confidently assigned to the entry, do not use it as a project thumbnail.
-- For an approved project image, copy/optimize it under `quartz/static/<slug>/`; never depend on a Drive URL at runtime. Document its source relation in the implementation/commit review, not the rendered site.
+- Audit **every** image attached to a supplied Project Experience entry before declaring image migration complete. Classify each as: approved for the detailed post, card-only, or excluded; record the decision in private implementation review notes, not rendered Markdown.
+- Exclude screenshots with identifiable speakers/participants, personal portraits, admin/editor forms, live chat, account names, document contents, device identifiers, or ambiguous project ownership. Do not use a crop to evade this rule.
+- For an approved project image, copy/optimize it under `quartz/static/<slug>/`; never depend on a Drive URL at runtime. Reference it in the relevant detailed post with meaningful Korean alt text, then optionally reuse it as `projectImage`. Document its source relation in the implementation/commit review, not the rendered site.
 
 ## Portfolio vs. case-study boundary
 
