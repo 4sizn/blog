@@ -1,193 +1,120 @@
 ---
 name: developer-project-case-study
-description: Create or revise a 4sizn Blog `/blog/projects` record. Use for any project post, career Project Experience migration, self-owned project development record, or project archive/title audit. Preserve the supplied source record's structure and detail; do not force a generic case-study formula.
+description: Create or revise a 4sizn Blog `/blog/projects` record. Use for any Toy or Career project detail page, especially when rewriting code-first project descriptions into a product-and-work record in the style of the `리모트미팅` post.
 created_by: agent
 ---
 
-# Project Records for 4sizn Blog
+# 4sizn Blog Project Records
 
-`/projects` is a concise résumé/portfolio surface. `/blog/projects` is the detailed project record. They do not use one universal article form.
+`/projects` is a concise portfolio surface. `/blog/projects` is a readable project record. The reference voice and structural baseline is **`리모트미팅`**: short factual introduction, product/service context, clearly grouped work, a restrained outcome or reflection, and related public records.
 
-The prior one-size-fits-all “developer case study” model is prohibited. In particular, do **not** force a project into “problem → architecture → two failures → test table → timeline” when the available primary source is a Project Experience record with its own structure.
+A project post is not a repository tour, a changelog, or an architecture case study. Technical details only belong when they make a reader understand the product experience or a distinct work decision. File paths, symbols, commit IDs, test names, shell commands, and implementation chronology do not belong in the body merely because they are available.
 
-## 1. First decide the record type
+## 1. Choose the evidence boundary
 
-Set the frontmatter fields before drafting:
+Set the record type before drafting.
 
-```yaml
-recordType: career-source # or code-evidence
-sourceScope: supplied-project-record # or repository-history
-```
+| Record type          | Use when                                                                                            | Primary sources                                                                                        | Public purpose                                                                                                          |
+| -------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `career-source`      | A supplied Project Experience/resume record exists                                                  | Supplied record and verified public links                                                              | Preserve the original service, work, outcome, and reflection structure at a public-safe level.                          |
+| `self-owned-product` | A Toy/personal project has a product page, store page, release notes, screenshots, or public source | Existing portfolio card, public release/store copy, approved product images, and verified public links | Explain what the product is, what people can do with it, the author’s product/work focus, and its current public scope. |
 
-| Type            | Use when                                                                      | Primary evidence                                                                                                                       | Purpose                                                                                                             |
-| --------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `career-source` | A supplied Notion/Resume/Drive Project Experience record exists               | The supplied record's explicit description, period, stack, `간략소개`, `서비스`, `업무`, `업무성과`, `회고`, and verified public links | Preserve the author's project context and work record at its original level of detail, in public-safe Korean.       |
-| `code-evidence` | A self-owned project has inspectable source, history, tests, or run artifacts | Repository implementation, tests, commit history, real runtime evidence, and verified release/source links                             | Explain the product and only the implementation decisions and verification that the inspected evidence establishes. |
+Do not use `code-evidence` for 4sizn Toy project posts. Public source and Git history are useful to check accuracy, but they are not an editorial outline and must not determine the article’s content or prose.
 
-Never infer undisclosed company architecture, metrics, ownership, customer impact, current operating status, or source-code behavior from a career record. A source record's frontmatter tags are classification metadata only: they may populate public tags, but never establish a responsibility, implementation, feature, outcome, or verification claim in the body.
+## 2. Inspect before drafting
 
-## 2. Source coverage is a gate, not an afterthought
+1. Read the matching `content/projects/<slug>.md`, the current `content/blog/projects/<slug>.md`, approved images, linked public store/release records, and `/blog/projects/index.md`.
+2. Treat the card and public product/release copy as a fact boundary. If source code adds a technical fact that is not needed to explain the product, leave it out.
+3. Make a private coverage map: product promise → service/use context → distinct work areas → public result/current scope → related records.
+4. Never add internal architecture, performance figures, device-wide guarantees, individual ownership claims, unpublished plans, or a reconstructed development story.
+5. Never use private URLs, local paths, raw export identifiers, credentials, internal issue links, participant data, or admin UI images.
 
-Before editing a `career-source` post, create a **private** coverage matrix:
+## 3. Required shape
 
-```text
-original section / sub-item → public destination section → retained detail → omission reason (if any)
-```
+### Career record (`career-source`)
 
-- Read the full supplied record, including sublists and callouts, before drafting.
-- Each meaningful source section must map to a public section. Do not collapse `서비스`, `업무`, `업무성과`, and `회고` into a short “role” paragraph.
-- Preserve distinctions in the source. For example: existing-service maintenance versus a separate POC; product version 1 versus version 2; a user-facing surface versus an admin surface.
-- Preserve lists of concrete responsibilities when they are public-safe. Group only when grouping does not discard a distinct responsibility.
-- Omit only content that is private, unsafe, unverifiable, redundant, or no longer publicly valid. Record the reason privately; never put raw source identifiers or paths into the repository.
-- When the record does not support an architecture story, do not invent one merely to make the article feel technical.
-
-For a `code-evidence` post, create a private evidence map instead:
-
-```text
-claim → implementation/test/history/runtime evidence → source location → verification actually run
-```
-
-Use only the sections supported by that map. A tiny project does not need two “hard problems”; a project without a meaningful test harness must state its verification boundary rather than fabricate one.
-
-## 3. Career source-record shape
-
-The exact source headings control the article. The following is the default mapping, not a replacement outline:
+Preserve the source record’s real headings and level of detail. The usual form is:
 
 ```md
----
-title: "[프로젝트명]"
-description: "[기간] 동안 [역할/참여 범위]로 참여한 [제품 또는 서비스] 작업 기록"
-recordType: career-source
-sourceScope: supplied-project-record
-tags: [career, project]
-draft: true
-lang: ko
----
-
 > **기록 범위**
-> 공개 가능한 당시 프로젝트 기록을 바탕으로 정리한다.
+> 공개 가능한 당시 프로젝트 기록과 공개 회고를 바탕으로 정리한다.
 > 비공개 소스·내부 문서·운영 데이터·현재 상태는 포함하지 않는다.
 
 ## 간략소개
 
-[원문의 제품/서비스와 기간. 원문에 있는 배경은 여기서 보존한다.]
-
 ## 서비스
-
-[원문의 제품 설명, 버전/사용 흐름/공개 영상 또는 검증된 공개 링크.]
 
 ## 업무
 
-### [원문에서 구분한 업무 영역]
-
-- [원문의 구체 작업을 빠뜨리지 않고 정리]
+### [업무 영역]
 
 ## 업무성과
 
-[원문에 직접 기록된 학습, 범위 확장, 출시 등만. 수치나 외부 효과를 추가하지 않는다.]
-
 ## 회고
 
-[원문의 구체적 회고와 당시 제약. 일반론이나 사후 미화를 추가하지 않는다.]
+## 관련 기록
+```
+
+Do not invent a technical narrative where the supplied career record does not support one.
+
+### Toy/personal record (`self-owned-product`)
+
+Use the same reader-facing rhythm as the career reference, adapted to a self-owned product:
+
+```md
+> **기록 범위**
+> 공개된 프로젝트 소개, 배포/스토어 정보, 승인된 이미지와 관련 공개 기록을 바탕으로 정리한다.
+> 비공개 구현·운영 데이터·확인하지 않은 환경은 포함하지 않는다.
+
+## 간략소개
+
+[제품이 무엇인지와 누구의 어떤 순간을 위한 것인지.]
+
+## 서비스
+
+[사람이 실제로 보는 흐름과 주요 기능. 필요한 경우 승인된 제품 이미지를 한 장만 둔다.]
+
+## 작업
+
+### [제품 경험 또는 작업 영역]
+
+- [제품에 드러나는 구체 범위]
+
+## 공개와 현재 범위
+
+[확인 가능한 스토어/릴리즈/공개 상태와 경계. 릴리즈의 상세 변경은 반복하지 않는다.]
 
 ## 관련 기록
 
-[검증된 서비스/공개 영상 또는 공개 안전한 제목·날짜. Raw Notion/Drive URL·ID는 금지.]
+[포트폴리오 요약, 공개 스토어/소스, 관련 릴리즈.]
 ```
 
-- The source does not need every heading. Keep only headings that exist or are necessary to retain an explicit source fact.
-- Original Day/date records may become subsections, but their chronology and technical conclusion must remain visible.
-- Use a short disclosure boundary, not a defensive paragraph after every fact.
-- Do not call a career record `제작기` or `개발 참여 기록` in its title.
+- A smaller project may combine `서비스`와 `작업`, but do not replace them with `구성`, `아키텍처`, `변경 이력`, `검증 범위`, or `남은 제약` sections.
+- Describe visible behaviour and product intent first. Technical product terms are allowed only when they are already part of the public product language and help explain a visible experience (for example, `모션 입력`, `오프라인 동작`, `탭별 설정`).
+- Keep version-by-version details in `/blog/releases`; link to them rather than copying a changelog.
+- A source link is a related record, not a reason to narrate directories, commits, or tests.
 
-## 4. Self-owned code-evidence shape
+## 4. Title, description, and language
 
-Use the inspected product's actual evidence to choose headings. Start with product context, then retain the implementation details that make this project distinct.
+- The title is exactly the project name. No `제작기`, slogan, colon, em dash, or evaluative subtitle.
+- The description is one factual sentence describing product context and public scope.
+- Write calm explanatory Korean. Prefer present tense and noun phrases; use past tense only for dated public events.
+- Use concrete nouns and product actions. Avoid generic phrases such as `기능을 구현했다`, `성능을 개선했다`, `경험을 쌓았다`, or `코드 기반으로 확인했다`.
+- Do not force a failure story, a test table, or an implementation timeline.
 
-```md
----
-title: "[프로젝트명]"
-description: "[제품/사용자 맥락]과 [확인 가능한 구현·검증 범위]를 정리한 개발 기록"
-recordType: code-evidence
-sourceScope: repository-history
-tags: [project]
-draft: true
-lang: ko
----
+## 5. Archive wording
 
-> **검토 범위**
-> 공개 저장소의 구현, 변경 이력, 테스트 또는 실행 결과를 기준으로 정리한다.
-> 확인하지 않은 환경·사용자 지표·성능 수치는 주장하지 않는다.
+`/blog/projects/index.md` must tell readers that records are organized around each product’s context and work, not around source code. For Toy records, describe the record as a public product/service record; for Career records, describe it as an authored experience record.
 
-## 프로젝트
+## 6. Required audit and verification
 
-[제품이 무엇이며 누구의 어떤 상황을 다루는지]
-
-## 구현 기록
-
-### [실제 구현 영역]
-
-[구조·책임·선택과 그 근거. 경로/심볼은 독자의 이해에 도움이 될 때만 사용한다.]
-
-## 변경과 확인
-
-[실제 이력에서 확인되는 변화, 테스트·실행·배포 확인. 항목 수를 강제하지 않는다.]
-
-## 현재 범위
-
-[현재 링크, 확인한 한계, 다음 확인이 필요한 범위]
-```
-
-- Repository paths, commits, tests, and commands are evidence—not decorative scaffolding. Include them only when they explain a project-specific decision.
-- Separate release notes from the record. Link them rather than restating changelog bullet points.
-- Do not turn every self-owned post into the same “failure narrative.”
-
-## 5. Title, description, and language gates
-
-### Title
-
-- The title is **exactly the project name**.
-- Prohibited: `제작기`, `개발 참여 기록`, em dashes, colons followed by a slogan, “~하기” slogan subtitles, or evaluative copy.
-- Examples:
-  - Allowed: `Swing Golf`, `리모트미팅`, `SpecialForce ARVR`
-  - Prohibited: `Swing Golf 제작기 — 신체 모션을 재현 가능한 게임 입력으로 바꾸기`
-
-### Description
-
-- One factual sentence: what the product is, the period/role for career work or implementation/verification scope for self-owned work.
-- No campaign copy, abstract slogans, unsupported evaluation, fabricated metrics, or vague success language.
-
-### Prose
-
-- Write explanatory Korean in present tense and noun phrases by default.
-  - Prefer: `입력 이벤트는 상태 전이 계층에서 처리한다.`
-  - Avoid: `입력 이벤트를 상태 전이 계층에서 처리했다.`
-- Use past tense only when the date itself matters: a release, a historical change, or the source’s contemporaneous reflection.
-- Do not repeat `했다`, `했습니다`, or `하였다` as a list-writing crutch.
-- Headings name a product area, task, constraint, or decision. They are not advertising slogans.
-- Do not replace detailed source content with generic sentences such as “기능을 구현했다”, “성능을 개선했다”, or “경험을 쌓았다.” State the concrete source-supported scope instead.
-
-## 6. Public-safety boundary
-
-Never publish or commit:
-
-- Notion/Drive export URLs, page IDs, raw archive identifiers, or private local paths;
-- company source, internal issue links, internal operations data, unverified public endpoints, or credentials;
-- participant names/faces, chats, documents, account information, or admin/editor/broadcast UI captures;
-- unsupported metrics, individual ownership claims, or reconstructed internal architecture.
-
-Only use a supplied image after a project-attribution and public-safety review. Keep approved images local under `quartz/static/`, use meaningful Korean alt text, and retain rejection reasons only in private review material.
-
-## 7. Required audit and verification
-
-1. Read `content/projects/<slug>.md`, matching `content/blog/projects/<slug>.md`, and its primary evidence before editing.
-2. For every archive-wide change, audit all titles, descriptions, and `content/blog/projects/index.md` labels.
-3. Check source coverage for `career-source` records and evidence mapping for `code-evidence` records.
-4. Scan the public change and reachable publication history for private identifier leaks.
-5. Run changed-file Prettier, tests, TypeScript, Quartz build, and `git diff --check`.
-6. Inspect `/blog/projects` and representative posts on desktop and 390px mobile. Verify title-only archive labels, text hierarchy, images, and horizontal overflow.
-7. Request independent source/style/privacy review before declaring the rewrite complete.
+1. Audit every Toy detail record when this editorial rule changes; do not fix only the initially named post.
+2. Confirm every Toy post uses `recordType: self-owned-product` and `sourceScope: public-product-record`.
+3. Scan the changed posts for code paths, symbol names, commit hashes, test names, commands, repository-history wording, and forbidden `제작기` labels.
+4. Run changed-file Prettier, typecheck, tests, Quartz build, and `git diff --check`.
+5. Inspect `/blog/projects` and representative revised posts at desktop and 390px mobile. Verify headings, image rendering, links, and no horizontal overflow.
+6. Request an independent content/style/privacy review before calling the rewrite complete.
 
 ## Completion report
 
-State: record types used; sources inspected without exposing private identifiers; source sections retained; intentionally omitted unsafe material; title/style audit result; verification evidence; review result; and commit/push/deploy status. Do not call work complete before the independent review is resolved.
+State the records rewritten, source categories inspected without exposing private identifiers, the style/evidence rule adopted, links or claims intentionally removed, visual/build verification evidence, review outcome, and commit/push/deploy state. Do not call a content rewrite a product release.

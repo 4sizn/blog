@@ -1,39 +1,44 @@
 ---
 title: "AI Config Monitor"
-description: "여러 AI 도구의 MCP 설정과 상태를 수집해 터미널 대시보드로 표시하는 CLI다."
-recordType: code-evidence
-sourceScope: repository-history
+description: "여러 AI 도구의 설정 상태를 한 화면에서 살피고 갱신 여부를 확인하는 커맨드라인 도구다."
+recordType: self-owned-product
+sourceScope: public-product-record
 socialImage: "/static/ai-config-monitor/update-check.jpg"
-tags: [project, cli, typescript]
+tags: [project, cli]
 draft: false
 lang: ko
 ---
 
-> **검토 범위**
-> 공개 저장소의 CLI 구성, 수집기, 갱신 기능과 변경 이력을 기준으로 정리한다. 특정 사용자 환경의 설정 내용과 수집 결과는 포함하지 않는다.
+> **기록 범위**
+> 공개된 프로젝트 소개와 릴리즈 정보, 승인된 이미지를 바탕으로 정리한다.
+> 사용자의 설정 내용·비공개 구현·운영 데이터는 포함하지 않는다.
 
-## 프로젝트
+## 간략소개
 
-AI Config Monitor는 여러 AI 도구에 흩어진 MCP 설정을 수집하고, 터미널에서 서버·skills·hooks·plugins 상태를 확인하는 CLI다. 도구마다 설정 파일의 위치와 형식이 다른 환경을 한 화면에서 살피는 데 초점을 둔다.
+AI Config Monitor는 여러 AI 도구를 함께 쓰는 환경에서 설정이 어떻게 되어 있는지 살피기 위한 커맨드라인 도구다. 도구마다 흩어진 설정을 하나씩 열어보는 대신, 터미널에서 연결 상태와 구성 요소를 한 번에 확인하는 데 초점을 둔다.
 
-## 구성
+## 서비스
 
-`src/app.ts`는 Claude Desktop, Docker, Cursor, VS Code, Gemini, 프로젝트 MCP 설정을 수집하는 흐름을 가진다. 수집 결과는 서버·skills·hooks·plugins 상태로 정리되며, 패널 렌더링과 파일 감시는 이 상태를 사용한다.
+명령을 실행하면 서버, skills, hooks, plugins처럼 작업 환경을 이루는 항목을 읽기 쉬운 형태로 보여 준다. 변경을 계속 지켜보거나 현재 상태만 점검할 수 있고, 새 버전이 필요한 경우에는 같은 도구 안에서 업데이트 여부를 확인한다.
 
-수집기, health check, notifier, watcher, renderer, update 기능은 서로 다른 역할로 나뉜다. 특정 도구의 설정을 읽는 일과 현재 상태를 표시하는 일을 같은 모듈에 묶지 않는 구조다.
+![AI Config Monitor의 업데이트 확인 화면](/static/ai-config-monitor/update-check.jpg)
 
-## 상태 확인과 갱신
+## 작업
 
-변경 이력에는 health check와 화면 알림 갱신, Codex TOML 파싱 보정, self-update 흐름이 남아 있다. `ai-monitor update`는 최신 버전 확인과 업데이트 흐름을 CLI에서 다루는 범위다.
+### 흩어진 설정의 확인
 
-- `215c6be` · 초기 CLI 공개
-- `7d9a155` · health check와 화면 알림 갱신
-- `6b876eb` · Codex TOML 파싱 보정
-- `69b7e16` · self-update 흐름 추가
+- 여러 AI 도구의 설정을 하나의 터미널 화면에서 확인
+- 구성 요소별 상태를 나누어, 어디를 먼저 살펴봐야 하는지 파악하기 쉬운 흐름
+- 여러 도구를 함께 쓰는 환경에서 현재 구성을 빠르게 살피는 용도
 
-## 확인 범위
+### 갱신 흐름
 
-이 기록은 공개 저장소의 구성과 변경 이력을 정리한 것이다. 특정 도구의 설정 파일 형식, 네트워크 실패 처리, 화면 갱신 조건은 각 버전의 코드와 문서를 추가로 확인해야 한다.
+- 현재 상태를 점검하고 새 버전이 있는지 확인하는 흐름
+- 세부 변경은 릴리즈 기록에서 확인할 수 있도록 정리
+
+## 공개와 현재 범위
+
+현재 공개 릴리즈는 v1.2.4이다. 지원하는 도구와 설정 형식은 해당 버전의 공개 문서에서 확인할 수 있다.
 
 ## 관련 기록
 

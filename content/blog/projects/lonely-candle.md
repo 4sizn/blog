@@ -1,10 +1,10 @@
 ---
 title: "Lonely Candle"
-description: "기울기와 입김에 반응하는 촛불 장면을 Godot으로 구성한 모바일 앱이다."
-recordType: code-evidence
-sourceScope: repository-history
+description: "기울기와 입김에 반응하는 촛불을 손안에서 바라보고 다시 밝히는 모바일 앱이다."
+recordType: self-owned-product
+sourceScope: public-product-record
 socialImage: "/static/lonely-candle-appicon.jpg"
-tags: [project, godot, ios]
+tags: [project, ios]
 draft: false
 lang: ko
 created: "2025-04-07"
@@ -12,35 +12,40 @@ published: "2025-04-08"
 updated: "2025-04-08"
 ---
 
-> **검토 범위**
-> 로컬 소스, 관련 테스트, Blender 장면, 변경 이력을 기준으로 정리한다. 모든 기기와 입력 환경에서의 감각적 결과는 이 글의 확인 범위 밖이다.
+> **기록 범위**
+> 공개된 프로젝트 소개와 스토어·릴리즈 정보, 승인된 이미지를 바탕으로 정리한다.
+> 비공개 구현·운영 데이터·확인하지 않은 기기 환경은 포함하지 않는다.
 
-## 프로젝트
+## 간략소개
 
-Lonely Candle은 기울기, 입김, 재점화에 반응하는 모바일 촛불 장면이다. Blender의 Mantaflow 장면을 런타임에 그대로 가져오는 대신, Godot에서 필요한 형상·상태·입력 반응을 구성한다.
+Lonely Candle은 화면 속 촛불 하나를 손안에 두는 모바일 앱이다. 폰을 기울이면 불꽃이 흔들리고, 입김을 불거나 심지를 누르면 꺼진다. 조용한 빛을 잠시 바라보거나 작은 의식을 만들고 싶은 순간을 위한 장면이다.
 
-## 장면과 상태
+## 서비스
 
-`godot/scripts/main.gd`는 거의 빈 `main.tscn` 위에서 환경, 카메라, 촛불, 불꽃, 연기, 개발 패널을 조립한다. 촛불 재질과 불꽃·연기 재질은 별도의 shader material을 사용하며, 재생 상태는 `LIT`, `OUT`, `RELIGHTING`으로 구분한다.
+불꽃은 기울기에 따라 출렁이고, 입김에는 흔들리거나 꺼진다. 꺼진 뒤에는 연기와 심지의 잔불이 남고, 화면 위쪽을 탭하면 다시 불을 붙일 수 있다. 마이크 권한은 입김으로 불을 끄는 경험에만 사용하며, 앱은 인터넷 연결 없이 동작한다.
 
-## 입력 반응
+![손안에서 흔들리는 Lonely Candle의 촛불](/static/lonely-candle/store-01.jpg)
 
-마이크 입력은 원시 바람값과 화면 연출용 smoothing 값을 분리한다. 일정 세기의 바람이 `extinguish_hold` 시간 동안 유지될 때만 소화 상태로 전환되며, 단발성 노이즈가 즉시 상태를 바꾸지 않게 한다.
+## 작업
 
-기울기 입력은 현재 tilt, 속도, 강성·감쇠 상수를 통해 불꽃의 반응에 사용한다. 입력값과 화면 변형을 1:1로 연결하지 않고, 움직임이 따라오는 방식으로 다루는 범위다.
+### 촛불의 반응
 
-## 관련 변경
+- 기울기에 맞춰 세계의 수직을 향해 흔들리는 불꽃
+- 입김의 세기에 따라 흔들리고 꺼지는 흐름
+- 심지를 눌러 끄기, 연기와 잔불, 다시 밝히기까지 이어지는 장면
 
-- `de5bcf0` · Android versionCode 보정
-- `fdac97f` · 버전 단일 원천과 Fastlane 배포 흐름 추가
-- `b932928` · 서명·APK 업로드 흐름 보정
-- `fd60e6c` / `dfb9263` · 개발자 정보와 설정 팝업 보완
+### 손안의 장면으로 다듬기
 
-## 확인 범위
+- 촛불과 불꽃, 연기가 하나의 조용한 장면으로 읽히는 화면 구성
+- 사용 목적과 마이크 권한 범위를 분명히 하는 안내
+- 개발자 정보와 안정성 보완을 포함한 공개 버전 정리
 
-이 기록은 `godot/scripts/main.gd`, 관련 테스트, `lonely_candle.blend`, 변경 이력을 기준으로 한다. 실제 기기 마이크 감도와 자이로 반응은 기기 조건에 따라 별도로 확인한다.
+## 공개와 현재 범위
+
+Lonely Candle은 iOS App Store에서 공개되어 있다. 실제 기기에서의 마이크와 기울기 반응은 기기 조건에 따라 달라질 수 있다.
 
 ## 관련 기록
 
+- [App Store에서 보기](https://apps.apple.com/kr/app/lonely-candle/id6796374959)
 - [포트폴리오 요약](/projects/lonely-candle)
 - [v1.2 릴리즈 노트](/blog/releases/2026-08-05-lonely-candle-1.2)
