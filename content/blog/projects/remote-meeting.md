@@ -64,8 +64,10 @@ Day5는 state·props가 바뀌지 않았는데도 컴포넌트가 다시 렌더�
 
 공개 회고에는 React DevTools/프로파일링으로 불필요한 렌더링을 관찰하고 전후 동영상을 남겼다는 기록이 있다. 그러나 해당 동영상, 코드, 자동화 테스트를 여기서 재실행하지 않았으므로 수치나 성능 개선율을 인용하지 않는다. 이 제작기의 검증 범위는 회고에서 확인 가능한 문제·대안·선택이며, 현재 코드에 대한 검증은 아니다.
 
-## 근거가 된 공개 회고
+## 근거가 된 공개 회고와 서비스
 
+- [리모트미팅 서비스](https://www.remotemeeting.com/ko/home)
+- [서비스 소개 영상](https://www.youtube.com/watch?v=dkZdxNhFHBM)
 - [Day0 — 서비스 UserList 상태 구조 개선안](REDACTED-NOTION-SOURCE-URL)
 - [Day1 — Recoil `atomEffect/onSet` 상태 이슈](REDACTED-NOTION-SOURCE-URL)
 - [Day2 — Component와 State 간 단일책임원칙](REDACTED-NOTION-SOURCE-URL)

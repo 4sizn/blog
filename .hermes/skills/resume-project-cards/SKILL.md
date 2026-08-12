@@ -75,7 +75,13 @@ Drive export entry → projects slug → blog/projects slug → approved local a
 
 Public résumé evidence indicates each experience should preserve: project/service name, timeframe, stack, short service description, owned work, and cautiously stated outcomes. The RemoteMeeting page additionally supplies a model: service context, renewal transition, role, and retrospective links.
 
-Do not copy Notion prose wholesale. Synthesize only the information needed for a résumé card and attribute/public-link any longer retrospective in the related blog article when appropriate.
+When a supplied Notion Project Experience entry includes **간략소개**, **서비스**, **업무**, **업무성과**, or **회고**, migrate its project-specific context rather than reducing it to a generic role summary:
+
+- `/projects/<slug>` must remain skimmable, but include the product context plus concrete scoped duties from the source.
+- The matching `/blog/projects/<slug>` should become a source-grounded participation record: product/service context → implementation areas → concrete workflow or technical boundary → restrained outcome/learning → public links and disclosure boundary.
+- Preserve distinctions the source makes (for example, maintenance versus a POC) instead of merging them into a vague feature claim.
+- Retain verified public service/video links as `projectLinks` on the card and link them again in the detailed record.
+- Do not copy prose wholesale or expose raw export paths, identifiers, private screenshots, participant data, source code, internal metrics, or unverified architecture. Synthesize the public facts into clear Korean.
 
 ## Verification
 
