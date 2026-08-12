@@ -10,6 +10,8 @@ projectStack:
   - Redux-Saga
   - WebRTC
   - YouTube
+  - styled-components
+  - Responsive
 draft: false
 lang: ko
 ---

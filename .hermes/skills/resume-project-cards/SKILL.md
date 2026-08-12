@@ -10,10 +10,12 @@ created_by: agent
 
 ## Source hierarchy
 
-1. Inspect the relevant public résumé/Notion page directly when a URL is supplied. Treat it as evidence, not as a template to copy.
-2. Inspect the existing `content/projects/<slug>.md`, the matching `content/blog/projects/<slug>.md`, and repository assets before editing.
-3. For career work without source access, preserve the author’s published scope and do not infer company metrics, architecture, or present operational state.
-4. For personal projects, use source/test/history evidence for the blog post, while keeping the portfolio card brief and outcome-oriented.
+1. When a Drive export is supplied, inspect the exported Resume HTML/CSV and its `Resume/Project Experience` entries first. This is the primary source for project name, description, tags, exact start/end dates, and verified public link.
+2. Inspect a directly supplied public résumé/Notion page next when available. Treat either source as evidence, not as a template to copy.
+3. Inspect the existing `content/projects/<slug>.md`, the matching `content/blog/projects/<slug>.md`, and repository assets before editing.
+4. Resolve conflicts in favor of the most recently supplied export for its explicit structured fields. Do not retain an older inferred or previously copied date.
+5. For career work without source access, preserve the author’s published scope and do not infer company metrics, architecture, or present operational state.
+6. For personal projects, use source/test/history evidence for the blog post, while keeping the portfolio card brief and outcome-oriented.
 
 ## Card contract
 

@@ -9,13 +9,14 @@ projectStack:
   - JSP
   - CSS
   - WebRTC
+  - Admin
 draft: false
 lang: ko
 ---
 
 ## 기간
 
-2017.12 - 2019.03
+2018.12 - 2020.12
 
 ## 역할 및 기여
 
