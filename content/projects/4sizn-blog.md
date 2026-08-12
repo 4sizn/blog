@@ -3,6 +3,7 @@ title: "4sizn Blog"
 description: "지금 보고 계신 사이트. Quartz 기반에 릴리즈 노트 자동화를 붙였습니다"
 projectOrder: 6
 projectCategory: toy
+projectImage: "static/4sizn-blog/4sizn-blog-thumbnail.png"
 projectStack:
   - Quartz
   - GitHub Actions
