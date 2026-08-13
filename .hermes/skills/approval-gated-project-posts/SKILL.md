@@ -8,7 +8,17 @@ created_by: Hermes Agent
 
 A project post is not ready merely because a draft reads well. It needs a clear evidence boundary, material the author approves for publication, an HTML preview the author has actually reviewed, and a final explicit publication decision.
 
-Run **one post at a time**. Do not silently batch-rewrite the archive, publish a draft, or use unapproved images because an earlier post was approved. Each post has its own preparation input, evidence ledger, preview, revision loop, and final approval.
+Run **one post at a time per thread**. Separate posts may progress in parallel in separate Discord threads so the author is never blocked waiting for another post’s preparation or proofreading cycle. Do not silently batch-rewrite the archive, publish a draft, or use unapproved images because an earlier post was approved. Each post has its own preparation input, evidence ledger, preview, revision loop, and final approval.
+
+## Parallel thread isolation
+
+A Discord thread is one independent post lane. Give it a clear name such as `포스팅 — <프로젝트명>` and restate its target route in the opening preparation gate.
+
+- Parallel lanes may analyze sources, propose story structure, draft, and render temporary HTML previews at the same time.
+- Each lane still stops at its own preparation, story-proposal, revision, and final-publication approvals. Approval in one thread has no effect in another.
+- Do not edit the same Markdown file, the same image asset, shared archive/index copy, layout, or site configuration from two lanes at once.
+- When a lane reaches the source-file publication stage, use an isolated worktree/branch or serialize the final source edit, build, commit, and push. Rebase/merge against the current target branch before final verification.
+- If two posts need a shared change (for example an archive introduction, card ordering, or common image), create a separate coordination lane and obtain explicit approval there.
 
 ## When to Use
 
