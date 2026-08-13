@@ -1,11 +1,12 @@
 ---
 title: "Lonely Candle"
-description: "기울이면 출렁이고 입김에 꺼지는, 손안의 진짜 촛불"
+description: "생일 촛불이 없던 자리에서 출발한, 입김과 기울기에 반응하는 손안의 촛불"
 projectOrder: 3
 projectCategory: toy
 featured: true
 projectIcon: "static/lonely-candle-appicon.jpg"
-projectImage: "static/lonely-candle/store-01.jpg"
+projectImage: "static/lonely-candle/runtime-lit.png"
+projectDetailSlug: "blog/dev/lonely-candle"
 projectStack:
   - iOS
   - Godot

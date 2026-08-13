@@ -5,15 +5,23 @@ import { isProjectCardSlug, projectDetailSlug } from "./projectLinks"
 const availableSlugs = new Set([
   "projects/lonely-candle",
   "blog/projects/lonely-candle",
+  "blog/dev/lonely-candle",
   "projects/remote-meeting",
   "blog/projects/remote-meeting",
   "blog/dev/screen-saver-extension",
 ])
 
-test("toy portfolio cards use their matching blog build note", () => {
+test("toy portfolio cards use their matching blog build note by default", () => {
   assert.equal(
     projectDetailSlug("projects/lonely-candle", "toy", availableSlugs),
     "blog/projects/lonely-candle",
+  )
+})
+
+test("a card can explicitly point to its approved development story", () => {
+  assert.equal(
+    projectDetailSlug("projects/lonely-candle", "toy", availableSlugs, "blog/dev/lonely-candle"),
+    "blog/dev/lonely-candle",
   )
 })
 

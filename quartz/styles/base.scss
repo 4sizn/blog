@@ -194,6 +194,7 @@ a {
   }
 
   & > #quartz-body {
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: #{map.get($desktopGrid, templateColumns)};
     grid-template-rows: #{map.get($desktopGrid, templateRows)};
