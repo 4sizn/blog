@@ -7,6 +7,7 @@ const availableSlugs = new Set([
   "blog/projects/lonely-candle",
   "projects/remote-meeting",
   "blog/projects/remote-meeting",
+  "blog/dev/screen-saver-extension",
 ])
 
 test("toy portfolio cards use their matching blog build note", () => {
@@ -27,6 +28,18 @@ test("toy cards fall back to their portfolio route when no build note exists", (
   assert.equal(
     projectDetailSlug("projects/unpublished", "toy", availableSlugs),
     "projects/unpublished",
+  )
+})
+
+test("a card can explicitly point to its approved developer story", () => {
+  assert.equal(
+    projectDetailSlug(
+      "projects/screen-saver-extension",
+      "toy",
+      availableSlugs,
+      "blog/dev/screen-saver-extension",
+    ),
+    "blog/dev/screen-saver-extension",
   )
 })
 

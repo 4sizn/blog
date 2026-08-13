@@ -112,6 +112,7 @@ export default ((opts?: Options) => {
               project.slug,
               project.frontmatter?.projectCategory,
               availableSlugs,
+              project.frontmatter?.projectDetailSlug,
             )
 
             return (

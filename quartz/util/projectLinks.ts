@@ -20,8 +20,13 @@ export function projectDetailSlug(
   projectSlug: string,
   _category: unknown,
   availableSlugs: ReadonlySet<string>,
+  preferredDetailSlug?: unknown,
 ): string {
   if (projectSlug.startsWith(BLOG_PROJECT_PREFIX)) return projectSlug
+
+  if (typeof preferredDetailSlug === "string" && availableSlugs.has(preferredDetailSlug)) {
+    return preferredDetailSlug
+  }
 
   const buildNoteSlug = `${BLOG_PROJECT_PREFIX}${projectSlug}`
   return availableSlugs.has(buildNoteSlug) ? buildNoteSlug : projectSlug
