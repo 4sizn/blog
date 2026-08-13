@@ -1,14 +1,28 @@
 const BLOG_PROJECT_PREFIX = "blog/"
 
 /**
- * Every portfolio card uses its matching long-form project record when one is
- * published under /blog/projects; otherwise it preserves the portfolio route.
+ * A project card may live in `content/projects` or, when its only public detail
+ * page is the long-form post, directly in `content/blog/projects`.
+ */
+export function isProjectCardSlug(slug: string, projectCard: unknown): boolean {
+  return (
+    (slug.startsWith("projects/") && slug !== "projects/index") ||
+    (slug.startsWith(BLOG_PROJECT_PREFIX) && projectCard === true)
+  )
+}
+
+/**
+ * Cards stored under `content/blog/projects` already point at their public
+ * long-form record. Portfolio-source cards use a matching blog record when it
+ * exists, otherwise retain their own portfolio route.
  */
 export function projectDetailSlug(
   projectSlug: string,
   _category: unknown,
   availableSlugs: ReadonlySet<string>,
 ): string {
+  if (projectSlug.startsWith(BLOG_PROJECT_PREFIX)) return projectSlug
+
   const buildNoteSlug = `${BLOG_PROJECT_PREFIX}${projectSlug}`
   return availableSlugs.has(buildNoteSlug) ? buildNoteSlug : projectSlug
 }

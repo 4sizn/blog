@@ -1,6 +1,6 @@
 import style from "./styles/projectGrid.scss"
 import { resolveRelative, pathToRoot, joinSegments, type FullSlug } from "../util/path"
-import { projectDetailSlug } from "../util/projectLinks"
+import { isProjectCardSlug, projectDetailSlug } from "../util/projectLinks"
 import type { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import type { QuartzPluginData } from "../plugins/vfile"
 
@@ -23,9 +23,7 @@ type ProjectPage = QuartzPluginData & { slug: string }
 
 function isProject(page: QuartzPluginData): page is ProjectPage {
   const slug = page.slug
-  if (typeof slug !== "string") return false
-  // projects/index 는 페이지 본문이지 카드가 아니다
-  return slug.startsWith(`${PROJECT_ROOT}/`) && slug !== `${PROJECT_ROOT}/index`
+  return typeof slug === "string" && isProjectCardSlug(slug, page.frontmatter?.projectCard)
 }
 
 function orderOf(page: QuartzPluginData): number {

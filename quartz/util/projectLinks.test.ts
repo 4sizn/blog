@@ -1,6 +1,6 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { projectDetailSlug } from "./projectLinks"
+import { isProjectCardSlug, projectDetailSlug } from "./projectLinks"
 
 const availableSlugs = new Set([
   "projects/lonely-candle",
@@ -30,9 +30,12 @@ test("toy cards fall back to their portfolio route when no build note exists", (
   )
 })
 
-test("category does not affect a published project record target", () => {
+test("a blog project record can supply a portfolio card without a duplicate card page", () => {
+  assert.equal(isProjectCardSlug("blog/projects/garden-eel-cove", true), true)
+  assert.equal(isProjectCardSlug("blog/projects/garden-eel-cove", false), false)
+  assert.equal(isProjectCardSlug("projects/index", true), false)
   assert.equal(
-    projectDetailSlug("projects/lonely-candle", undefined, availableSlugs),
-    "blog/projects/lonely-candle",
+    projectDetailSlug("blog/projects/garden-eel-cove", "toy", availableSlugs),
+    "blog/projects/garden-eel-cove",
   )
 })
