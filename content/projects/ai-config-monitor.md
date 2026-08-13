@@ -7,6 +7,7 @@ projectImage: "static/ai-config-monitor/overview.jpg"
 projectStack:
   - CLI
 projectLinks:
+  개발기: "/blog/dev/ai-config-monitor"
   GitHub: "https://github.com/4sizn/ai-config-monitor"
 draft: false
 lang: ko
