@@ -3,6 +3,7 @@ title: "효자손"
 description: "부모님 스마트폰을 자녀가 함께 보며 도울 수 있도록 설계한 가족 원격 지원 앱"
 projectOrder: 8
 projectCategory: toy
+projectDetailSlug: "blog/projects/hyojason"
 projectImage: "static/hyojason/project-scenarios.png"
 projectStack:
   - Android

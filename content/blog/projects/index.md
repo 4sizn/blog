@@ -19,7 +19,7 @@ lang: ko
 - [AI Config Monitor](/blog/projects/ai-config-monitor)
 - [Screen Saver Extension](/blog/projects/screen-saver-extension)
 - [4sizn Blog](/blog/projects/4sizn-blog)
-- [효자손 브랜드 사이트](/blog/projects/parent-view-brandsite)
+- [효자손](/blog/projects/hyojason)
 
 ## Career Projects
 
