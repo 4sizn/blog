@@ -5,6 +5,7 @@
 ## 📋 목차
 
 - [프로젝트 개요](#프로젝트-개요)
+- [글쓰기 스타일](#글쓰기-스타일)
 - [버전 관리 정책](#버전-관리-정책)
 - [개발 환경 설정](#개발-환경-설정)
 - [개발 서버 실행](#개발-서버-실행)
@@ -31,6 +32,28 @@
 - Node.js 22+
 - npm 10.9.2+
 - GitHub Actions
+
+---
+
+## 글쓰기 스타일
+
+`content/` 아래 블로그 글(릴리즈 노트·회고·에세이·프로젝트 소개 포함)을 쓰거나 고칠 때는
+**`heeseok-writing-style` skill 을 먼저 읽고 그 문체를 따른다.** 사용자가 skill 이름을 말하지 않아도 그렇다.
+
+- 출처: https://github.com/4sizn/skills/tree/main/heeseok-writing-style
+- 로컬: `~/.claude/skills/heeseok-writing-style/`
+
+핵심은 **상황 → 문제 → 검토·선택 → 결과·남은 점**의 인과를 남기는 것이다.
+'효율을 높였다' 같은 추상적 성과 문장에서 멈추지 말고, 무엇이 왜 문제였고 왜 그 방안을 골랐는지 쓴다.
+막혔던 지점과 시행착오를 지우지 않으며, 원자료에 없는 경험·수치·검증 결과는 만들지 않는다.
+
+다른 글쓰기 skill 과 겹칠 때의 순서:
+
+1. 구조 — `blog-release-note`(릴리즈 노트 12섹션) / `developer-project-case-study` / `resume-project-cards` 가 골격을 정한다
+2. 문체 — `heeseok-writing-style` 로 초안을 쓴다
+3. 윤문 — `humanize-korean` 으로 AI 티를 걷어낸다
+
+즉 **골격은 기존 skill, 문장은 이 스타일** 이다. 서로 충돌하면 골격 요구사항(섹션 구성·이미지 최소 1장 등)이 우선한다.
 
 ---
 
