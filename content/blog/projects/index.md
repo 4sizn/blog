@@ -13,6 +13,7 @@ lang: ko
 
 ## Toy Projects
 
+- [Moa](/blog/projects/moa)
 - [Swing Golf](/blog/projects/swing-golf)
 - [Lonely Candle](/blog/projects/lonely-candle)
 - [Garden Eel Cove](/blog/projects/garden-eel-cove)

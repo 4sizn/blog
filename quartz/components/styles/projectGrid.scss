@@ -29,27 +29,15 @@
   }
 }
 
-// 12칸 위에 7 / 5로 번갈아 얹는다. 균등 3분할은 어떤 카드가 더 중요한지
-// 말해주지 않고, 화면에서 가장 먼저 읽히는 템플릿 모양이기도 하다.
-// 홀수 장이면 마지막 줄 오른쪽이 비는데, 그 여백은 실수가 아니라 쉼표다.
+// 2열 균등. 7 / 5 교차 배치는 카드 폭이 줄마다 달라져 제목·설명 줄바꿈이
+// 들쭉날쭉했다. 우선순위는 projectOrder 로 정하고 폭은 같게 둔다.
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.1rem 1.25rem;
 
-  & > .project-card {
-    grid-column: span 7;
-
-    &:nth-child(2n) {
-      grid-column: span 5;
-    }
-  }
-
   @media all and (max-width: 1000px) {
-    & > .project-card,
-    & > .project-card:nth-child(2n) {
-      grid-column: span 12;
-    }
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
