@@ -114,6 +114,16 @@ body[data-slug="projects/index"] {
     margin: 0 0 1.15rem;
   }
 
+  // 세로 스크린샷(모바일 캡처)이 본문 폭을 가득 채우면 한 화면을 넘어간다.
+  // 높이를 뷰포트 기준으로 묶고 폭은 비율에 맞게 줄인다.
+  & p > img {
+    display: block;
+    max-height: 70vh;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   & h1,
   & h2,
   & h3,
